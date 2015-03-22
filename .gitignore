@@ -18,7 +18,7 @@ wp-content/upgrade/
 wp-content/uploads/
 wp-content/wp-cache-config.php
 wp-content/rsspi-log/
-wp-content/plugins/wp-github/cache 
+wp-content/plugins/wp-github/cache/
 
 license.txt
 readme.html
