@@ -1,0 +1,56 @@
+/*
+Theme Name: The Learning Collective
+Theme URI: http://athemes.com/theme/hiero
+Author: TLC
+Author URI: http://thelearningcollective.nyc
+Description:  Custom child theme for The Learning Collective
+Version: 1.6
+License: GNU General Public License v3.0
+License URI: license.txt
+Tags: black, white, red, two-columns, fixed-layout, threaded-comments, full-width-template, custom-menu
+Template: hiero
+*/
+
+
+/* ------------------------------------------
+/ CORE
+--------------------------------------------- */
+
+@import "variables";
+
+/* ------------------------------------------
+/ STRUCTURE
+--------------------------------------------- */
+
+@import "structure";
+@import "header";
+@import "footer";
+@import "sidebars";
+
+
+/* ------------------------------------------
+/ COMMON CLASSES
+--------------------------------------------- */
+
+@import "elements";
+
+/* ------------------------------------------
+/ CONTENT
+--------------------------------------------- */
+
+@import "posts";
+@import "pages";
+@import "widgets";
+
+/* ------------------------------------------
+/ PLUGINS
+--------------------------------------------- */
+
+
+
+/* ------------------------------------------
+/ LOOK & FEEL
+--------------------------------------------- */
+
+@import "colors";
+@import "typography";
