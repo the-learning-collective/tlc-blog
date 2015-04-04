@@ -75,7 +75,14 @@ get_header(); ?>
 			<!-- .page-header --></header>
 
 			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+			
+			<?php if( is_category( 'resources' || 'projects' ) ) {
+				$query = new WP_Query( 'orderby=title' );
+			} else {
+				$query = new WP_Query( 'orderby=date&order=ASC' );
+			} ?>
+			
+			<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 
 				<?php
 					/* Include the Post-Format-specific template for the content.
