@@ -77,7 +77,7 @@ get_header(); ?>
 			<?php /* Start the Loop */ ?>
 			
 			<?php if( is_category( 'resources' || 'projects' ) ) {
-				$query = new WP_Query( 'orderby=title' );
+				$query = new WP_Query( 'orderby=title&order=ASC' );
 			} else {
 				$query = new WP_Query( 'orderby=date&order=ASC' );
 			} ?>
