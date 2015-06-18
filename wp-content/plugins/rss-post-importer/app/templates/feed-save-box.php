@@ -27,10 +27,13 @@
 	</div>
 <?php endif; ?>
 
+<?php if (!$this->is_key_valid) : ?>
 <?php $banner_url = RSS_PI_URL . "app/assets/img/rss-post-importer_280x600.jpg"; ?>
 <a target="_blank" href="http://www.feedsapi.com/?utm=rsspostimporter_banner">
 	<img class='rss_pi_banner_img' src="<?php echo $banner_url; ?>" />
 </a>
+<?php endif; ?>
+
 <!--Start of Zopim Live Chat Script-->
 <script type="text/javascript">
 window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
