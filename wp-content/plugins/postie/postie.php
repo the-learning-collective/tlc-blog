@@ -4,13 +4,14 @@
   Plugin Name: Postie
   Plugin URI: http://PostiePlugin.com/
   Description: Create posts via email. Signifigantly upgrades the Post by Email features of Word Press.
-  Version: 1.6.17
+  Version: 1.7.16
   Author: Wayne Allen
-  Author URI: http://allens-home.com/
+  Author URI: http://PostiePlugin.com/
   License: GPL2
+  Text Domain: postie
  */
 
-/*  Copyright (c) 2012  Wayne Allen  (email : wayne@allens-home.com)
+/*  Copyright (c) 2015  Wayne Allen  (email : wayne@allens-home.com)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License, version 2, as
@@ -27,16 +28,17 @@
  */
 
 /*
-  $Id: postie.php 1122898 2015-03-28 22:23:05Z WayneAllen $
+  $Id: postie.php 1261949 2015-10-08 20:05:58Z WayneAllen $
  */
+require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . "lib_autolink.php");
 require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . "postie-functions.php");
 
-define('POSTIE_VERSION', '1.6.17');
+define('POSTIE_VERSION', '1.7.16');
 define("POSTIE_ROOT", dirname(__FILE__));
 define("POSTIE_URL", WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)));
 
 //register the hooks early in the page in case some method needs the result of one of them (i.e. cron_schedules)
-add_action('init', 'disable_kses_content', 20);
+add_action('init', 'postie_disable_kses_content', 20);
 add_action('check_postie_hook', 'check_postie');
 add_action('parse_request', 'postie_parse_request');
 add_action('admin_init', 'postie_admin_init');
@@ -65,7 +67,7 @@ if (is_admin()) {
 
         function postie_load_domain() {
             $plugin_dir = WP_PLUGIN_DIR . '/' . basename(dirname(__FILE__));
-            load_plugin_textdomain('postie', $plugin_dir . "/languages/", basename(dirname(__FILE__)) . '/languages/');
+            load_plugin_textdomain('postie', false, dirname(plugin_basename(__FILE__)) . '/languages/');
         }
 
         add_action('init', 'postie_load_domain');
@@ -140,7 +142,7 @@ function postie_loadjs_options_page() {
 
 function postie_admin_page() {
     if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
+        wp_die(__('You do not have sufficient permissions to access this page.', 'postie'));
     }
     include 'config_form.php';
 }
@@ -231,15 +233,26 @@ function postie_warnings() {
         add_action('admin_notices', 'postie_tls_warning');
     }
 
-    if (!function_exists('mb_detect_encoding')) {
+    if (isMarkdownInstalled() && $config['prefer_text_type'] == 'html') {
 
-        function postie_mbstring_warning() {
-            echo "<div id='postie-mbstring-warning' class='error'><p><strong>";
-            echo __('Warning: the Multibyte String php extension (mbstring) is not installed. Postie will not function without this extension.', 'postie');
+        function postie_markdown_warning() {
+            echo "<div id='postie-lst-warning' class='error'><p><strong>";
+            _e("You currently have the Markdown plugin installed. It will cause problems if you send in HTML email. Please turn it off if you intend to send email using HTML.", 'postie');
             echo "</strong></p></div>";
         }
 
-        add_action('admin_notices', 'postie_mbstring_warning');
+        add_action('admin_notices', 'postie_markdown_warning');
+    }
+
+    if (!HasIconvInstalled()) {
+
+        function postie_iconv_warning() {
+            echo "<div id='postie-lst-warning' class='error'><p><strong>";
+            _e("Warning! Postie requires that iconv be enabled.", 'postie');
+            echo "</strong></p></div>";
+        }
+
+        add_action('admin_notices', 'postie_iconv_warning');
     }
 
     $userdata = WP_User::get_data_by('login', $config['admin_username']);
@@ -255,7 +268,7 @@ function postie_warnings() {
     }
 }
 
-function disable_kses_content() {
+function postie_disable_kses_content() {
     remove_filter('content_save_pre', 'wp_filter_post_kses');
 }
 
@@ -267,7 +280,7 @@ function postie_whitelist($options) {
 
 //don't use DebugEcho or EchoInfo here as it is not defined when called as an action
 function check_postie() {
-    error_log("check_postie");
+    //error_log("check_postie");
     postie_get_mail();
 }
 
@@ -315,10 +328,12 @@ function postie_decron() {
 function postie_more_reccurences($schedules) {
     //Do not echo output in filters, it seems to break some installs
     //error_log("postie_more_reccurences: setting cron schedules");
-    $schedules['weekly'] = array('interval' => (60 * 60 * 24 * 7), 'display' => __('Once Weekly'));
-    $schedules['twiceperhour'] = array('interval' => 60 * 30, 'display' => __('Twice per hour'));
-    $schedules['tenminutes'] = array('interval' => 60 * 10, 'display' => __('Every 10 minutes'));
-    $schedules['fiveminutes'] = array('interval' => 60 * 5, 'display' => __('Every 5 minutes'));
-
+    $schedules['weekly'] = array('interval' => (60 * 60 * 24 * 7), 'display' => __('Once Weekly', 'postie'));
+    $schedules['twiceperhour'] = array('interval' => 60 * 30, 'display' => __('Twice per hour', 'postie'));
+    $schedules['tenminutes'] = array('interval' => 60 * 10, 'display' => __('Every 10 minutes', 'postie'));
+    $schedules['fiveminutes'] = array('interval' => 60 * 5, 'display' => __('Every 5 minutes', 'postie'));
+    $schedules['oneminute'] = array('interval' => 60 * 1, 'display' => __('Every 1 minute', 'postie'));
+    $schedules['thirtyseconds'] = array('interval' => 30, 'display' => __('Every 30 seconds', 'postie'));
+    $schedules['fifteenseconds'] = array('interval' => 15, 'display' => __('Every 15 seconds', 'postie'));
     return $schedules;
 }

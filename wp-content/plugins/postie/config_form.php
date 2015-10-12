@@ -37,12 +37,12 @@
                 exit;
                 break;
             case "runpostie":
-                EchoInfo(__("Checking for mail manually", "postie"));
+                EchoInfo(__("Checking for mail manually", 'postie'));
                 postie_get_mail();
                 exit;
                 break;
             case "runpostie-debug":
-                EchoInfo(__("Checking for mail manually with debug output", "postie"));
+                EchoInfo(__("Checking for mail manually with debug output", 'postie'));
                 if (!defined('POSTIE_DEBUG')) {
                     define('POSTIE_DEBUG', true);
                 }
@@ -71,7 +71,7 @@
     }
     extract($config);
     if (!isset($maxemails)) {
-        EchoInfo(__("New setting: maxemails", "postie"));
+        EchoInfo(__("New setting: maxemails", 'postie'));
         $maxemails = 0;
     }
     if (!isset($category_match)) {
@@ -144,7 +144,7 @@
                     </td>
                     </tr>
 
-                    <?php echo BuildBooleanSelect(__("Use Transport Layer Security (TLS)", "postie"), 'postie-settings[email_tls]', $email_tls, __("Choose Yes if your server requires TLS", "postie")); ?>
+                    <?php echo BuildBooleanSelect(__("Use Transport Layer Security (TLS)", 'postie'), 'postie-settings[email_tls]', $email_tls, __("Choose Yes if your server requires TLS", 'postie')); ?>
 
                     <tr>
                         <th scope="row"><label for="postie-settings-mail_server_port"><?php _e('Port', 'postie') ?></label></th>
@@ -190,37 +190,71 @@
                                 if ($interval == "weekly") {
                                     echo "selected='selected'";
                                 }
-                                ?>><?php _e('Once weekly', 'postie') ?></option>
+                                ?>><?php _e('Once weekly', 'postie') ?>
+                                </option>
+
                                 <option value="daily"<?php
                                 if ($interval == "daily") {
                                     echo "selected='selected'";
                                 }
-                                ?>><?php _e('daily', 'postie') ?></option>
+                                ?>><?php _e('daily', 'postie') ?>
+                                </option>
+
                                 <option value="hourly" <?php
                                 if ($interval == "hourly") {
                                     echo "selected='selected'";
                                 }
-                                ?>><?php _e('hourly', 'postie') ?></option>
+                                ?>><?php _e('hourly', 'postie') ?>
+                                </option>
+
                                 <option value="twiceperhour" <?php
                                 if ($interval == "twiceperhour") {
                                     echo "selected='selected'";
                                 }
-                                ?>><?php _e('twice per hour', 'postie') ?></option>
+                                ?>><?php _e('twice per hour', 'postie') ?>
+                                </option>
+
                                 <option value="tenminutes" <?php
                                 if ($interval == "tenminutes") {
                                     echo "selected='selected'";
                                 }
-                                ?>><?php _e('every ten minutes', 'postie') ?></option>
+                                ?>><?php _e('every 10 minutes', 'postie') ?>
+                                </option>
+
                                 <option value="fiveminutes" <?php
                                 if ($interval == "fiveminutes") {
                                     echo "selected='selected'";
                                 }
-                                ?>><?php _e('every five minutes', 'postie') ?></option>
+                                ?>><?php _e('every 5 minutes', 'postie') ?>
+                                </option>
+
+                                <option value="oneminute" <?php
+                                if ($interval == "oneminute") {
+                                    echo "selected='selected'";
+                                }
+                                ?>><?php _e('every 1 minute', 'postie') ?>
+                                </option>
+
+                                <option value="thirtyseconds" <?php
+                                if ($interval == "thirtyseconds") {
+                                    echo "selected='selected'";
+                                }
+                                ?>><?php _e('every 30 seconds', 'postie') ?>
+                                </option>
+                                
+                                <option value="fifteenseconds" <?php
+                                if ($interval == "fifteenseconds") {
+                                    echo "selected='selected'";
+                                }
+                                ?>><?php _e('every 15 seconds', 'postie') ?>
+                                </option>
+                                
                                 <option value="manual" <?php
                                 if ($interval == "manual") {
                                     echo "selected='selected'";
                                 }
-                                ?>><?php _e('check manually', 'postie') ?></option>
+                                ?>><?php _e('check manually', 'postie') ?>
+                                </option>
                             </select>
                         </td>
                     </tr>
@@ -240,16 +274,17 @@
                             </select>
                         </td>
                     </tr>
-                    <?php echo BuildBooleanSelect(__("Delete email after posting", "postie"), 'postie-settings[delete_mail_after_processing]', $delete_mail_after_processing, __("Only set to no for testing purposes", "postie")); ?>
-                    <?php echo BuildTextArea(__("Allowed SMTP servers", "postie"), "postie-settings[smtp]", $smtp, __("Only allow messages which have been sent throught the following SMTP servers. Put each server on a separate line. Leave blank to allow any SMTP server.", "postie")); ?>
+                    <?php echo BuildBooleanSelect(__("Delete email after posting", 'postie'), 'postie-settings[delete_mail_after_processing]', $delete_mail_after_processing, __("Only set to no for testing purposes", 'postie')); ?>
+                    <?php echo BuildBooleanSelect(__("Ignore mail state", 'postie'), 'postie-settings[ignore_mail_state]', $ignore_mail_state, __("Ignore whether the mails is 'read' or 'unread' If 'No' then only unread messages are processed.", 'postie')); ?>
+                    <?php echo BuildTextArea(__("Allowed SMTP servers", 'postie'), "postie-settings[smtp]", $smtp, __("Only allow messages which have been sent throught the following SMTP servers. Put each server on a separate line. Leave blank to allow any SMTP server.", 'postie')); ?>
                 </table>
             </div>
 
             <div id="simpleTabs-content-2" class="simpleTabs-content">
                 <table class='form-table'>
 
-                    <?php echo BuildBooleanSelect(__("Allow Anyone To Post Via Email", "postie"), "postie-settings[turn_authorization_off]", $turn_authorization_off, __("Changing this to yes <b style='color: red'>is not recommended</b> - anything that gets sent in will automatically be posted.", "postie")); ?>
-                    <?php echo BuildBooleanSelect(__("Force User Login", "postie"), "postie-settings[force_user_login]", $force_user_login, __("Changing this to yes will cause Postie to try and login as the 'from' user if they exist. This should be set to 'Yes' if you use custom taxonomies in the subject line.", "postie")); ?>
+                    <?php echo BuildBooleanSelect(__("Allow Anyone To Post Via Email", 'postie'), "postie-settings[turn_authorization_off]", $turn_authorization_off, __("Changing this to yes <b style='color: red'>is not recommended</b> - anything that gets sent in will automatically be posted.", 'postie')); ?>
+                    <?php echo BuildBooleanSelect(__("Force User Login", 'postie'), "postie-settings[force_user_login]", $force_user_login, __("Changing this to yes will cause Postie to try and login as the 'from' user if they exist. This should be set to 'Yes' if you use custom taxonomies in the subject line.", 'postie')); ?>
                     <tr>
                         <th scope="row">
                             <?php _e('Roles That Can Post', 'postie') ?><br />
@@ -286,7 +321,7 @@
                         </td>
                     </tr>
 
-                    <?php echo BuildTextArea(__("Authorized Addresses", "postie"), "postie-settings[authorized_addresses]", $authorized_addresses, __("Put each email address on a single line. Posts from emails in this list will be treated as if they came from the admin. If you would prefer to have users post under their own name - create a WordPress user with the correct access level.", "postie")); ?>
+                    <?php echo BuildTextArea(__("Authorized Addresses", 'postie'), "postie-settings[authorized_addresses]", $authorized_addresses, __("Put each email address on a single line. Posts from emails in this list will be treated as if they came from the admin. If you would prefer to have users post under their own name - create a WordPress user with the correct access level.", 'postie')); ?>
                     <tr> 
                         <th scope="row"><?php _e('Default Poster', 'postie') ?></th> 
                         <td>
@@ -331,7 +366,7 @@
                             wp_dropdown_categories($args);
                             ?>
                     </tr>
-                    <?php echo BuildBooleanSelect(__("Match short category", "postie"), "postie-settings[category_match]", $category_match, __("Try to match categories using 'starts with logic' otherwise only do exact matches.<br />Note that custom taxonomies will not be found if this setting is 'No'", "postie")); ?>
+                    <?php echo BuildBooleanSelect(__("Match short category", 'postie'), "postie-settings[category_match]", $category_match, __("Try to match categories using 'starts with logic' otherwise only do exact matches.<br />Note that custom taxonomies will not be found if this setting is 'No'", 'postie')); ?>
 
                     <tr valign="top">
                         <th scope="row">
@@ -413,30 +448,32 @@
                         </td> 
                     </tr> 
 
-                    <?php echo BuildBooleanSelect(__("Treat Replies As", "postie"), "postie-settings[reply_as_comment]", $reply_as_comment, "", array("comments", "new posts")); ?>
-                    <?php echo BuildBooleanSelect(__("Forward Rejected Mail", "postie"), "postie-settings[forward_rejected_mail]", $forward_rejected_mail); ?>
-                    <?php echo BuildBooleanSelect(__("Allow Subject In Mail", "postie"), "postie-settings[allow_subject_in_mail]", $allow_subject_in_mail, "Enclose the subject between '#' on the very first line. E.g. #this is my subject#"); ?>
-                    <?php echo BuildBooleanSelect(__("Allow HTML In Mail Subject", "postie"), "postie-settings[allow_html_in_subject]", $allow_html_in_subject); ?>
-                    <?php echo BuildBooleanSelect(__("Allow HTML In Mail Body", "postie"), "postie-settings[allow_html_in_body]", $allow_html_in_body); ?>
+                    <?php echo BuildBooleanSelect(__("Treat Replies As", 'postie'), "postie-settings[reply_as_comment]", $reply_as_comment, "", array("comments", "new posts")); ?>
+                    <?php echo BuildBooleanSelect(__("Strip Original Content from Replies", 'postie'), "postie-settings[strip_reply]", $strip_reply, "Only applicable if replies are trated as comments"); ?>
+                    
+                    <?php echo BuildBooleanSelect(__("Forward Rejected Mail", 'postie'), "postie-settings[forward_rejected_mail]", $forward_rejected_mail); ?>
+                    <?php echo BuildBooleanSelect(__("Allow Subject In Mail", 'postie'), "postie-settings[allow_subject_in_mail]", $allow_subject_in_mail, "Enclose the subject between '#' on the very first line. E.g. #this is my subject#"); ?>
+                    <?php echo BuildBooleanSelect(__("Allow HTML In Mail Subject", 'postie'), "postie-settings[allow_html_in_subject]", $allow_html_in_subject); ?>
+                    <?php echo BuildBooleanSelect(__("Allow HTML In Mail Body", 'postie'), "postie-settings[allow_html_in_body]", $allow_html_in_body); ?>
                     <tr> 
                         <th scope="row"><?php _e('Text for Message Start', 'postie') ?> </th>
                         <td>
                             <input name='postie-settings[message_start]' type="text" id='postie-settings-message_start' value="<?php echo esc_attr($message_start); ?>" size="50" /><br />
-                            <p class='description'><?php _e('Remove all text from the beginning of the message up to the point where this is found.', 'postie') ?></p>
+                            <p class='description'><?php _e('Remove all text from the beginning of the message up to the point where this is found. Note this works best with "Plain" messages.', 'postie') ?></p>
                         </td> 
                     </tr>
                     <tr>
                         <th scope="row"><?php _e('Text for Message End', 'postie') ?> </th>
                         <td>
                             <input name='postie-settings[message_end]' type="text" id='postie-settings-message_end' value="<?php echo esc_attr($message_end); ?>" size="50" /><br />
-                            <p class='description'><?php _e('Remove all text from the point this is found to the end of the message.', 'postie') ?></p>
+                            <p class='description'><?php _e('Remove all text from the point this is found to the end of the message. Note this works best with "Plain" messages.', 'postie') ?></p>
                         </td>
                     </tr>
 
                     <?php
-                    echo BuildBooleanSelect(__("Filter newlines", "postie"), "postie-settings[filternewlines]", $filternewlines, __("Retain newlines from plain text. Set to no if using markdown or textitle syntax", "postie"));
-                    echo BuildBooleanSelect(__("Replace newline characters with html line breaks (&lt;br /&gt;)", "postie"), "postie-settings[convertnewline]", $convertnewline, __("Filter newlines must be turned on for this option to take effect", "postie"));
-                    echo BuildBooleanSelect(__("Return rejected mail to sender", "postie"), "postie-settings[return_to_sender]", $return_to_sender);
+                    echo BuildBooleanSelect(__("Filter newlines", 'postie'), "postie-settings[filternewlines]", $filternewlines, __("Whether to strip newlines from plain text. Set to no if using markdown or textitle syntax", 'postie'));
+                    echo BuildBooleanSelect(__("Replace newline characters with html line breaks (&lt;br /&gt;)", 'postie'), "postie-settings[convertnewline]", $convertnewline, __("Filter newlines must be turned on for this option to take effect", 'postie'));
+                    echo BuildBooleanSelect(__("Return rejected mail to sender", 'postie'), "postie-settings[return_to_sender]", $return_to_sender);
                     ?>
                     <tr>
                         <th>
@@ -453,8 +490,7 @@
                     </tr>
 
                     <?php
-                    echo BuildBooleanSelect(__("Automatically convert urls to links", "postie"), "postie-settings[converturls]", $converturls);
-                    echo BuildBooleanSelect(__("Use shortcode for embedding video (youtube and others)", "postie"), "postie-settings[shortcode]", $shortcode);
+                    echo BuildBooleanSelect(__("Automatically convert urls to links", 'postie'), "postie-settings[converturls]", $converturls);
                     ?>
                     <tr> 
                         <th scope="row"><?php _e('Encoding for pages and feeds', 'postie') ?> </th> 
@@ -464,9 +500,9 @@
                             <p class='description'>UTF-8 <?php _e("should handle ISO-8859-1 as well", 'postie'); ?></p>
                         </td> 
                     </tr> 
-                    <?php echo BuildBooleanSelect(__("Decode Quoted Printable Data", "postie"), "postie-settings[message_dequote]", $message_dequote); ?>
-                    <?php echo BuildBooleanSelect(__("Drop The Signature From Mail", "postie"), "postie-settings[drop_signature]", $drop_signature); ?>
-                    <?php echo BuildTextArea(__("Signature Patterns", "postie"), "postie-settings[sig_pattern_list]", $sig_pattern_list, __("Put each pattern on a separate line. Patterns are <a href='http://regex101.com/' target='_blank'>regular expressions</a>", "postie")); ?>
+                    <?php echo BuildBooleanSelect(__("Decode Quoted Printable Data", 'postie'), "postie-settings[message_dequote]", $message_dequote); ?>
+                    <?php echo BuildBooleanSelect(__("Drop The Signature From Mail", 'postie'), "postie-settings[drop_signature]", $drop_signature, __("Really only works with 'plain' format.")); ?>
+                    <?php echo BuildTextArea(__("Signature Patterns", 'postie'), "postie-settings[sig_pattern_list]", $sig_pattern_list, __("Really only works with 'plain' format. Put each pattern on a separate line. Patterns are <a href='http://regex101.com/' target='_blank'>regular expressions</a> and are put inside /^{pattern}$/i", 'postie')); ?>
                 </table> 
             </div>
 
@@ -474,11 +510,13 @@
                 <table class='form-table'>
 
                     <?php
-                    echo BuildBooleanSelect(__("Use First Image as Featured Image", "postie"), "postie-settings[featured_image]", $featured_image, __("If any images are attached, the first one will be the featured image for the post", "postie"));
-                    echo BuildBooleanSelect(__("Automatically insert image gallery", "postie"), "postie-settings[auto_gallery]", $auto_gallery, __("If any images are attached, they will automatically be inserted as a gallery", "postie"));
-                    echo BuildBooleanSelect(__("Image Location", "postie"), "postie-settings[images_append]", $images_append, __("Location of attachments if using 'plain' format. Before or After content.", "postie"), array('After', 'Before'));
-                    echo BuildBooleanSelect(__("Generate Thumbnails", "postie"), "postie-settings[generate_thumbnails]", $generate_thumbnails, __("Some hosts crash during thumbnail generation. Set this to 'No' if you have this issue", "postie"));
-                    echo BuildBooleanSelect(__("Start Image Count At", "postie"), "postie-settings[start_image_count_at_zero]", $start_image_count_at_zero, __('For use if using "Image Place Holder Tag" below.', "postie"), array('Start at 0', 'Start at 1'));
+                    echo BuildBooleanSelect(__("Use First Image as Featured Image", 'postie'), "postie-settings[featured_image]", $featured_image, __("If any images are attached, the first one will be the featured image for the post", 'postie'));
+                    echo BuildBooleanSelect(__("Include Featured Image in Post", 'postie'), "postie-settings[include_featured_image]", $include_featured_image, __("Should the featured image be included in the post", 'postie'));
+                    echo BuildBooleanSelect(__("Automatically insert image gallery", 'postie'), "postie-settings[auto_gallery]", $auto_gallery, __("If any images are attached, they will automatically be inserted as a gallery", 'postie'));
+                    echo BuildSelect(__("Gallery Link Type", 'postie'), "postie-settings[auto_gallery_link]", $auto_gallery_link, array('Default', 'Post', 'File', 'None'), "Select the type of link the gallery should use");
+                    echo BuildBooleanSelect(__("Image Location", 'postie'), "postie-settings[images_append]", $images_append, __("Location of attachments if using 'plain' format. Before or After content.", 'postie'), array('After', 'Before'));
+                    echo BuildBooleanSelect(__("Generate Thumbnails", 'postie'), "postie-settings[generate_thumbnails]", $generate_thumbnails, __("Some hosts crash during thumbnail generation. Set this to 'No' if you have this issue", 'postie'));
+                    echo BuildBooleanSelect(__("Start Image Count At", 'postie'), "postie-settings[start_image_count_at_zero]", $start_image_count_at_zero, __('For use if using "Image Place Holder Tag" below.', 'postie'), array('Start at 0', 'Start at 1'));
                     ?>
                     <tr> 
                         <th scope="row"><?php _e('Image Place Holder Tag', 'postie') ?></th> 
@@ -528,6 +566,7 @@
                                     <li>{CAPTION} gets replaced with the caption you specified (if any)</li>
                                     <li>{FILELINK} gets replaced with the url to the media</li>
                                     <li>{FILENAME} gets replaced with the name of the attachment from the email</li>
+                                    <li>{FILEID} gets replaced with the ID of the media</li>
                                     <li>{FULL} same as {FILELINK}</li>
                                     <li>{HEIGHT} gets replaced with the height of the photo</li>
                                     <li>{ID} gets replaced with the post id</li>
@@ -561,7 +600,9 @@
 
             <div id="simpleTabs-content-5" class="simpleTabs-content">
                 <table class='form-table'>
-
+                    <?php
+                    echo BuildBooleanSelect(__("Use shortcode for embedding video (youtube or vimeo)", 'postie'), "postie-settings[shortcode]", $shortcode, "Only change this value to 'Yes' if you have another plugin that will process the shortcode.");
+                    ?>
                     <tr>
                         <th scope='row'><?php _e('Video template 1', 'postie') ?></th>
                         <?php $templateDir = get_option('siteurl') . '/' . PLUGINDIR . '/postie/templates'; ?>
@@ -710,8 +751,8 @@
 
             <div id="simpleTabs-content-6" class="simpleTabs-content">
                 <table class='form-table'>
-                    <?php echo BuildTextArea(__("Supported MIME Types", "postie"), "postie-settings[supported_file_types]", $supported_file_types, __("Add just the type (not the subtype). Text, Video, Audio, Image and Multipart are always supported. Put each type on a single line", "postie")); ?>
-                    <?php echo BuildTextArea(__("Banned File Names", "postie"), "postie-settings[banned_files_list]", $banned_files_list, __("Put each file name on a single line.Files matching this list will never be posted to your blog. You can use wildcards such as *.xls, or *.* for all files", "postie")); ?>
+                    <?php echo BuildTextArea(__("Supported MIME Types", 'postie'), "postie-settings[supported_file_types]", $supported_file_types, __("Add just the type (not the subtype). Text, Video, Audio, Image and Multipart are always supported. Put each type on a single line", 'postie')); ?>
+                    <?php echo BuildTextArea(__("Banned File Names", 'postie'), "postie-settings[banned_files_list]", $banned_files_list, __("Put each file name on a single line.Files matching this list will never be posted to your blog. You can use wildcards such as *.xls, or *.* for all files", 'postie')); ?>
 
                     <tr>
                         <th scope='row'><?php _e('Attachment icon set', 'postie') ?></th>
@@ -805,7 +846,7 @@
                                       name='postie-settings[generaltemplate]'><?php echo esc_attr($generaltemplate) ?></textarea>
                         </td>
                     </tr>
-                    <?php echo BuildBooleanSelect(__("Use custom image field for attachments", "postie"), "postie-settings[custom_image_field]", $custom_image_field, __("When set to 'Yes' no attachments will appear in the post (including images, video &amp; sound files). Instead the url to the attachment will be put into a custom field named 'image'. Your theme will need logic to display these attachments", "postie")); ?>            
+                    <?php echo BuildBooleanSelect(__("Use custom image field for attachments", 'postie'), "postie-settings[custom_image_field]", $custom_image_field, __("When set to 'Yes' no attachments will appear in the post (including images, video &amp; sound files). Instead the url to the attachment will be put into a custom field named 'image'. Your theme will need logic to display these attachments", 'postie')); ?>            
                 </table> 
             </div>
             <div id="simpleTabs-content-7" class="simpleTabs-content">
@@ -939,6 +980,7 @@
         previewHTML = previewHTML.replace(/{LARGEWIDTH}/, 1024);
         previewHTML = previewHTML.replace(/{LARGEHEIGHT}/, 682);
         previewHTML = previewHTML.replace(/{ID}/, 9999);
+        previewHTML = previewHTML.replace(/{FILEID}/, 9999);
         previewHTML = previewHTML.replace(/{POSTTITLE}/g, 'Post title');
         previewHTML = previewHTML.replace(/{CAPTION}/g, 'Spencer smiling');
         preview.innerHTML = previewHTML;
