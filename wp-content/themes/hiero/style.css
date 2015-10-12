@@ -4,7 +4,7 @@ Theme URI: http://athemes.com/theme/hiero
 Author: aThemes
 Author URI: http://athemes.com
 Description:  Hiero is an awesome magazine theme for your WordPress site feature bold colors and details to the content. Responsive layout, post thumbnails support, threaded comments and more.
-Version: 1.6
+Version: 1.7
 License: GNU General Public License v3.0
 License URI: license.txt
 Tags: black, white, red, two-columns, fixed-layout, threaded-comments, full-width-template, custom-menu
@@ -573,13 +573,8 @@ object {
 	margin: 0 0 20px;
 	}
 .entry-summary {
-/*	margin: 0 0 20px 260px;*/
-	margin: 0 0 20px 0;
+	margin: 0 0 20px 260px;
 	}
-.entry-summary .more-link,
-.entry-summary .page-links {
-	text-align: left;
-}
 .entry-footer {
 	clear: both;
 	padding: 8px 0;
