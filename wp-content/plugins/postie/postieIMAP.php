@@ -93,7 +93,7 @@ class PostieIMAP {
             $this->_connected = true;
             DebugEcho($this->_protocol . ": connected");
         } else {
-            LogInfo("imap_open failed: " . imap_last_error());
+            EchoError("imap_open failed: " . imap_last_error());
         }
         return $this->_connected;
     }
@@ -103,12 +103,12 @@ class PostieIMAP {
      * @return integer
      */
     function getNumberOfMessages() {
-        $status = imap_status($this->_connection, $this->_mailbox, SA_ALL); 
+        $status = imap_status($this->_connection, $this->_mailbox, SA_ALL);
         DebugDump($status);
         if ($status) {
             return max($status->messages, imap_num_msg($this->_connection));
         } else {
-            LogInfo("Error imap_status did not return a value");
+            EchoError("Error imap_status did not return a value");
             //DebugDump($this);
             return 0;
         }
@@ -118,12 +118,12 @@ class PostieIMAP {
      * Gets the raw email message from the server
      * @return string
      */
-    function fetchEmail($index) {
+    function fetchEmail($index, $ignoreMailState) {
 
         $header_info = imap_headerinfo($this->_connection, $index);
         //DebugDump($header_info);
 
-        if (IsDebugMode() || $header_info->Recent == 'N' || $header_info->Unseen == 'U') {
+        if (true == $ignoreMailState || IsDebugMode() || $header_info->Recent == 'N' || $header_info->Unseen == 'U') {
             $email = imap_fetchheader($this->_connection, $index);
             $email .= imap_body($this->_connection, $index);
 

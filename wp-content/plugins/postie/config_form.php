@@ -37,12 +37,12 @@
                 exit;
                 break;
             case "runpostie":
-                EchoInfo(__("Checking for mail manually", 'postie'));
+                DebugEcho(__("Checking for mail manually", 'postie'));
                 postie_get_mail();
                 exit;
                 break;
             case "runpostie-debug":
-                EchoInfo(__("Checking for mail manually with debug output", 'postie'));
+                DebugEcho(__("Checking for mail manually with debug output", 'postie'));
                 if (!defined('POSTIE_DEBUG')) {
                     define('POSTIE_DEBUG', true);
                 }
@@ -71,7 +71,7 @@
     }
     extract($config);
     if (!isset($maxemails)) {
-        EchoInfo(__("New setting: maxemails", 'postie'));
+        DebugEcho(__("New setting: maxemails", 'postie'));
         $maxemails = 0;
     }
     if (!isset($category_match)) {
@@ -241,14 +241,14 @@
                                 }
                                 ?>><?php _e('every 30 seconds', 'postie') ?>
                                 </option>
-                                
+
                                 <option value="fifteenseconds" <?php
                                 if ($interval == "fifteenseconds") {
                                     echo "selected='selected'";
                                 }
                                 ?>><?php _e('every 15 seconds', 'postie') ?>
                                 </option>
-                                
+
                                 <option value="manual" <?php
                                 if ($interval == "manual") {
                                     echo "selected='selected'";
@@ -277,6 +277,10 @@
                     <?php echo BuildBooleanSelect(__("Delete email after posting", 'postie'), 'postie-settings[delete_mail_after_processing]', $delete_mail_after_processing, __("Only set to no for testing purposes", 'postie')); ?>
                     <?php echo BuildBooleanSelect(__("Ignore mail state", 'postie'), 'postie-settings[ignore_mail_state]', $ignore_mail_state, __("Ignore whether the mails is 'read' or 'unread' If 'No' then only unread messages are processed.", 'postie')); ?>
                     <?php echo BuildTextArea(__("Allowed SMTP servers", 'postie'), "postie-settings[smtp]", $smtp, __("Only allow messages which have been sent throught the following SMTP servers. Put each server on a separate line. Leave blank to allow any SMTP server.", 'postie')); ?>
+
+                    <?php echo BuildBooleanSelect(__("Enable Error Logging", 'postie'), 'postie-settings[postie_log_error]', $postie_log_error, __("Log error messages to the web server error log.", 'postie')); ?>
+                    <?php echo BuildBooleanSelect(__("Enable Debug Logging", 'postie'), 'postie-settings[postie_log_debug]', $postie_log_debug, __("Log debug messages to the web server error log.", 'postie')); ?>
+
                 </table>
             </div>
 
@@ -450,7 +454,7 @@
 
                     <?php echo BuildBooleanSelect(__("Treat Replies As", 'postie'), "postie-settings[reply_as_comment]", $reply_as_comment, "", array("comments", "new posts")); ?>
                     <?php echo BuildBooleanSelect(__("Strip Original Content from Replies", 'postie'), "postie-settings[strip_reply]", $strip_reply, "Only applicable if replies are trated as comments"); ?>
-                    
+
                     <?php echo BuildBooleanSelect(__("Forward Rejected Mail", 'postie'), "postie-settings[forward_rejected_mail]", $forward_rejected_mail); ?>
                     <?php echo BuildBooleanSelect(__("Allow Subject In Mail", 'postie'), "postie-settings[allow_subject_in_mail]", $allow_subject_in_mail, "Enclose the subject between '#' on the very first line. E.g. #this is my subject#"); ?>
                     <?php echo BuildBooleanSelect(__("Allow HTML In Mail Subject", 'postie'), "postie-settings[allow_html_in_subject]", $allow_html_in_subject); ?>
@@ -511,7 +515,7 @@
 
                     <?php
                     echo BuildBooleanSelect(__("Use First Image as Featured Image", 'postie'), "postie-settings[featured_image]", $featured_image, __("If any images are attached, the first one will be the featured image for the post", 'postie'));
-                    echo BuildBooleanSelect(__("Include Featured Image in Post", 'postie'), "postie-settings[include_featured_image]", $include_featured_image, __("Should the featured image be included in the post", 'postie'));
+                    echo BuildBooleanSelect(__("Include Featured Image in Post", 'postie'), "postie-settings[include_featured_image]", $include_featured_image, __("Should the featured image be included in the post. This only works if the 'Preferred Text Type' is 'Plain'", 'postie'));
                     echo BuildBooleanSelect(__("Automatically insert image gallery", 'postie'), "postie-settings[auto_gallery]", $auto_gallery, __("If any images are attached, they will automatically be inserted as a gallery", 'postie'));
                     echo BuildSelect(__("Gallery Link Type", 'postie'), "postie-settings[auto_gallery_link]", $auto_gallery_link, array('Default', 'Post', 'File', 'None'), "Select the type of link the gallery should use");
                     echo BuildBooleanSelect(__("Image Location", 'postie'), "postie-settings[images_append]", $images_append, __("Location of attachments if using 'plain' format. Before or After content.", 'postie'), array('After', 'Before'));

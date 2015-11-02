@@ -54,8 +54,6 @@ hook for actions
   non-permitted attachment types
   email rejected
   email connection failure
-  start check
-  end check
   mail read
   mail delete
   content part

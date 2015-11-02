@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: postie-functions.php 1260699 2015-10-06 22:30:27Z WayneAllen $
+  $Id: postie-functions.php 1274225 2015-10-27 19:29:28Z WayneAllen $
  */
 
 class PostiePostModifiers {
@@ -57,30 +57,30 @@ if (!function_exists('mb_str_replace')) {
     }
 }
 
-function postie_environment() {
-    DebugEcho("Postie Version: " . POSTIE_VERSION);
-    DebugEcho("Wordpress Version: " . get_bloginfo('version'));
-    DebugEcho("PHP Version: " . phpversion());
-    DebugEcho("OS: " . php_uname());
-    DebugEcho("Debug mode: " . (IsDebugMode() ? "On" : "Off"));
-    DebugEcho("Time: " . date('Y-m-d H:i:s', time()) . " GMT");
-    DebugEcho("Error log: " . ini_get('error_log'));
-    DebugEcho("TMP dir: " . get_temp_dir());
-    DebugEcho("Postie is in " . plugin_dir_path(__FILE__));
+function postie_environment($force_display = false) {
+    DebugEcho("Postie Version: " . POSTIE_VERSION, $force_display);
+    DebugEcho("Wordpress Version: " . get_bloginfo('version'), $force_display);
+    DebugEcho("PHP Version: " . phpversion(), $force_display);
+    DebugEcho("OS: " . php_uname(), $force_display);
+    DebugEcho("POSTIE_DEBUG: " . (IsDebugMode() ? "On" : "Off"), $force_display);
+    DebugEcho("Time: " . date('Y-m-d H:i:s', time()) . " GMT", $force_display);
+    DebugEcho("Error log: " . ini_get('error_log'), $force_display);
+    DebugEcho("TMP dir: " . get_temp_dir(), $force_display);
+    DebugEcho("Postie is in " . plugin_dir_path(__FILE__), $force_display);
 
     if (defined('ALTERNATE_WP_CRON') && ALTERNATE_WP_CRON) {
-        DebugEcho("Alternate cron is enabled");
+        DebugEcho("Alternate cron is enabled", $force_display);
     }
 
     if (defined('DISABLE_WP_CRON') && DISABLE_WP_CRON) {
-        DebugEcho("WordPress cron is disabled. Postie will not run unless you have an external cron set up.");
+        DebugEcho("WordPress cron is disabled. Postie will not run unless you have an external cron set up.", $force_display);
     }
 
-    DebugEcho("Cron: " . (defined('DISABLE_WP_CRON') && DISABLE_WP_CRON === true ? "Off" : "On"));
-    DebugEcho("Alternate Cron: " . (defined('ALTERNATE_WP_CRON') && ALTERNATE_WP_CRON === true ? "On" : "Off"));
+    DebugEcho("Cron: " . (defined('DISABLE_WP_CRON') && DISABLE_WP_CRON === true ? "Off" : "On"), $force_display);
+    DebugEcho("Alternate Cron: " . (defined('ALTERNATE_WP_CRON') && ALTERNATE_WP_CRON === true ? "On" : "Off"), $force_display);
 
     if (defined('WP_CRON_LOCK_TIMEOUT') && WP_CRON_LOCK_TIMEOUT === true) {
-        DebugEcho("Cron lock timeout is:" . WP_CRON_LOCK_TIMEOUT);
+        DebugEcho("Cron lock timeout is:" . WP_CRON_LOCK_TIMEOUT, $force_display);
     }
 }
 
@@ -110,44 +110,44 @@ if (!function_exists('fnmatch')) {
 
 }
 
-function LogInfo($v) {
-    error_log("Postie: $v");
-}
-
-function EchoInfo($v) {
+function postie_log_onscreen($data) {
     if (php_sapi_name() == "cli") {
-        print( "$v\n");
+        print( "$data\n");
     } else {
         //flush the buffers
         while (ob_get_level() > 0) {
             ob_end_flush();
         }
-        print( "<pre>" . htmlspecialchars($v) . "</pre>\n");
+        print( "<pre>" . htmlspecialchars($data) . "</pre>\n");
     }
-    LogInfo($v);
+}
+
+function postie_log_error($v) {
+    postie_log_onscreen($v);
+    error_log("Postie [error]: $v");
+}
+
+function postie_log_debug($data) {
+    error_log("Postie [debug]: $data");
+}
+
+function EchoError($v) {
+    postie_log_error($v);
+    do_action('postie_log_debug', $v);
 }
 
 function DebugDump($v) {
-    if (IsDebugMode()) {
-        $o = print_r($v, true);
-        if (php_sapi_name() == "cli") {
-            print( "$o\n");
-        } else {
-            //flush the buffers
-            while (ob_get_level() > 0) {
-                ob_end_flush();
-            }
-            print( "<pre>\n");
-            EchoInfo($o);
-            print( "</pre>\n");
-        }
+    if (defined('POSTIE_DEBUG') && true == POSTIE_DEBUG) {
+        postie_log_onscreen(print_r($v, true));
     }
+    do_action('postie_log_debug', print_r($v, true));
 }
 
-function DebugEcho($v) {
-    if (IsDebugMode()) {
-        EchoInfo($v);
+function DebugEcho($v, $force = false) {
+    if ($force || (defined('POSTIE_DEBUG') && true == POSTIE_DEBUG)) {
+        postie_log_onscreen($v);
     }
+    do_action('postie_log_debug', $v);
 }
 
 function tag_Date(&$content, $message_date, $isHtml) {
@@ -296,6 +296,12 @@ function CreatePost($poster, $mimeDecodedEmail, $post_id, &$is_reply, $config, $
         DebugEcho("post status: $content");
     }
 
+    //handle CID before linkify
+    filter_ReplaceImageCIDs($content, $attachments, $config);
+    if ($fulldebug) {
+        DebugEcho("post cid: $content");
+    }
+
     if ($config['converturls']) {
         $content = filter_Videos($content, $config['shortcode']); //videos first so linkify doesn't mess with them
         if ($fulldebug) {
@@ -311,11 +317,6 @@ function CreatePost($poster, $mimeDecodedEmail, $post_id, &$is_reply, $config, $
     filter_VodafoneHandler($content, $attachments);
     if ($fulldebug) {
         DebugEcho("post vodafone: $content");
-    }
-
-    filter_ReplaceImageCIDs($content, $attachments, $config);
-    if ($fulldebug) {
-        DebugEcho("post cid: $content");
     }
 
     $customImages = tag_CustomImageField($content, $attachments, $config);
@@ -454,7 +455,7 @@ function PostEmail($poster, $mimeDecodedEmail, $config) {
             // then it should be removed
             if (!$is_reply) {
                 wp_delete_post($post_id);
-                EchoInfo("postie_post filter cleared the post, not saving.");
+                EchoError("postie_post filter cleared the post, not saving.");
             }
         } else {
             DisplayEmailPost($details);
@@ -469,11 +470,13 @@ function PostEmail($poster, $mimeDecodedEmail, $config) {
                 } elseif ($confirmation_email == 'both') {
                     $recipients = array($details['email_author'], get_option("admin_email"));
                 }
-                MailToRecipients($mimeDecodedEmail, false, $recipients, false, false, $postid);
+                if (null != $postid) {
+                    MailToRecipients($mimeDecodedEmail, $recipients, false, false, $postid);
+                }
             }
         }
     } else {
-        EchoInfo("wp_insert_post failed: " . $post_id->get_error_message());
+        EchoError("PostEmail wp_insert_post failed: " . $post_id->get_error_message());
         DebugDump($post_id->get_error_messages());
         DebugDump($post_id->get_error_data());
     }
@@ -620,8 +623,14 @@ function make_links($text) {
 
 function getPostAuthorDetails(&$subject, &$content, &$mimeDecodedEmail) {
 
-    $theDate = $mimeDecodedEmail->headers['date'];
-    $theEmail = RemoveExtraCharactersInEmailAddress($mimeDecodedEmail->headers["from"]);
+    $theDate = null;
+    if (array_key_exists("date", $mimeDecodedEmail->headers) && !empty($mimeDecodedEmail->headers["date"])) {
+        $theDate = $mimeDecodedEmail->headers['date'];
+    }
+    $theEmail = '';
+    if (array_key_exists("from", $mimeDecodedEmail->headers) && !empty($mimeDecodedEmail->headers["from"])) {
+        $theEmail = RemoveExtraCharactersInEmailAddress($mimeDecodedEmail->headers["from"]);
+    }
 
     $regAuthor = get_user_by('email', $theEmail);
     if ($regAuthor) {
@@ -643,7 +652,7 @@ function getPostAuthorDetails(&$subject, &$content, &$mimeDecodedEmail) {
             $thFeAuthor = GetNameFromEmail($matches[1]);
             $mimeDecodedEmail->headers['from'] = $theAuthor;
         }
-        //TODO dosen't always work with HTML
+        //TODO doesn't always work with HTML
         if (preg_match("/\ndate:(.*?)\n/i", $content, $matches)) {
             $theDate = $matches[1];
             DebugEcho("date in Fwd: $theDate");
@@ -747,14 +756,14 @@ function ConfigurePostie() {
  * This function handles determining the protocol and fetching the mail
  * @return array
  */
-function FetchMail($server = NULL, $port = NULL, $email = NULL, $password = NULL, $protocol = NULL, $offset = NULL, $test = NULL, $deleteMessages = true, $maxemails = 0, $email_tls = false) {
+function FetchMail($server = NULL, $port = NULL, $email = NULL, $password = NULL, $protocol = NULL, $offset = NULL, $test = NULL, $deleteMessages = true, $maxemails = 0, $email_tls = false, $ignoreEmailState = true) {
     $emails = array();
     if (!$server || !$port || !$email) {
-        EchoInfo("Missing Configuration For Mail Server");
+        EchoError("Missing Configuration For Mail Server");
         return $emails;
     }
     if ($server == "pop.gmail.com") {
-        EchoInfo("MAKE SURE POP IS TURNED ON IN SETTING AT Gmail");
+        EchoError("MAKE SURE POP IS TURNED ON IN SETTING AT Gmail");
     }
     switch (strtolower($protocol)) {
         case 'smtp': //direct 
@@ -770,9 +779,9 @@ function FetchMail($server = NULL, $port = NULL, $email = NULL, $password = NULL
         case 'imap-ssl':
         case 'pop3-ssl':
             if (!HasIMAPSupport()) {
-                EchoInfo("Sorry - you do not have IMAP php module installed - it is required for this mail setting.");
+                EchoError("Sorry - you do not have IMAP php module installed - it is required for this mail setting.");
             } else {
-                $emails = IMAPMessageFetch($server, $port, $email, $password, $protocol, $offset, $test, $deleteMessages, $maxemails, $email_tls);
+                $emails = IMAPMessageFetch($server, $port, $email, $password, $protocol, $offset, $test, $deleteMessages, $maxemails, $email_tls, $ignoreEmailState);
             }
             break;
         case 'pop3':
@@ -786,7 +795,7 @@ function FetchMail($server = NULL, $port = NULL, $email = NULL, $password = NULL
 /**
  * Handles fetching messages from an imap server
  */
-function IMAPMessageFetch($server = NULL, $port = NULL, $email = NULL, $password = NULL, $protocol = NULL, $offset = NULL, $test = NULL, $deleteMessages = true, $maxemails = 0, $tls = false) {
+function IMAPMessageFetch($server = NULL, $port = NULL, $email = NULL, $password = NULL, $protocol = NULL, $offset = NULL, $test = NULL, $deleteMessages = true, $maxemails = 0, $tls = false, $ignoreMailState = true) {
     require_once("postieIMAP.php");
     $emails = array();
     $mail_server = &PostieIMAP::Factory($protocol);
@@ -797,15 +806,15 @@ function IMAPMessageFetch($server = NULL, $port = NULL, $email = NULL, $password
     if ($mail_server->connect(trim($server), $port, $email, $password)) {
         $msg_count = $mail_server->getNumberOfMessages();
     } else {
-        EchoInfo("Mail Connection Time Out");
-        EchoInfo("Common Reasons: Server Down, Network Issue, Port/Protocol MisMatch ");
-        EchoInfo("The Server said:" . $mail_server->error());
+        EchoError("Mail Connection Time Out");
+        EchoError("Common Reasons: Server Down, Network Issue, Port/Protocol MisMatch ");
+        EchoError("The Server said:" . $mail_server->error());
         $msg_count = 0;
     }
 
     // loop through messages 
     for ($i = 1; $i <= $msg_count; $i++) {
-        $emails[$i] = $mail_server->fetchEmail($i);
+        $emails[$i] = $mail_server->fetchEmail($i, $ignoreMailState);
         if ($deleteMessages) {
             $mail_server->deleteMessage($i);
         }
@@ -843,9 +852,9 @@ function POP3MessageFetch($server = NULL, $port = NULL, $email = NULL, $password
         }
     } else {
         if (strpos($pop3->ERROR, "POP3: premature NOOP OK, NOT an RFC 1939 Compliant server") === false) {
-            EchoInfo("Mail Connection Time Out. Common Reasons: Server Down, Network Issue, Port/Protocol MisMatch");
+            EchoError("Mail Connection Time Out. Common Reasons: Server Down, Network Issue, Port/Protocol MisMatch");
         }
-        EchoInfo("The Server said: $pop3->ERROR");
+        EchoError("The Server said: $pop3->ERROR");
         $msg_count = 0;
     }
     DebugEcho("message count: $msg_count");
@@ -862,7 +871,7 @@ function POP3MessageFetch($server = NULL, $port = NULL, $email = NULL, $password
                 $emails[$i] = implode('', $m);
                 if ($deleteMessages) {
                     if (!$pop3->delete($i)) {
-                        EchoInfo("POP3MessageFetch: cannot delete message $i: " . $pop3->ERROR);
+                        EchoError("POP3MessageFetch: cannot delete message $i: " . $pop3->ERROR);
                         $pop3->reset();
                         exit;
                     }
@@ -871,7 +880,7 @@ function POP3MessageFetch($server = NULL, $port = NULL, $email = NULL, $password
                 DebugEcho("POP3MessageFetch: message $i not an array");
             }
         } else {
-            EchoInfo("POP3MessageFetch: message $i $pop3->ERROR");
+            EchoError("POP3MessageFetch: message $i $pop3->ERROR");
         }
         if ($maxemails != 0 && $i >= $maxemails) {
             DebugEcho("Max emails ($maxemails)");
@@ -891,8 +900,11 @@ function PostToDB($details, $isReply, $customImageField, $postmodifiers) {
     if (!$isReply) {
         $post_ID = wp_insert_post($details, true);
         if (is_wp_error($post_ID)) {
-            EchoInfo("Error: " . $post_ID->get_error_message());
+            EchoError("PostToDB Error: " . $post_ID->get_error_message());
+            DebugDump($post_ID->get_error_messages());
+            DebugDump($post_ID->get_error_data());
             wp_delete_post($details['ID']);
+            $post_ID = null;
         }
         //evidently post_category was depricated at some point.
         //wp_set_post_terms($post_ID, $details['post_category']);
@@ -950,7 +962,7 @@ function isBannedFileName($filename, $bannedFiles) {
     }
     foreach ($bannedFiles as $bannedFile) {
         if (fnmatch($bannedFile, $filename)) {
-            EchoInfo("Ignoring attachment: $filename - it is on the banned files list.");
+            EchoError("Ignoring attachment: $filename - it is on the banned files list.");
             return true;
         }
     }
@@ -1090,7 +1102,7 @@ function GetContent($part, &$attachments, $post_id, $poster, $config) {
                             $attachments["html"][$filename] = "<a href='$file'>" . $icon . $filename . '</a>' . "\n";
                             DebugEcho("GetContent: text attachment: adding '$filename'");
                         } else {
-                            LogInfo($file_id->get_error_message());
+                            EchoError($file_id->get_error_message());
                         }
                     } else {
                         DebugEcho("GetContent: text attachment: skipping '$filename'");
@@ -1129,7 +1141,7 @@ function GetContent($part, &$attachments, $post_id, $poster, $config) {
                             $icon = chooseAttachmentIcon($file, $mimetype_primary, $mimetype_secondary, $config['icon_set'], $config['icon_size']);
                             $attachments["html"][$filename] = "<a href='$file'>" . $icon . $filename . '</a>' . "\n";
                         } else {
-                            LogInfo($file_id->get_error_message());
+                            EchoError($file_id->get_error_message());
                         }
                     }
                 }
@@ -1165,7 +1177,7 @@ function GetContent($part, &$attachments, $post_id, $poster, $config) {
                         }
                     }
                 } else {
-                    LogInfo("image error: " . $file_id->get_error_message());
+                    EchoError("image error: " . $file_id->get_error_message());
                 }
                 break;
 
@@ -1190,7 +1202,7 @@ function GetContent($part, &$attachments, $post_id, $poster, $config) {
                     }
                     $attachments["html"][$filename] = parseTemplate($file_id, $mimetype_primary, $audioTemplate, $filename);
                 } else {
-                    LogInfo("audio error: " . $file_id->get_error_message());
+                    EchoError("audio error: " . $file_id->get_error_message());
                 }
                 break;
 
@@ -1219,7 +1231,7 @@ function GetContent($part, &$attachments, $post_id, $poster, $config) {
                     $attachments["html"][$filename] = parseTemplate($file_id, $mimetype_primary, $videoTemplate, $filename);
                     //echo "videoTemplate = $videoTemplate\n";
                 } else {
-                    LogInfo($file_id->get_error_message());
+                    EchoError($file_id->get_error_message());
                 }
                 break;
 
@@ -1247,7 +1259,7 @@ function GetContent($part, &$attachments, $post_id, $poster, $config) {
                             DebugEcho("GetContent: No content-id");
                         }
                     } else {
-                        LogInfo($file_id->get_error_message());
+                        EchoError($file_id->get_error_message());
                     }
                 } else {
                     DebugEcho("GetContent: Not in supported filetype list");
@@ -1420,7 +1432,7 @@ function ValidatePoster(&$mimeDecodedEmail, $config) {
         DebugEcho("ValidatePoster: looking up default user $admin_username");
         $user = get_user_by('login', $admin_username);
         if ($user === false) {
-            EchoInfo("Your 'Default Poster' setting '$admin_username' is not a valid WordPress user (2)");
+            EchoError("Your 'Default Poster' setting '$admin_username' is not a valid WordPress user (2)");
             $poster = 1;
         } else {
             $poster = $user->ID;
@@ -1434,13 +1446,13 @@ function ValidatePoster(&$mimeDecodedEmail, $config) {
     $validSMTP = isValidSmtpServer($mimeDecodedEmail, $smtp);
 
     if (!$poster || !$validSMTP) {
-        EchoInfo('Invalid sender: ' . htmlentities($from) . "! Not adding email!");
+        EchoError('Invalid sender: ' . htmlentities($from) . "! Not adding email!");
         if ($forward_rejected_mail) {
             $admin_email = get_option("admin_email");
-            if (MailToRecipients($mimeDecodedEmail, false, array($admin_email), $return_to_sender)) {
-                EchoInfo("A copy of the message has been forwarded to the administrator.");
+            if (MailToRecipients($mimeDecodedEmail, array($admin_email), $return_to_sender)) {
+                EchoError("A copy of the message has been forwarded to the administrator.");
             } else {
-                EchoInfo("The message was unable to be forwarded to the adminstrator.");
+                EchoError("The message was unable to be forwarded to the adminstrator.");
             }
         }
         return '';
@@ -1465,7 +1477,7 @@ function isValidSmtpServer($mimeDecodedEmail, $smtpservers) {
     }
 
     foreach ((array) $mimeDecodedEmail->headers['received'] as $received) {
-        EchoInfo("isValidSmtpServer: checking header $received");
+        EchoError("isValidSmtpServer: checking header $received");
         foreach ($smtpservers as $smtp) {
             if (stristr($received, $smtp) !== false) {
                 DebugEcho("isValidSmtpServer: Sent from valid SMTP server.");
@@ -1474,7 +1486,7 @@ function isValidSmtpServer($mimeDecodedEmail, $smtpservers) {
         }
     }
 
-    EchoInfo("isValidSmtpServer: Sent from invalid SMTP server.");
+    EchoError("isValidSmtpServer: Sent from invalid SMTP server.");
     return false;
 }
 
@@ -1796,7 +1808,7 @@ function filter_AppleFile(&$mimeDecodedEmail) {
     for ($i = 0; $i < count($mimeDecodedEmail->parts); $i++) {
         if ($mimeDecodedEmail->parts[$i]->ctype_secondary == "applefile") {
             $found = true;
-            LogInfo("Removing 'applefile'");
+            DebugEcho("Removing 'applefile'");
         } else {
             $newParts[] = $mimeDecodedEmail->parts[$i];
         }
@@ -1808,7 +1820,6 @@ function filter_AppleFile(&$mimeDecodedEmail) {
 
 function postie_media_handle_upload($part, $post_id, $poster, $generate_thubnails = true, $mimetype_primary = null, $mimetype_secondary = null) {
     $post_data = array();
-    $overrides = array('test_form' => false);
 
     $tmpFile = tempnam(get_temp_dir(), 'postie');
     if ($tmpFile !== false) {
@@ -1817,10 +1828,10 @@ function postie_media_handle_upload($part, $post_id, $poster, $generate_thubnail
             fwrite($fp, $part->body);
             fclose($fp);
         } else {
-            EchoInfo("postie_media_handle_upload: Could not write to temp file: '$tmpFile' ");
+            EchoError("postie_media_handle_upload: Could not write to temp file: '$tmpFile' ");
         }
     } else {
-        EchoInfo("postie_media_handle_upload: Could not create temp file in " . get_temp_dir());
+        EchoError("postie_media_handle_upload: Could not create temp file in " . get_temp_dir());
     }
 
     //special case to deal with older png implementations
@@ -1863,7 +1874,6 @@ function postie_media_handle_upload($part, $post_id, $poster, $generate_thubnail
         $type = $part->primary . '/' . $part->secondary;
         $the_file['ext'] = $ext;
         $the_file['type'] = $type;
-        $overrides['test_type'] = false;
     }
 
     $time = current_time('mysql');
@@ -1873,7 +1883,7 @@ function postie_media_handle_upload($part, $post_id, $poster, $generate_thubnail
         $time = $post->post_date;
     }
 
-    $file = postie_handle_upload($the_file, $overrides, $time, $mimetype_primary, $mimetype_secondary);
+    $file = postie_handle_upload($the_file, $time, $mimetype_primary, $mimetype_secondary);
 
 
     if (isset($file['error'])) {
@@ -1933,13 +1943,15 @@ function postie_media_handle_upload($part, $post_id, $poster, $generate_thubnail
             DebugEcho("thumbnail generation disabled");
         }
     } else {
-        EchoInfo("There was an error adding the attachement: " . $id->get_error_message());
+        EchoError("There was an error adding the attachement: " . $id->get_error_message());
+        DebugDump($id->get_error_messages());
+        DebugDump($id->get_error_data());
     }
 
     return $id;
 }
 
-function postie_handle_upload(&$file, $overrides = false, $time = null, $mimetype_primary = null, $mimetype_secondary = null) {
+function postie_handle_upload(&$file, $time = null, $mimetype_primary = null, $mimetype_secondary = null) {
     // The default error handler.
     if (!function_exists('wp_handle_upload_error')) {
 
@@ -1959,6 +1971,9 @@ function postie_handle_upload(&$file, $overrides = false, $time = null, $mimetyp
         } else if (!empty($mimetype_primary)) {
             DebugEcho("postie_handle_upload: substituting mimetype_primary - $mimetype_primary/$mimetype_secondary");
             $file['type'] = "$mimetype_primary/$mimetype_secondary";
+        } else {
+            DebugEcho("postie_handle_upload: no type found, implies not allowed");
+            $file['type'] = '';
         }
     }
     DebugEcho("postie_handle_upload: detected file type for " . $file['name'] . " is " . $file['type']);
@@ -1981,13 +1996,13 @@ function postie_handle_upload(&$file, $overrides = false, $time = null, $mimetyp
         __("Missing a temporary folder.", 'postie'),
         __("Failed to write file to disk.", 'postie'));
 
-    // Install user overrides. Did we mention that this voids your warranty?
-    if (is_array($overrides)) {
-        extract($overrides, EXTR_OVERWRITE);
-    }
     // A successful upload will pass this test. It makes no sense to override this one.
     if ($file['error'] > 0) {
         return $upload_error_handler($file, $upload_error_strings[$file['error']]);
+    }
+    // A file with a valid mime type
+    if (empty($file['type'])) {
+        return $upload_error_handler($file, __('File type is not allowed', 'postie'));
     }
     // A non-empty file will pass this test.
     if (!($file['size'] > 0 )) {
@@ -2117,11 +2132,8 @@ function filter_PreferedText($mimeDecodedEmail, $preferTextType) {
  * This function can be used to send confirmation or rejection emails
  * It accepts an object containing the entire message
  */
-function MailToRecipients(&$mail_content, $testEmail = false, $recipients = array(), $returnToSender = false, $reject = true, $postid = null) {
+function MailToRecipients(&$mail_content, $recipients = array(), $returnToSender = false, $reject = true, $postid = null) {
     DebugEcho("MailToRecipients: send mail");
-    if ($testEmail) {
-        return false;
-    }
 
     $myemailadd = get_option("admin_email");
     $blogname = get_option("blogname");
@@ -2990,7 +3002,9 @@ function config_GetDefaults() {
         'force_user_login' => false,
         'auto_gallery_link' => 'default',
         'ignore_mail_state' => false,
-        'strip_reply' => true
+        'strip_reply' => true,
+        'postie_log_error' => true,
+        'postie_log_debug' => false
     );
 }
 
@@ -3300,7 +3314,7 @@ function HasFunctions($function_list, $display = true) {
     foreach ($function_list as $function) {
         if (!function_exists($function)) {
             if ($display) {
-                EchoInfo("Missing $function");
+                EchoError("Missing $function");
             }
             return false;
         }
@@ -3476,20 +3490,27 @@ function DebugFiltersFor($hook = '') {
 }
 
 function postie_test_config() {
-    $config = config_Read();
-    extract($config);
+
     get_currentuserinfo();
 
     if (!current_user_can('manage_options')) {
-        LogInfo("non-admin tried to set options");
+        DebugEcho("non-admin tried to set options");
         echo "<h2> Sorry only admin can run this file</h2>";
         exit();
+    }
+
+    $config = config_Read();
+    if (true == $config['postie_log_error'] || (defined('POSTIE_DEBUG') && true == POSTIE_DEBUG)) {
+        add_action('postie_log_error', 'postie_log_error');
+    }
+    if (true == $config['postie_log_debug'] || (defined('POSTIE_DEBUG') && true == POSTIE_DEBUG)) {
+        add_action('postie_log_debug', 'postie_log_debug');
     }
     ?>
     <div class="wrap"> 
         <h1>Postie Configuration Test</h1>
         <?php
-        postie_environment();
+        postie_environment(true);
         ?>
 
         <h2>Clock Tests</h2>
@@ -3497,29 +3518,29 @@ function postie_test_config() {
         <?php
         $content = "";
         $data = tag_Delay($content, null, $config['time_offset']);
-        EchoInfo("Post time: $data[0]");
+        DebugEcho("Post time: $data[0]", true);
         ?>
         <h2>Encoding</h2>
         <?php
-        EchoInfo("default_charset: " . ini_get('default_charset'));
+        DebugEcho("default_charset: " . ini_get('default_charset'), true);
         if (defined('DB_CHARSET')) {
-            EchoInfo("DB_CHARSET: " . DB_CHARSET);
+            DebugEcho("DB_CHARSET: " . DB_CHARSET, true);
         } else {
-            EchoInfo("DB_CHARSET: undefined (utf8)");
+            DebugEcho("DB_CHARSET: undefined (utf8)", true);
         }
         if (defined('DB_COLLATE')) {
-            EchoInfo("DB_COLLATE: " . DB_COLLATE);
+            DebugEcho("DB_COLLATE: " . DB_COLLATE, true);
         }
-        EchoInfo("WordPress encoding: " . esc_attr(get_option('blog_charset')));
-        EchoInfo("Postie encoding: " . $config['message_encoding']);
+        DebugEcho("WordPress encoding: " . esc_attr(get_option('blog_charset')), true);
+        DebugEcho("Postie encoding: " . $config['message_encoding'], true);
         ?>
         <h2>Connect to Mail Host</h2>
 
         <?php
-        if (!$mail_server || !$mail_server_port || !$mail_userid) {
-            EchoInfo("FAIL - server settings not complete");
+        if (!$config['mail_server'] || !$config['mail_server_port'] || !$config['mail_userid']) {
+            EchoError("FAIL - server settings not complete");
         } else {
-            DebugEcho("checking");
+            DebugEcho("checking", true);
         }
 
         switch (strtolower($config["input_protocol"])) {
@@ -3527,19 +3548,19 @@ function postie_test_config() {
             case 'imap-ssl':
             case 'pop3-ssl':
                 if (!HasIMAPSupport()) {
-                    EchoInfo("Sorry - you do not have IMAP php module installed - it is required for this mail setting.");
+                    EchoError("Sorry - you do not have IMAP php module installed - it is required for this mail setting.");
                 } else {
                     require_once("postieIMAP.php");
                     $mail_server = &PostieIMAP::Factory($config["input_protocol"]);
-                    if ($email_tls) {
+                    if ($config['email_tls']) {
                         $mail_server->TLSOn();
                     }
                     if (!$mail_server->connect($config["mail_server"], $config["mail_server_port"], $config["mail_userid"], $config["mail_password"])) {
-                        EchoInfo("Unable to connect. The server said:");
-                        EchoInfo($mail_server->error());
+                        EchoError("Unable to connect. The server said:");
+                        EchoError($mail_server->error());
                     } else {
-                        EchoInfo("Successful " . strtoupper($config['input_protocol']) . " connection on port {$config["mail_server_port"]}");
-                        EchoInfo("# of waiting messages: " . $mail_server->getNumberOfMessages());
+                        DebugEcho("Successful " . strtoupper($config['input_protocol']) . " connection on port {$config["mail_server_port"]}", true);
+                        DebugEcho("# of waiting messages: " . $mail_server->getNumberOfMessages(), true);
                         $mail_server->disconnect();
                     }
                 }
@@ -3552,9 +3573,9 @@ function postie_test_config() {
                     $pop3->DEBUG = POSTIE_DEBUG;
                 }
                 if (!$pop3->connect($config["mail_server"], $config["mail_server_port"])) {
-                    EchoInfo("Unable to connect. The server said:" . $pop3->ERROR);
+                    EchoError("Unable to connect. The server said:" . $pop3->ERROR);
                 } else {
-                    EchoInfo("Sucessful " . strtoupper($config['input_protocol']) . " connection on port {$config["mail_server_port"]}");
+                    DebugEcho("Sucessful " . strtoupper($config['input_protocol']) . " connection on port {$config["mail_server_port"]}", true);
                     $msgs = $pop3->login($config["mail_userid"], $config["mail_password"]);
                     if ($msgs === false) {
                         //workaround for bug reported here Apr 12, 2013
@@ -3562,12 +3583,12 @@ function postie_test_config() {
                         //originally repoted here:
                         //https://core.trac.wordpress.org/ticket/10587
                         if (empty($pop3->ERROR)) {
-                            EchoInfo("No waiting messages");
+                            DebugEcho("No waiting messages", true);
                         } else {
-                            EchoInfo("Unable to login. The server said:" . $pop3->ERROR);
+                            EchoError("Unable to login. The server said:" . $pop3->ERROR);
                         }
                     } else {
-                        EchoInfo("# of waiting messages: $msgs");
+                        DebugEcho("# of waiting messages: $msgs", true);
                     }
                     $pop3->quit();
                 }
@@ -3584,7 +3605,16 @@ function postie_get_mail() {
         require_once (plugin_dir_path(__FILE__) . 'simple_html_dom.php');
     }
 
-    EchoInfo("Starting mail fetch");
+    $config = config_Read();
+    if (true == $config['postie_log_error'] || (defined('POSTIE_DEBUG') && true == POSTIE_DEBUG)) {
+        add_action('postie_log_error', 'postie_log_error');
+    }
+    if (true == $config['postie_log_debug'] || (defined('POSTIE_DEBUG') && true == POSTIE_DEBUG)) {
+        add_action('postie_log_debug', 'postie_log_debug');
+    }
+
+    DebugEcho("Starting mail fetch");
+
     postie_environment();
     $wp_content_path = dirname(dirname(dirname(__FILE__)));
     DebugEcho("wp_content_path: $wp_content_path");
@@ -3593,21 +3623,21 @@ function postie_get_mail() {
         include_once ($wp_content_path . DIRECTORY_SEPARATOR . "filterPostie.php");
     }
 
+    do_action('postie_session_start');
+
     if (has_filter('postie_post')) {
         echo "Postie: filter 'postie_post' is depricated in favor of 'postie_post_before'";
     }
 
     $test_email = null;
-    $config = config_Read();
-    //extract($config);
     if (!array_key_exists('maxemails', $config)) {
         $config['maxemails'] = 0;
     }
 
-    $emails = FetchMail($config['mail_server'], $config['mail_server_port'], $config['mail_userid'], $config['mail_password'], $config['input_protocol'], $config['time_offset'], $test_email, $config['delete_mail_after_processing'], $config['maxemails'], $config['email_tls']);
+    $emails = FetchMail($config['mail_server'], $config['mail_server_port'], $config['mail_userid'], $config['mail_password'], $config['input_protocol'], $config['time_offset'], $test_email, $config['delete_mail_after_processing'], $config['maxemails'], $config['email_tls'], $config['ignore_mail_state']);
     $message = 'Done.';
 
-    EchoInfo(sprintf(__("There are %d messages to process", 'postie'), count($emails)));
+    DebugEcho(sprintf(__("There are %d messages to process", 'postie'), count($emails)));
 
     if (function_exists('memory_get_usage')) {
         DebugEcho(__("memory at start of email processing:", 'postie') . memory_get_usage());
@@ -3620,14 +3650,15 @@ function postie_get_mail() {
     foreach ($emails as $email) {
         $message_number++;
         DebugEcho("$message_number: ------------------------------------");
+        //DebugDump($email);
         //sanity check to see if there is any info in the message
         if ($email == NULL) {
             $message = __('Dang, message is empty!', 'postie');
-            EchoInfo("$message_number: $message");
+            EchoError("$message_number: $message");
             continue;
-        } else if (($config['ignore_mail_state'] == false) && ( $email == 'already read')) {
+        } else if ($email == 'already read') {
             $message = __("Message is already marked 'read'.", 'postie');
-            EchoInfo("$message_number: $message");
+            DebugEcho("$message_number: $message");
             continue;
         }
 
@@ -3639,12 +3670,14 @@ function postie_get_mail() {
         $poster = ValidatePoster($mimeDecodedEmail, $config);
         if (!empty($poster)) {
             PostEmail($poster, $mimeDecodedEmail, $config);
+            DebugEcho("$message_number: processed");
         } else {
-            EchoInfo("Ignoring email - not authorized.");
+            EchoError("Ignoring email - not authorized.");
         }
         flush();
     }
-    EchoInfo("Mail fetch complete, $message_number emails");
+    DebugEcho("Mail fetch complete, $message_number emails");
+    do_action('postie_session_end');
 
     if (function_exists('memory_get_usage')) {
         DebugEcho("memory at end of email processing:" . memory_get_usage());

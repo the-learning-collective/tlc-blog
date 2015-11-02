@@ -105,6 +105,10 @@ Please visit [the official website](http://www.schloebe.de/wordpress/admin-manag
 
 == Changelog ==
 
+= 2.4.0.1 =
+* FIXED: Privilege escalation issue fixed (Thanks Kacper Szurek!)
+* FIXED: Code cleanup
+
 = 2.4.0 =
 * NEW: Localization update (sl_SI)
 * FIXED: Improved compatibility with WordPress 4.3, specifically for Drag'n'Drop feature

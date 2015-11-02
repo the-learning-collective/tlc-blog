@@ -6,7 +6,7 @@ Plugin URI: http://PostiePlugin.com/
 Tags: e-mail, email, post-by-email
 Requires at least: 3.3.0
 Tested up to: 4.3.1
-Stable tag: 1.7.16
+Stable tag: 1.7.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -235,6 +235,27 @@ All script, style and body tags are stripped from html emails.
 Attachments are now processed in the order they were attached.
 
 == CHANGELOG ==
+= 1.7.21 (2015-10-27) =
+* Refix bug where "Ignore mail state" setting was being ignored
+
+= 1.7.20 (2015-10-26) =
+* Fixed bug where debug info was not being displayed according to settings
+* Fix bug where "Ignore mail state" setting was being ignored
+* Fix bug where empty post was being generated when already read mail was in the inbox and "Ignore mail state" was "Yes"
+* Added postie_session_start and postie_session_end actions
+
+= 1.7.19 (2015-10-13) =
+* Fixed bug where allowed mime types was not being respected.
+
+= 1.7.18 (2015-10-13) =
+* Fix bug where linkify was messing up CID reference
+
+= 1.7.17 (2015-10-12) =
+* New action, postie_log_error
+* New action, postie_log_debug
+* New feature to turn off all logging
+* Only errors logged by default
+
 = 1.7.16 (2015-10-08) =
 * Ensure comments are valid html after striping if preferred text type is html
 * Add setting to control comment content (strip_reply)
