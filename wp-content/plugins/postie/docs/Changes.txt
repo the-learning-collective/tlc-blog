@@ -27,6 +27,110 @@ All script, style and body tags are stripped from html emails.
 Attachments are now processed in the order they were attached.
 
 == CHANGELOG ==
+= 1.7.22 (2015-11-09) =
+* Update admin screen to match current WP style
+* Remove dependence on simple tabs jQuery-UI library and use WP admin tab style
+* Remove email password from logging
+
+= 1.7.21 (2015-10-27) =
+* Refix bug where "Ignore mail state" setting was being ignored
+
+= 1.7.20 (2015-10-26) =
+* Fixed bug where debug info was not being displayed according to settings
+* Fix bug where "Ignore mail state" setting was being ignored
+* Fix bug where empty post was being generated when already read mail was in the inbox and "Ignore mail state" was "Yes"
+* Added postie_session_start and postie_session_end actions
+
+= 1.7.19 (2015-10-13) =
+* Fixed bug where allowed mime types was not being respected.
+
+= 1.7.18 (2015-10-13) =
+* Fix bug where linkify was messing up CID reference
+
+= 1.7.17 (2015-10-12) =
+* New action, postie_log_error
+* New action, postie_log_debug
+* New feature to turn off all logging
+* Only errors logged by default
+
+= 1.7.16 (2015-10-08) =
+* Ensure comments are valid html after striping if preferred text type is html
+* Add setting to control comment content (strip_reply)
+
+= 1.7.15 (2015-10-02) =
+* Completely replace linkify logic
+* Support youtu.be links
+
+= 1.7.14 (2015-10-01) =
+* Fix bug in new linkify logic
+
+= 1.7.13 (2015-10-01) =
+* Fix support for "Automatically convert urls to links" with html
+* Fix support for "date" tag with html
+* Prep for upcoming translation
+
+= 1.7.12 (2015-09-25) =
+* Add new setting to ignore email read/unread state
+* Fix support for "tag" tags in html and plain messages
+
+= 1.7.11 (2015-09-18) =
+* Add FILEID to image and video templates
+
+= 1.7.10 (2015-09-16) =
+* added 15 and 30 second cron schedules
+
+= 1.7.9 (2015-09-14) =
+* revert tags logic as html version was messing up the content.
+* revert video linkify logic as html version was messing up the content.
+* revert linkify logic as html version was messing up the content.
+
+= 1.7.8 (2015-09-08) =
+* Remove mbstring admin message. Added fallback if mbstring is not installed
+* More explanation for signature regex
+* Add 1 minute schedule to supplement new external cron recommendation
+* Updates to support upcoming Language Packs feature for plugins
+* Moved important warning to admin notices
+* New filter postie_category_default
+
+= 1.7.7 (2015-08-24) =
+* Fixed bug where "To" and "Reply-To" emails were not parsed correctly for postie_filter_email2 filter
+
+= 1.7.6 (2015-08-13) =
+* Added setting to control whether the featured image is included in the post or not.
+* Added 2 new filters, postie_comment_before and postie_comment_after 
+
+= 1.7.5 (2015-08-06) =
+* If featured image is enabled, the featured image will no longer appear in the post.
+
+= 1.7.4 (2015-07-30) =
+* Added additional output if wp_insert_post() fails
+* Fixed image upload failure when image filename doesn't have an extension
+
+= 1.7.3 (2015-07-22) =
+* Fix parameter order bug in postie_gallery filter
+
+= 1.7.2 (2015-07-19) =
+* Add filter postie_gallery when generating gallery shortcode
+
+= 1.7.1 (2015-07-16) =
+* Fixed issue where multiple custom taxonomy terms were not correctly being saved
+
+= 1.7.0 (2015-07-07) =
+* Fixed attachment uploading bug when the type & extension weren't available.
+* Clarified "Filter newlines" setting description.
+* Better support for Exchange 2010+ thanks to Andrew Chaplin
+* New action hook - postie_file_added
+
+= 1.6.19 (2015-05-04) =
+* Reduced the number of messages sent to the log for successful runs
+* Rename the disable_kses_content() function to postie_disable_kses_content() to fix a conflict with DAP WP LiveLinks Plugin
+
+= 1.6.18 (2015-04-27) =
+* Fixed a bug that prevented Postie from detecting categories with an ampersand in them.
+* Added support for "future" post status 
+* Move "Use shortcode for embedding video" setting to Video tab and clarified usage.
+* Added setting to specify the link type used with galleries
+
 = 1.6.17 (2015-03-28) =
 * Add a setting to attempt a user login based on the from address of the email if a matching Wordpress user exists.
 
@@ -672,7 +776,7 @@ code better. In June/July 2005 I discovered a little plugin by Chris J Davis (ht
 feature to it (basically a bookmarklet).  In the process I started looking at his code and realized how much you could do with the plugin system 
 available in Word Press.
 
-So I decided to make an offical fork. I put up an article on my blog asking for new names. I picked Postie.  I then modified the code to be a proper 
+So I decided to make an official fork. I put up an article on my blog asking for new names. I picked Postie.  I then modified the code to be a proper 
 plugin.  And the rest is history :)
 
 * BUGFIX -problem with subject

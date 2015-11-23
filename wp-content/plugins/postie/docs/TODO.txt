@@ -1,4 +1,9 @@
+For IMAP mailboxes allow the user to choose the folder.
+Preferred text type: just html, just plain, html fallback to plain
+Check to see if post already exists. Store hash in custom field.
+Change successful post message to take post status into account (i.e. draft really isn't posted - possible link to publish draft?)
 Verify that WP is honoring the wp_set_current_user() call. I.e. if the user is not an "author" role can they publish?
+Test server port combination by opening a socket connection to see if any service responds. (via ajax call)
 Option to not process forwarded emails (getPostAuthorDetails)
 Separate out video linkifying from normal url linkifying - separate settings
 Add Message-ID header value to custom field (postie_message_id?) to both posts and comments.
@@ -14,6 +19,7 @@ Comment not being created when subject contains category command []. I.e. listse
 date: tag is being detected in body when not wanted
 Update tag_* and filter_* to handle HTML (per tag_Tags)
 dynamically determine video size (height/width) - https://code.google.com/p/phpvideotoolkit/
+new video template with <video> tag
 gallery logic does not handle both images and non-images
 plugin conflict - Image Rotation Fixer/Image Rotation Repair
 send email notice when attachments are rejected.
@@ -24,22 +30,6 @@ use wordpress plugin template
   starter-plugin https://github.com/mattyza/starter-plugin
   WordPress-Plugin-Template https://github.com/hlashbrooke/WordPress-Plugin-Template
 configurable message for "post confirmation" - variable substitution
-
-Shortcodes
-Note: Postie will need to temporarily save the global $shortcode_tags variable off to the side, register its own
-shortcodes (action for user supplied shortcodes?) process the emails then restore the global $shortcode_tags.
-  [postie_status draft | publish | pending | private]
-  [postie_date <the date>]
-  [postie_delay [0-99d][0-99h][0-99m]]
-  [postie_comments 0 | 1 | 2]
-  [postie_excerpt]<excerpt>[/postie_excerpt]
-  [postie_type <posttype>]
-  [postie_format <postformat>]
-  [postie_category <comma separated categories>]
-  [postie_tag <comma separated tags>]
-  [postie_title <title>]
-  [postie_image <image #> caption="<optional caption>"]
-  [postie_more]
 
 Hooks
 add hooks for post meta data change
@@ -64,8 +54,6 @@ hook for actions
   non-permitted attachment types
   email rejected
   email connection failure
-  start check
-  end check
   mail read
   mail delete
   content part
@@ -89,10 +77,6 @@ Original text is never modified
 There are filters that modify
   meta data (tags, categories, date)
   content (start, end, newlines, linkifying)
-=========
-AddOn Ideas
-(done) Google Alerts - turn each alert into a post
-(done) HTML cleaning - use http://htmlpurifier.org/ to convert Word Html and other bad html into standard html
 
 =========
 Postie 2.0
@@ -101,14 +85,10 @@ http://www.yaconiello.com/blog/how-to-write-wordpress-plugin/
 
 setting to turn off individual tags
 process single email at a time and don't delete unless successful
-plugin mechanism to add new tags (and define "built-in ones")
 fix postie settings	http://alisothegeek.com/2011/01/wordpress-settings-api-tutorial-1/
 Make sure all failures are sent to admin (option?) failed attachments, etc.
 Option to send logs to support
 Enhance #img# to specify the featured image
 "yoast" style admin sidebar - see clicky by yoast
-replace native imap MIME parser with flourish - http://flourishlib.com/docs/fMailbox or Hoard - see "Post By Email" plugin https://wordpress.org/plugins/post-by-email/
+replace native imap MIME parser with flourish - http://flourishlib.com/docs/fMailbox or Hoard http://dev.horde.org/imap_client/install.php - see "Post By Email" plugin https://wordpress.org/plugins/post-by-email/
 provide a location for custom icons. update docs about location.
-handle condition where only one of text/plain & text/html is supplied, but Preferred Text Type is set to the opposite.
-change all Postie command to use a more consistent and easy to parse syntax
-  Use standard shortcode syntax. I.e. [postie date="Jan 1, 2014"]
