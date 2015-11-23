@@ -1,0 +1,8 @@
+.site-header {
+    .search-form label {
+        display: inline-block;
+    }
+    input[type="submit"] {
+        background-color: $primary;
+    }
+}
