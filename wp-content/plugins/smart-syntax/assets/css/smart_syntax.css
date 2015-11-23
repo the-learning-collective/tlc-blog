@@ -1,0 +1,108 @@
+/**
+ * Smart Syntax
+ * http://www.smartpixels.net
+ *
+ * Copyright (c) 2014 Smartpixels
+ * Licensed under the GPLv2+ license.
+ */
+ /* 
+Smart Syntax Light Theme for Google Prettify
+Author : Smartpixels (@smartpixelsnet)
+Author Url: http://www.smartpixels.net
+Project : Smart Syntax Wordpress Plugin
+*/
+pre.prettyprint {
+  padding: 2%;
+  border: 2px solid #dadada;
+  margin: 1% 0%;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #dadada;
+  overflow-x: auto;
+  word-wrap: break-word;
+  max-height: 250px;
+  overflow-y: scroll;
+  height: 100%;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 0.8em;
+  line-height: 1.5em;
+  background: #FFFFFA;
+  white-space: pre-wrap;
+}
+pre.prettyprint .str {
+  color: #01B444;
+}
+pre.prettyprint .kwd {
+  color: #008;
+}
+pre.prettyprint .com {
+  color: #AAA;
+}
+pre.prettyprint .typ {
+  color: #606;
+}
+pre.prettyprint .lit {
+  color: #6028D8;
+}
+pre.prettyprint .pun {
+  color: #999;
+}
+pre.prettyprint .opn {
+  color: #cccccc;
+}
+pre.prettyprint .pln {
+  color: #555;
+}
+pre.prettyprint .tag {
+  color: #008;
+}
+pre.prettyprint .atn {
+  color: #3A3A3A;
+}
+pre.prettyprint .clo {
+  color: #cccccc;
+}
+pre.prettyprint .atv {
+  color: #D00555;
+}
+pre.prettyprint .dec {
+  color: #606;
+}
+pre.prettyprint .var {
+  color: #f2777a;
+}
+pre.prettyprint .fun {
+  color: #6699cc;
+}
+@media print, projection {
+  pre.prettyprint .str {
+    color: #060;
+  }
+  pre.prettyprint .kwd {
+    color: #006;
+    font-weight: bold;
+  }
+  pre.prettyprint .com {
+    color: #600;
+    font-style: italic;
+  }
+  pre.prettyprint .typ {
+    color: #404;
+    font-weight: bold;
+  }
+  pre.prettyprint .lit {
+    color: #044;
+  }
+  pre.prettyprint .pun, pre.prettyprint .opn, pre.prettyprint .clo {
+    color: #440;
+  }
+  pre.prettyprint .tag {
+    color: #006;
+    font-weight: bold;
+  }
+  pre.prettyprint .atn {
+    color: #404;
+  }
+  pre.prettyprint .atv {
+    color: #060;
+  }
+}
