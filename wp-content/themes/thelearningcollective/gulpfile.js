@@ -1,4 +1,4 @@
-// npm install --save-dev gulp gulp-plumber gulp-watch gulp-livereload gulp-minify-css gulp-uglify gulp-rename gulp-notify gulp-include gulp-sass
+// npm install --save-dev gulp gulp-plumber gulp-watch gulp-minify-css gulp-uglify gulp-rename gulp-notify gulp-include gulp-sass
 
 var gulp = require( 'gulp' ),
     plumber = require( 'gulp-plumber' ),
