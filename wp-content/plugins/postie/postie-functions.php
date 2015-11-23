@@ -1,6 +1,10 @@
 <?php
 /*
+<<<<<<< HEAD
   $Id: postie-functions.php 1274225 2015-10-27 19:29:28Z WayneAllen $
+=======
+  $Id: postie-functions.php 1282808 2015-11-09 21:36:41Z WayneAllen $
+>>>>>>> develop
  */
 
 class PostiePostModifiers {
@@ -345,12 +349,21 @@ function CreatePost($poster, $mimeDecodedEmail, $post_id, &$is_reply, $config, $
                             preg_match("/^-+\s*forwarded\s*message\s*-+/i", $line) == 0) {
                         $newContents.="$line\n";
                     }
+<<<<<<< HEAD
                 }
                 if ((strlen($newContents) <> strlen($content)) && ('html' == $config['prefer_text_type'])) {
                     DebugEcho("Attempting to fix reply html (before): $newContents");
                     $newContents = LoadDOM($newContents)->__toString();
                     DebugEcho("Attempting to fix reply html (after): $newContents");
                 }
+=======
+                }
+                if ((strlen($newContents) <> strlen($content)) && ('html' == $config['prefer_text_type'])) {
+                    DebugEcho("Attempting to fix reply html (before): $newContents");
+                    $newContents = LoadDOM($newContents)->__toString();
+                    DebugEcho("Attempting to fix reply html (after): $newContents");
+                }
+>>>>>>> develop
                 $content = $newContents;
             }
             wp_delete_post($post_id);
@@ -763,7 +776,11 @@ function FetchMail($server = NULL, $port = NULL, $email = NULL, $password = NULL
         return $emails;
     }
     if ($server == "pop.gmail.com") {
+<<<<<<< HEAD
         EchoError("MAKE SURE POP IS TURNED ON IN SETTING AT Gmail");
+=======
+        DebugEcho("MAKE SURE POP IS TURNED ON IN SETTING AT Gmail");
+>>>>>>> develop
     }
     switch (strtolower($protocol)) {
         case 'smtp': //direct 
@@ -1443,9 +1460,13 @@ function ValidatePoster(&$mimeDecodedEmail, $config) {
         DebugEcho("ValidatePoster: found user '$poster'");
     }
 
+<<<<<<< HEAD
     $validSMTP = isValidSmtpServer($mimeDecodedEmail, $smtp);
 
     if (!$poster || !$validSMTP) {
+=======
+    if (!$poster) {
+>>>>>>> develop
         EchoError('Invalid sender: ' . htmlentities($from) . "! Not adding email!");
         if ($forward_rejected_mail) {
             $admin_email = get_option("admin_email");
@@ -1471,6 +1492,7 @@ function ValidatePoster(&$mimeDecodedEmail, $config) {
     return $poster;
 }
 
+<<<<<<< HEAD
 function isValidSmtpServer($mimeDecodedEmail, $smtpservers) {
     if (empty($smtpservers)) {
         return true;
@@ -1490,6 +1512,8 @@ function isValidSmtpServer($mimeDecodedEmail, $smtpservers) {
     return false;
 }
 
+=======
+>>>>>>> develop
 /**
  * Looks at the content for the start of the message and removes everything before that
  * If the pattern is not found everything is returned
@@ -3643,7 +3667,10 @@ function postie_get_mail() {
         DebugEcho(__("memory at start of email processing:", 'postie') . memory_get_usage());
     }
 
-    DebugDump($config);
+    //don't output the password
+    $tmp_config=$config;
+    unset($tmp_config['mail_password']);
+    DebugDump($tmp_config);
 
     //loop through messages
     $message_number = 0;

@@ -4,7 +4,11 @@
   Plugin Name: Postie
   Plugin URI: http://PostiePlugin.com/
   Description: Create posts via email. Signifigantly upgrades the Post by Email features of Word Press.
+<<<<<<< HEAD
   Version: 1.7.21
+=======
+  Version: 1.7.22
+>>>>>>> develop
   Author: Wayne Allen
   Author URI: http://PostiePlugin.com/
   License: GPL2
@@ -28,12 +32,20 @@
  */
 
 /*
+<<<<<<< HEAD
   $Id: postie.php 1274225 2015-10-27 19:29:28Z WayneAllen $
+=======
+  $Id: postie.php 1282808 2015-11-09 21:36:41Z WayneAllen $
+>>>>>>> develop
  */
 require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . "lib_autolink.php");
 require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . "postie-functions.php");
 
+<<<<<<< HEAD
 define('POSTIE_VERSION', '1.7.21');
+=======
+define('POSTIE_VERSION', '1.7.22');
+>>>>>>> develop
 define("POSTIE_ROOT", dirname(__FILE__));
 define("POSTIE_URL", WP_PLUGIN_URL . '/' . basename(dirname(__FILE__)));
 
@@ -127,7 +139,6 @@ function postie_parse_request($wp) {
 
 function postie_admin_init() {
     wp_register_style('postie-style', plugins_url('css/style.css', __FILE__));
-    wp_register_style('postie-simpleTabs', plugins_url('css/simpleTabs.css', __FILE__));
     register_setting('postie-settings', 'postie-settings', 'config_ValidateSettings');
 }
 
@@ -148,9 +159,7 @@ function postie_admin_page() {
 }
 
 function postie_admin_styles() {
-    wp_enqueue_script('loadjs', plugins_url('js/simpleTabs.jquery.js', __FILE__));
     wp_enqueue_style('postie-style');
-    wp_enqueue_style('postie-simpleTabs');
 }
 
 /*

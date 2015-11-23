@@ -11,6 +11,10 @@
  * Auto Activate: Yes
  * Module Tags: Social, Recommended
  * Feature: Recommended, Jumpstart, Traffic
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: share, sharing, sharedaddy, buttons, icons, email, facebook, twitter, google+, linkedin, pinterest, pocket, press this, print, reddit, tumblr
+>>>>>>> develop
  */
 
 if ( !function_exists( 'sharing_init' ) )

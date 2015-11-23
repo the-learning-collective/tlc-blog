@@ -342,6 +342,11 @@ class Jetpack_Widget_Conditions {
 			/**
 			 * Fires after the widget visibility conditions are saved.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module widget-visibility
+			 *
+>>>>>>> develop
 			 * @since 2.4.0
 			 */
 			do_action( 'widget_conditions_save' );
@@ -351,6 +356,11 @@ class Jetpack_Widget_Conditions {
 			/**
 			 * Fires after the widget visibility conditions are deleted.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module widget-visibility
+			 *
+>>>>>>> develop
 			 * @since 2.4.0
 			 */
 			do_action( 'widget_conditions_delete' );
@@ -521,7 +531,11 @@ class Jetpack_Widget_Conditions {
 								$condition_result = true;
 							} else {
 								$tag = get_tag( $rule['minor'] );
+<<<<<<< HEAD
 								if ( $tag && ! is_wp_error( $tag ) && is_tag( $tag->slug ) ) {
+=======
+								if ( $tag && is_tag( $tag->slug ) ) {
+>>>>>>> develop
 									$condition_result = true;
 								}
 							}

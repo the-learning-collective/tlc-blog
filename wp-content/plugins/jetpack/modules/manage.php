@@ -10,6 +10,10 @@
  * Auto Activate: No
  * Module Tags: Centralized Management, Recommended
  * Feature: Recommended, Jumpstart
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: manage, management, remote
+>>>>>>> develop
  */
 
 add_action( 'jetpack_activate_module_manage', array( Jetpack::init(), 'toggle_module_on_wpcom' ) );
@@ -42,3 +46,11 @@ if ( Jetpack_Options::get_option( 'sync_non_public_post_stati' ) ) {
 	);
 	Jetpack_Sync::sync_posts( __FILE__, $sync_options );
 }
+<<<<<<< HEAD
+=======
+
+Jetpack::module_configuration_screen( 'manage', 'jetpack_manage_config_screen' );
+function jetpack_manage_config_screen() {
+	include ( JETPACK__PLUGIN_DIR . 'modules/manage/confirm-admin.php' );
+}
+>>>>>>> develop

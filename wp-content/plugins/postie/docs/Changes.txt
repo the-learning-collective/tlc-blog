@@ -27,6 +27,14 @@ All script, style and body tags are stripped from html emails.
 Attachments are now processed in the order they were attached.
 
 == CHANGELOG ==
+<<<<<<< HEAD
+=======
+= 1.7.22 (2015-11-09) =
+* Update admin screen to match current WP style
+* Remove dependence on simple tabs jQuery-UI library and use WP admin tab style
+* Remove email password from logging
+
+>>>>>>> develop
 = 1.7.21 (2015-10-27) =
 * Refix bug where "Ignore mail state" setting was being ignored
 

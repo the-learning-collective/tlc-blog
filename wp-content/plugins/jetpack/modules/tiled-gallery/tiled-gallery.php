@@ -107,6 +107,7 @@ class Jetpack_Tiled_Gallery {
 		if ( empty( $attachments ) )
 			return '';
 
+<<<<<<< HEAD
 		if ( is_feed() || defined( 'IS_HTML_EMAIL' ) )
 			return '';
 		/**
@@ -117,6 +118,27 @@ class Jetpack_Tiled_Gallery {
 		 * @param array Array of allowed types. Default: 'rectangular', 'square', 'circle', 'rectangle', 'columns'.
 		 */
 		if ( in_array( $this->atts['type'], $talaveras = apply_filters( 'jetpack_tiled_gallery_types', self::$talaveras ) ) ) {
+=======
+		if ( is_feed() || defined( 'IS_HTML_EMAIL' ) ) {
+			return '';
+		}
+
+		if (
+			in_array(
+				$this->atts['type'],
+				/**
+				 * Filters the permissible Tiled Gallery types.
+				 *
+				 * @module tiled-gallery
+				 *
+				 * @since 3.7.0
+				 *
+				 * @param array Array of allowed types. Default: 'rectangular', 'square', 'circle', 'rectangle', 'columns'.
+				 */
+				$talaveras = apply_filters( 'jetpack_tiled_gallery_types', self::$talaveras )
+			)
+		) {
+>>>>>>> develop
 			// Enqueue styles and scripts
 			self::default_scripts_and_styles();
 
@@ -146,8 +168,16 @@ class Jetpack_Tiled_Gallery {
 		}
 		/**
 		 * Filter the output of the check for another plugin or theme affecting WordPress galleries.
+<<<<<<< HEAD
 		 * This will let folks that replace core’s shortcode confirm feature parity with it, so Jetpack's Tiled Galleries can still work.
 		 *
+=======
+		 *
+		 * This will let folks that replace core’s shortcode confirm feature parity with it, so Jetpack's Tiled Galleries can still work.
+		 *
+		 * @module tiled-gallery
+		 *
+>>>>>>> develop
 		 * @since 3.1.0
 		 *
 		 * @param bool $redefined Does another plugin or theme already redefines the default WordPress gallery?
@@ -172,6 +202,11 @@ class Jetpack_Tiled_Gallery {
 		/**
 		 * Filter overwriting the default content width.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module tiled-gallery
+		 *
+>>>>>>> develop
 		 * @since 2.1.0
 		 *
 		 * @param string $tiled_gallery_content_width Default Tiled Gallery content width.
@@ -198,7 +233,11 @@ class Jetpack_Tiled_Gallery {
 		return $types;
 	}
 
+<<<<<<< HEAD
 	function jetpack_default_gallery_type( $default ) {
+=======
+	function jetpack_default_gallery_type() {
+>>>>>>> develop
 		return ( get_option( 'tiled_galleries' ) ? 'rectangular' : 'default' );
 	}
 

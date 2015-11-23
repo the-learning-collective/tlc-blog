@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;AAAC,cAAe;EACf,WAAW,EAAE,CAAC;;EAEd;4BACY;IACX,UAAU,EAAE,IAAI",
+"sources": ["../sass/_pages.scss"],
+"names": [],
+"file": "style.css"
+}

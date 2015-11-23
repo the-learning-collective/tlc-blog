@@ -20,6 +20,18 @@ wp_localize_script( 'grunion', 'GrunionFB_i18n', array(
 	'savedMessage' => esc_attr__( 'Saved successfully', 'jetpack' ),
 	'requiredLabel' => esc_attr( _x( '(required)', 'This HTML form field is marked as required by the user in contact form builder', 'jetpack' ) ),
 	'exitConfirmMessage' => esc_attr__( 'Are you sure you want to exit the form editor without saving?  Any changes you have made will be lost.', 'jetpack' ),
+<<<<<<< HEAD
+=======
+	/**
+	 * Filter to modify the limit of 5 additional contact form fields.
+	 *
+	 * @module contact-form
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param int 5 Maximum number of additional fields.
+	 */
+>>>>>>> develop
 	'maxNewFields' => intval( apply_filters( 'grunion_max_new_fields', 5 ) ),
 ) );
 
@@ -57,8 +69,12 @@ wp_localize_script( 'grunion', 'GrunionFB_i18n', array(
 	input { width: 301px; }
 	input[type='text'] { padding: 3px 5px; margin-right: 4px; -moz-border-radius:3px; border-radius:3px; -webkit-border-radius:3px; }
 	input[type='text']:focus { border: 2px solid #80B8D9; outline: 0 !important; }
+<<<<<<< HEAD
 	input[type='checkbox'], input[type='radio'] { width: auto !important; float: left; margin-top: 3px; }
 	input[type='radio'] { margin-right: 8px; }
+=======
+	input[type='checkbox'], input[type='radio'] { width: auto !important; float: left; margin-top: 3px; margin-right: 8px; }
+>>>>>>> develop
 	input.fieldError, select.fieldError, textarea.fieldError { border: 2px solid #D56F55; }
 	img { border: none; }
 	label { color: #222; font-weight: bold; display: block; margin-bottom: 4px; }
@@ -84,7 +100,11 @@ wp_localize_script( 'grunion', 'GrunionFB_i18n', array(
 	.fb-form-case { background: #FFF; padding: 13px; border: 1px solid #E2E2E2; width: 336px; -moz-border-radius:4px; border-radius:4px; -webkit-border-radius:4px }
 	.fb-form-case a { outline: none; }
 	.fb-form-case input[type='text'], .fb-form-case textarea { background: #E1E1E1; }
+<<<<<<< HEAD
 	.fb-radio-label { display: inline-block; margin-left: 8px; float: left; width: 290px; }
+=======
+	.fb-radio-label { display: inline-block; float: left; width: 290px; }
+>>>>>>> develop
 	.fb-new-fields { position: relative; border: 1px dashed #FFF; background: #FFF; padding: 4px 10px 10px; cursor: default; }
 	.fb-new-fields:hover { border: 1px dashed #BBDBEA; background: #F7FBFD; }
 	.fb-options { width: 170px !important; }
@@ -99,7 +119,11 @@ wp_localize_script( 'grunion', 'GrunionFB_i18n', array(
 	.fb-right .fb-new-fields { border: none; background: #F9F9F9; padding: 0; }
 	.fb-right input[type='text'] { width: 195px; margin-bottom: 14px; }
 	.fb-right label { color: #444; width: 100px; float: left; font-weight: normal; }
+<<<<<<< HEAD
 	.fb-right select { width: 150px !important; margin-bottom: 14px; }
+=======
+	.fb-right select { width: 195px !important; margin-bottom: 14px; }
+>>>>>>> develop
 	.fb-right textarea { margin-bottom: 13px; }
 	.fb-right p { color: #999; line-height: 19px; }
 	.fb-settings input[type='text'], .fb-settings textarea { background-image: none !important; }
@@ -173,6 +197,10 @@ wp_localize_script( 'grunion', 'GrunionFB_i18n', array(
 			<label for="fb-new-label"><?php esc_html_e( 'Field type', 'jetpack' ); ?></label>
 			<select id="fb-new-type">
 				<option value="checkbox"><?php esc_html_e( 'Checkbox', 'jetpack' ); ?></option>
+<<<<<<< HEAD
+=======
+				<option value="checkbox-multiple"><?php esc_html_e( 'Checkbox with Multiple Items', 'jetpack' ); ?></option>
+>>>>>>> develop
 				<option value="select"><?php esc_html_e( 'Drop down', 'jetpack' ); ?></option>
 				<option value="email"><?php esc_html_e( 'Email', 'jetpack' ); ?></option>
 				<option value="name"><?php esc_html_e( 'Name', 'jetpack' ); ?></option>

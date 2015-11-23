@@ -1,0 +1,46 @@
+$black: #000;
+$white: #fff;
+
+$primary: #ff2828;
+$secondary: $black;
+
+
+// shades of gray
+$base1: #1a1919;
+$base2: #333231;
+$base3: #4d4c4a;
+$base4: #757472;
+$base5: #999894;
+$base6: #b8b6b2;
+$base7: #d1cfcb;
+$base8: #e6e4df;
+$base9: #f6f6f6;
+$base0: #fcfdf9;
+
+
+// SCREEN
+
+$xs: 321px;
+$sm: 481px;
+$md: 769px; // Desktop
+$lg: 1025px;
+$xl: 1200px;
+
+
+// TYPE SIZES
+// http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/
+
+$giga: 80;
+$mega: 72;
+$kilo: 64;
+
+$alpha: 48; // h1
+$beta: 36; // h2
+$gamma: 28; // h3
+$delta: 22; // h4
+$epsilon: 18; // h5, p
+$zeta: 16; // h6
+
+$milli: 14; 
+$micro: 12; 
+$nano: 11; 

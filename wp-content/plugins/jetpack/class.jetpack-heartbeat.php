@@ -91,6 +91,14 @@ class Jetpack_Heartbeat {
 
 		$jetpack->do_stats( 'server_side' );
 
+<<<<<<< HEAD
+=======
+		/**
+		 * Fires when we synchronize all registered options on heartbeat.
+		 *
+		 * @since 3.3.0
+		 */
+>>>>>>> develop
 		do_action( 'jetpack_heartbeat' );
 	}
 

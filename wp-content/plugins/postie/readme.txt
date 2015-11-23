@@ -6,7 +6,11 @@ Plugin URI: http://PostiePlugin.com/
 Tags: e-mail, email, post-by-email
 Requires at least: 3.3.0
 Tested up to: 4.3.1
+<<<<<<< HEAD
 Stable tag: 1.7.21
+=======
+Stable tag: 1.7.22
+>>>>>>> develop
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -235,6 +239,14 @@ All script, style and body tags are stripped from html emails.
 Attachments are now processed in the order they were attached.
 
 == CHANGELOG ==
+<<<<<<< HEAD
+=======
+= 1.7.22 (2015-11-09) =
+* Update admin screen to match current WP style
+* Remove dependence on simple tabs jQuery-UI library and use WP admin tab style
+* Remove email password from logging
+
+>>>>>>> develop
 = 1.7.21 (2015-10-27) =
 * Refix bug where "Ignore mail state" setting was being ignored
 

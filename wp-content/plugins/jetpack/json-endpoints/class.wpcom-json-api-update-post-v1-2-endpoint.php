@@ -87,11 +87,19 @@ class WPCOM_JSON_API_Update_Post_v1_2_Endpoint extends WPCOM_JSON_API_Update_Pos
 					return $author_id;
 			}
 
+<<<<<<< HEAD
 			if ( 'publish' === $input['status'] && 'publish' !== $post->post_status && !current_user_can( 'publish_post', $post->ID ) ) {
 				$input['status'] = 'pending';
 			}
 			$last_status = $post->post_status;
 			$new_status = $input['status'];
+=======
+			if ( ( isset( $input['status'] ) && 'publish' === $input['status'] ) && 'publish' !== $post->post_status && !current_user_can( 'publish_post', $post->ID ) ) {
+				$input['status'] = 'pending';
+			}
+			$last_status = $post->post_status;
+			$new_status = isset( $input['status'] ) ? $input['status'] : $last_status;
+>>>>>>> develop
 
 			// Make sure that drafts get the current date when transitioning to publish if not supplied in the post.
 			$date_in_past = ( strtotime($post->post_date_gmt) < time() );
@@ -100,9 +108,13 @@ class WPCOM_JSON_API_Update_Post_v1_2_Endpoint extends WPCOM_JSON_API_Update_Pos
 			}
 		}
 
+<<<<<<< HEAD
 		// Fix for https://iorequests.wordpress.com/2014/08/13/scheduled-posts-made-in-the/
 		// See: https://a8c.slack.com/archives/io/p1408047082000273
 		// If date was set, $this->input will set date_gmt, date still needs to be adjusted for the blog's offset
+=======
+		// If date is set, $this->input will set date_gmt, date still needs to be adjusted for the blog's offset
+>>>>>>> develop
 		if ( isset( $input['date_gmt'] ) ) {
 			$gmt_offset = get_option( 'gmt_offset' );
 			$time_with_offset = strtotime( $input['date_gmt'] ) + $gmt_offset * HOUR_IN_SECONDS;
@@ -175,7 +187,11 @@ class WPCOM_JSON_API_Update_Post_v1_2_Endpoint extends WPCOM_JSON_API_Update_Pos
 			}
 
 			// combine with any previous selections
+<<<<<<< HEAD
 			if ( ! is_array( $tax_input[ $taxonomy ] ) ) {
+=======
+			if ( ! isset( $tax_input[ $taxonomy ] ) || ! is_array( $tax_input[ $taxonomy ] ) ) {
+>>>>>>> develop
 				$tax_input[ $taxonomy ] = array();
 			}
 
@@ -415,6 +431,10 @@ class WPCOM_JSON_API_Update_Post_v1_2_Endpoint extends WPCOM_JSON_API_Update_Pos
 					&& 'publish' == $new_status
 				)
 			) {
+<<<<<<< HEAD
+=======
+				/** This action is documented in modules/widgets/social-media-icons.php */
+>>>>>>> develop
 				do_action( 'jetpack_bump_stats_extras', 'api-insights-posts', $this->api->token_details['client_id'] );
 				update_post_meta( $post_id, '_rest_api_published', 1 );
 				update_post_meta( $post_id, '_rest_api_client_id', $this->api->token_details['client_id'] );
@@ -607,7 +627,11 @@ class WPCOM_JSON_API_Update_Post_v1_2_Endpoint extends WPCOM_JSON_API_Update_Pos
 		if ( ! empty( $media_results['errors'] ) )
 			$return['media_errors'] = $media_results['errors'];
 
+<<<<<<< HEAD
 		if ( 'publish' !== $post->post_status ) {
+=======
+		if ( 'publish' !== $post->post_status && isset( $input['title'] )) {
+>>>>>>> develop
 			$return['other_URLs'] = (object) $this->get_post_permalink_suggestions( $post_id, $input['title'] );
 		}
 

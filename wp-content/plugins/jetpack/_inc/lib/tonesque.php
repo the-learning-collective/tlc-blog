@@ -25,6 +25,11 @@ class Tonesque {
 		/**
 		 * Allows any image URL to be passed in for $this->image_url.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module theme-tools
+		 *
+>>>>>>> develop
 		 * @since 2.5.0
 		 *
 		 * @param string $image_url The URL to any image

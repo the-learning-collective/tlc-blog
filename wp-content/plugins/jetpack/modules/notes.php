@@ -7,6 +7,10 @@
  * Requires Connection: Yes
  * Auto Activate: Yes
  * Module Tags: Other
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: notification, notifications, toolbar, adminbar, push, comments
+>>>>>>> develop
  */
 
 if ( !defined( 'JETPACK_NOTES__CACHE_BUSTER' ) ) define( 'JETPACK_NOTES__CACHE_BUSTER', JETPACK__VERSION . '-' . gmdate( 'oW' ) );

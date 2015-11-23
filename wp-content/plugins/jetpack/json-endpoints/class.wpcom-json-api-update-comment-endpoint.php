@@ -55,6 +55,11 @@ class WPCOM_JSON_API_Update_Comment_Endpoint extends WPCOM_JSON_API_Comment_Endp
 			/**
 			 * Filter allowing non-registered users on the site to comment.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module json-api
+			 *
+>>>>>>> develop
 			 * @since 3.4.0
 			 *
 			 * @param bool is_user_member_of_blog() Is the user member of the site.

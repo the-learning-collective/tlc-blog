@@ -20,6 +20,7 @@ function jetpack_load_infinite_scroll_annotation() {
 		if ( ! is_a( $theme, 'WP_Theme' ) && ! is_array( $theme ) )
 			return;
 
+<<<<<<< HEAD
 		/**
 		 * Filter the directory where all Infinite Scroll compat files are located.
 		 *
@@ -28,6 +29,9 @@ function jetpack_load_infinite_scroll_annotation() {
 		 * @param string $var Infinite Scroll compat file URL.
 		 * @param string $theme['Stylesheet'] Theme directory URI.
 		 */
+=======
+		/** This filter is already documented in modules/infinite-scroll/infinity.php */
+>>>>>>> develop
 		$customization_file = apply_filters( 'infinite_scroll_customization_file', dirname( __FILE__ ) . "/infinite-scroll/themes/{$theme['Stylesheet']}.php", $theme['Stylesheet'] );
 
 		if ( is_readable( $customization_file ) ) {
@@ -49,7 +53,11 @@ add_action( 'setup_theme', 'jetpack_load_infinite_scroll_annotation' );
 * @filter jetpack_can_activate_infinite-scroll
 * @return bool
 */
+<<<<<<< HEAD
 function jetpack_can_activate_infinite_scroll( $can_activate ) {
+=======
+function jetpack_can_activate_infinite_scroll() {
+>>>>>>> develop
 	return (bool) current_theme_supports( 'infinite-scroll' );
 }
 add_filter( 'jetpack_can_activate_infinite-scroll', 'jetpack_can_activate_infinite_scroll' );

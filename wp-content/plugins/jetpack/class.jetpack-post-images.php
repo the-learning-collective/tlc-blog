@@ -85,15 +85,21 @@ class Jetpack_PostImages {
 		$images = array();
 
 		$post = get_post( $post_id );
+<<<<<<< HEAD
 		if ( !empty( $post->post_password ) )
 			return $images;
 
 		if ( false === has_shortcode( $post->post_content, 'gallery' ) ) {
 			return false; // no gallery - bail
+=======
+		if ( ! empty( $post->post_password ) ) {
+			return $images;
+>>>>>>> develop
 		}
 
 		$permalink = get_permalink( $post->ID );
 
+<<<<<<< HEAD
 		// CATS: All your base are belong to us
 		$old_post = $GLOBALS['post'];
 		$GLOBALS['post'] = $post;
@@ -130,19 +136,35 @@ class Jetpack_PostImages {
 
 				$a_pos = $src[1];
 
+=======
+		$gallery_images = get_post_galleries_images( $post->ID, false );
+
+		foreach ( $gallery_images as $galleries ) {
+			foreach ( $galleries as $src ) {
+				list( $raw_src ) = explode( '?', $src ); // pull off any Query string (?w=250)
+				$raw_src = wp_specialchars_decode( $raw_src ); // rawify it
+				$raw_src = esc_url_raw( $raw_src ); // clean it
+>>>>>>> develop
 				$images[] = array(
 					'type'  => 'image',
 					'from'  => 'gallery',
 					'src'   => $raw_src,
+<<<<<<< HEAD
 					'href'  => $permalink, // $href,
+=======
+					'href'  => $permalink,
+>>>>>>> develop
 				);
 			}
 		}
 
+<<<<<<< HEAD
 		// Captain: For great justice
 		$GLOBALS['shortcode_tags'] = $old_shortcodes;
 		$GLOBALS['post'] = $old_post;
 
+=======
+>>>>>>> develop
 		return $images;
 	}
 

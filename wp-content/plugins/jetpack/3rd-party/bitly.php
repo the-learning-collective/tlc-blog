@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 <?php 
 
 /* 
+=======
+<?php
+
+/*
+>>>>>>> develop
  * Fixes issues with the Official Bitly for WordPress
  * http://wordpress.org/plugins/bitly/
  */
 if( class_exists( 'Bitly' ) ) {
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> develop
 	if( isset( $GLOBALS['bitly'] ) ) {
 		remove_action( 'wp_head', array( $GLOBALS['bitly'], 'og_tags' ) );
 		add_action( 'wp_head', 'jetpack_bitly_og_tag', 100 );
@@ -14,8 +24,13 @@ if( class_exists( 'Bitly' ) ) {
 }
 
 /**
+<<<<<<< HEAD
  * jetpack_bitly_og_tag 
  * 
+=======
+ * jetpack_bitly_og_tag
+ *
+>>>>>>> develop
  * @return null
  */
 function jetpack_bitly_og_tag() {
@@ -23,7 +38,14 @@ function jetpack_bitly_og_tag() {
 		// Add the bitly part again back if we don't have any jetpack_og_tags added
 		$GLOBALS['bitly']->og_tags();
 	} elseif ( isset( $GLOBALS['posts'] ) && $GLOBALS['posts'][0]->ID > 0 ) {
+<<<<<<< HEAD
     	printf(  "<meta property=\"bitly:url\" content=\"%s\" /> \n", esc_attr( $GLOBALS['bitly']->get_bitly_link_for_post_id( $GLOBALS['posts'][0]->ID ) ) );
     }
 
 }
+=======
+		printf(  "<meta property=\"bitly:url\" content=\"%s\" /> \n", esc_attr( $GLOBALS['bitly']->get_bitly_link_for_post_id( $GLOBALS['posts'][0]->ID ) ) );
+	}
+
+}
+>>>>>>> develop

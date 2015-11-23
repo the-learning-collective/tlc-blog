@@ -8,6 +8,10 @@
  * Requires Connection: No
  * Auto Activate: No
  * Module Tags: Writing
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: md, markdown
+>>>>>>> develop
  */
 
 include dirname( __FILE__ ) . '/markdown/easy-markdown.php';
@@ -22,4 +26,8 @@ function jetpack_markdown_posting_always_on() {
 		unset( $wp_settings_fields['writing']['default'][ WPCom_Markdown::POST_OPTION ] );
 	}
 }
+<<<<<<< HEAD
 add_action( 'admin_init', 'jetpack_markdown_posting_always_on', 11 );
+=======
+add_action( 'admin_init', 'jetpack_markdown_posting_always_on', 11 );
+>>>>>>> develop

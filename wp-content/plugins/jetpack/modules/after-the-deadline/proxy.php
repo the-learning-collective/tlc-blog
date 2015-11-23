@@ -19,6 +19,11 @@ function AtD_http_post( $request, $host, $path, $port = 80 ) {
 		/**
 		* Change the timeout time for AtD post.
 		*
+<<<<<<< HEAD
+=======
+		* @module after-the-deadline
+		*
+>>>>>>> develop
 		* @since 1.2.3
 		*
 		* @param int $var Timeout time in seconds, default 15.
@@ -40,6 +45,11 @@ function AtD_http_post( $request, $host, $path, $port = 80 ) {
 		/**
 		 * Fires when there is a post error to AtD.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module after-the-deadline
+		 *
+>>>>>>> develop
 		 * @since 1.2.3
 		 *
 		 * @param int|string http-error The error that AtD runs into.
@@ -70,6 +80,11 @@ function AtD_redirect_call() {
 	/**
 	 * Change the AtD service domain.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module after-the-deadline
+	 *
+>>>>>>> develop
 	 * @since 1.2.3
 	 *
 	 * @param string $var The URL for AtD service domain, default is service.afterthedeadline.com.

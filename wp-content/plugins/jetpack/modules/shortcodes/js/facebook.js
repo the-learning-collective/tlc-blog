@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* global FB */
+=======
+/* global FB, jpfbembed */
+>>>>>>> develop
 (function( window ) {
 	var facebookEmbed = function() {
 		if ( 'undefined' !== typeof FB && FB.XFBML ) {
@@ -14,7 +18,11 @@
 
 	window.fbAsyncInit = function() {
 		FB.init( {
+<<<<<<< HEAD
 			appId  : '249643311490',
+=======
+			appId  : jpfbembed.appid,
+>>>>>>> develop
 			version: 'v2.3'
 		} );
 

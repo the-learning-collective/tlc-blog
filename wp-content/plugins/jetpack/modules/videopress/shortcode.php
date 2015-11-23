@@ -71,6 +71,11 @@ class Jetpack_VideoPress_Shortcode {
 		/**
 		 * Filter the default VideoPress shortcode options.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module videopress
+		 *
+>>>>>>> develop
 		 * @since 2.5.0
 		 *
 		 * @param array $args Array of VideoPress shortcode options.
@@ -146,4 +151,8 @@ Jetpack_VideoPress_Shortcode::init();
 
 wp_oembed_add_provider( '#^https?://videopress.com/v/.*#', 'http://public-api.wordpress.com/oembed/1.0/', true );
 
+<<<<<<< HEAD
 add_filter( 'oembed_fetch_url', 'Jetpack_VideoPress_Shortcode::add_oembed_parameter' );
+=======
+add_filter( 'oembed_fetch_url', 'Jetpack_VideoPress_Shortcode::add_oembed_parameter' );
+>>>>>>> develop

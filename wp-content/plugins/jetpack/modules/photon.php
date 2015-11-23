@@ -10,6 +10,10 @@
  * Auto Activate: No
  * Module Tags: Photos and Videos, Appearance, Recommended
  * Feature: Recommended, Jumpstart, Performance-Security
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: photon, image, cdn, performance, speed
+>>>>>>> develop
  */
 
 Jetpack::dns_prefetch( array(
@@ -18,4 +22,8 @@ Jetpack::dns_prefetch( array(
 	'//i2.wp.com',
 ) );
 
+<<<<<<< HEAD
 Jetpack_Photon::instance();
+=======
+Jetpack_Photon::instance();
+>>>>>>> develop

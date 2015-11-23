@@ -69,6 +69,10 @@ function wufoo_shortcode( $atts ) {
 	$iframe_embed .= '<a href="https://'. $username .'.wufoo.com/forms/'. $formhash .'/" ';
 	$iframe_embed .= 'rel="nofollow">Fill out my Wufoo form!</a></iframe>';
 
+<<<<<<< HEAD
+=======
+	/** This action is already documented in modules/widgets/gravatar-profile.php */
+>>>>>>> develop
 	do_action( 'jetpack_stats_extra', 'embeds', 'wufoo' );
 
 	/**
@@ -77,4 +81,8 @@ function wufoo_shortcode( $atts ) {
 	return "$js_embed <noscript> $iframe_embed </noscript>";
 }
 
+<<<<<<< HEAD
 add_shortcode('wufoo', 'wufoo_shortcode');
+=======
+add_shortcode('wufoo', 'wufoo_shortcode');
+>>>>>>> develop

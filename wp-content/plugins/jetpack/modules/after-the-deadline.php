@@ -7,6 +7,10 @@
  * Requires Connection: Yes
  * Auto Activate: Yes
  * Module Tags: Writing
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: after the deadline, afterthedeadline, spell, spellchecker, spelling, grammar, proofreading, style, language, cliche
+>>>>>>> develop
  */
 
 if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
@@ -17,6 +21,10 @@ if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
 	}
 	add_filter( 'atd_http_post_timeout', 'AtD_http_post_timeout_action' );
 	function AtD_http_post_error_action( $code ) {
+<<<<<<< HEAD
+=======
+		/** This action is documented in modules/widgets/social-media-icons.php */
+>>>>>>> develop
 		do_action( 'jetpack_bump_stats_extras', 'atd-remote-error', $code );
 	}
 	add_action( 'atd_http_post_error', 'AtD_http_post_error_action' );
@@ -297,6 +305,11 @@ function AtD_should_load_on_page() {
 	 *
 	 * By default, AtD only enqueues JS on certain admin pages to reduce bloat. The filter allows additional pages to have AtD JS.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module after-the-deadline
+	 *
+>>>>>>> develop
 	 * @since 1.2.3
 	 *
 	 * @param bool false Boolean to load or not load AtD scripts in admin.

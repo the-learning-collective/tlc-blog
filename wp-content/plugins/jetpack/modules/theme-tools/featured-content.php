@@ -186,6 +186,11 @@ class Featured_Content {
 				/**
 				 * Filter the list of Featured Posts IDs.
 				 *
+<<<<<<< HEAD
+=======
+				 * @module theme-tools
+				 *
+>>>>>>> develop
 				 * @since 2.7.0
 				 *
 				 * @param array $featured_ids Array of post IDs.
@@ -518,6 +523,25 @@ class Featured_Content {
 	public static function get_setting( $key = 'all' ) {
 		$saved = (array) get_option( 'featured-content' );
 
+<<<<<<< HEAD
+=======
+		/**
+		 * Filter Featured Content's default settings.
+		 *
+		 * @module theme-tools
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param array $args {
+		 * Array of Featured Content Settings
+		 *
+		 * 	@type int hide-tag Default is 1.
+		 * 	@type int tag-id Default is 0.
+		 * 	@type string tag-name Default is empty.
+		 * 	@type int show-all Default is 0.
+		 * }
+		 */
+>>>>>>> develop
 		$defaults = apply_filters( 'featured_content_default_settings', array(
 			'hide-tag' => 1,
 			'tag-id'   => 0,

@@ -353,7 +353,13 @@ class VideoPress_Player {
 		 * This filter allows you to control whether the legacy VideoPress player should be used
 		 * instead of the improved one.
 		 *
+<<<<<<< HEAD
 		 * @since 3.7
+=======
+		 * @module videopress
+		 *
+		 * @since 3.7.0
+>>>>>>> develop
 		 *
 		 * @param boolean $videopress_use_legacy_player
 		 */
@@ -536,7 +542,11 @@ class VideoPress_Player {
 		$video_container_id = 'v-' . $this->video->guid;
 
 		// Must not use iframes for IE11 due to a fullscreen bug
+<<<<<<< HEAD
 		if ( stristr( $_SERVER['HTTP_USER_AGENT'], 'Trident/7.0; rv:11.0' ) ) {
+=======
+		if ( isset( $_SERVER['HTTP_USER_AGENT'] ) && stristr( $_SERVER['HTTP_USER_AGENT'], 'Trident/7.0; rv:11.0' ) ) {
+>>>>>>> develop
 			$iframe_embed = false;
 		} else {
 
@@ -546,7 +556,13 @@ class VideoPress_Player {
 			 * This filter allows you to control whether the videos will be embedded using an iframe.
 			 * Set this to false in order to use an in-page embed rather than an iframe.
 			 *
+<<<<<<< HEAD
 			 * @since 3.7
+=======
+			 * @module videopress
+			 *
+			 * @since 3.7.0
+>>>>>>> develop
 			 *
 			 * @param boolean $videopress_player_use_iframe
 			 */
@@ -713,6 +729,11 @@ class VideoPress_Player {
 				/**
 				 * Filters the Flash parameters of the VideoPress player.
 				 *
+<<<<<<< HEAD
+=======
+				 * @module videopress
+				 *
+>>>>>>> develop
 				 * @since 1.2.0
 				 *
 				 * @param array $this->video->players->swf->params Array of swf parameters for the VideoPress flash player.

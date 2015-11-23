@@ -4,7 +4,11 @@
 */
 .jp-jitm {
   border-radius: 2px;
+<<<<<<< HEAD
   max-width: 95%;
+=======
+  max-width: 100%;
+>>>>>>> develop
   margin: 2em auto 0 auto;
   padding: .85em;
   background: #fcfcfc;
@@ -12,8 +16,32 @@
   text-align: center;
 }
 @media (min-width: 1100px) {
+<<<<<<< HEAD
   .jp-jitm {
     max-width: 650px;
+=======
+  .jp-jitm .jp-emblem, .jp-jitm p {
+    float: left;
+    margin: .5em 1em 0 .5em;
+    padding-top: 4px;
+  }
+  .jp-jitm .jp-emblem {
+    width: 20px;
+    height: 20px;
+    margin-right: .5em;
+  }
+  .jp-jitm p + p {
+    margin: 0;
+    padding: 0;
+  }
+  .jp-jitm .activate {
+    margin-top: 0;
+  }
+}
+@media (max-width: 1100px) {
+  .jp-jitm {
+    max-width: 90%;
+>>>>>>> develop
   }
 }
 .jp-jitm:before, .jp-jitm:after {
@@ -24,7 +52,11 @@
   clear: both;
 }
 .jp-jitm .activate {
+<<<<<<< HEAD
   margin-top: .8em;
+=======
+  margin-top: .5em;
+>>>>>>> develop
 }
 .jp-jitm .jp-emblem {
   width: 25px;
@@ -38,6 +70,12 @@
 .jp-jitm path {
   fill: #8cc258;
 }
+<<<<<<< HEAD
+=======
+.jp-jitm .button-jetpack {
+  margin-top: .5em;
+}
+>>>>>>> develop
 .jp-jitm .dismiss {
   margin: 0;
   text-decoration: none;
@@ -52,6 +90,7 @@
   font-size: 1em;
   line-height: 165%;
 }
+<<<<<<< HEAD
 
 .media-upload-form .jp-jitm {
   max-width: 100%;
@@ -78,6 +117,15 @@
 @media (max-width: 1100px) {
   .media-modal-content .jp-jitm {
     max-width: 90%;
+=======
+.jp-jitm .hide {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .update-core-php .jp-jitm {
+    margin: 3em 2em 0 auto;
+>>>>>>> develop
   }
 }
 

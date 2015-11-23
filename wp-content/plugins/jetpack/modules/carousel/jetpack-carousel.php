@@ -55,6 +55,11 @@ class Jetpack_Carousel {
 			/**
 			 * Filter the array of default prebuilt widths used in Carousel.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module carousel
+			 *
+>>>>>>> develop
 			 * @since 1.6.0
 			 *
 			 * @param array $this->prebuilt_widths Array of default widths.
@@ -76,6 +81,11 @@ class Jetpack_Carousel {
 		/**
 		 * Allow third-party plugins or themes to disable Carousel.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module carousel
+		 *
+>>>>>>> develop
 		 * @since 1.6.0
 		 *
 		 * @param bool false Should Carousel be disabled? Default to fase.
@@ -92,6 +102,11 @@ class Jetpack_Carousel {
 		/**
 		 * Filter the version string used when enqueuing Carousel assets.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module carousel
+		 *
+>>>>>>> develop
 		 * @since 1.6.0
 		 *
 		 * @param string $version Asset version.
@@ -115,6 +130,11 @@ class Jetpack_Carousel {
 			/**
 			 * Allow third-party plugins or themes to force-enable Carousel.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module carousel
+			 *
+>>>>>>> develop
 			 * @since 1.9.0
 			 *
 			 * @param bool false Should we force enable Carousel? Default to false.
@@ -134,6 +154,11 @@ class Jetpack_Carousel {
 		/**
 		 * Fires when thumbnails are shown in Carousel.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module carousel
+		 *
+>>>>>>> develop
 		 * @since 1.6.0
 		 **/
 		do_action( 'jp_carousel_thumbnails_shown' );
@@ -201,6 +226,11 @@ class Jetpack_Carousel {
 			/**
 			 * Filter the strings passed to the Carousel's js file.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module carousel
+			 *
+>>>>>>> develop
 			 * @since 1.6.0
 			 *
 			 * @param array $localize_strings Array of strings passed to the Jetpack js file.
@@ -221,6 +251,11 @@ class Jetpack_Carousel {
 			 * Fires after carousel assets are enqueued for the first time.
 			 * Allows for adding additional assets to the carousel page.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module carousel
+			 *
+>>>>>>> develop
 			 * @since 1.6.0
 			 *
 			 * @param bool $first_run First load if Carousel on the page.
@@ -330,6 +365,11 @@ class Jetpack_Carousel {
 			/**
 			 * Filter the data added to the Gallery container.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module carousel
+			 *
+>>>>>>> develop
 			 * @since 1.6.0
 			 *
 			 * @param array $extra_data Array of data about the site and the post.
@@ -352,6 +392,11 @@ class Jetpack_Carousel {
 		 * are packaged as JSON and sent back from the get_attachment_comments
 		 * AJAX endpoint
 		 *
+<<<<<<< HEAD
+=======
+		 * @module carousel
+		 *
+>>>>>>> develop
 		 * @since 1.6.0
 		 */
 		do_action('jp_carousel_check_blog_user_privileges');
@@ -474,6 +519,11 @@ class Jetpack_Carousel {
 		/**
 		 * Fires before adding a new comment to the database via the get_attachment_comments ajax endpoint.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module carousel
+		 *
+>>>>>>> develop
 		 * @since 1.6.0
 		 */
 		do_action( 'jp_carousel_post_attachment_comment' );

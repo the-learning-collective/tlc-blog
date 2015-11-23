@@ -56,6 +56,10 @@
 			$( '.manage-right' ).removeClass( 'show' );
 			originPoint.focus();
 			$( '.modal' )[0].removeAttribute( 'tabindex' );
+<<<<<<< HEAD
+=======
+			$( 'body' ).css( 'overflow', 'auto' );
+>>>>>>> develop
 			return false;
 		});
 
@@ -66,6 +70,10 @@
 				$( '.manage-right' ).removeClass( 'show' );
 				originPoint.focus();
 				$( '.modal' )[0].removeAttribute( 'tabindex' );
+<<<<<<< HEAD
+=======
+				$( 'body' ).css( 'overflow', 'auto' );
+>>>>>>> develop
 			}
 		});
 	}
@@ -138,6 +146,12 @@
 			$modal[0].setAttribute( 'tabindex', '0' );
 			$modal.focus();
 
+<<<<<<< HEAD
+=======
+			// Disallow scroll
+			$( 'body' ).css( 'overflow', 'hidden' );
+
+>>>>>>> develop
 			closeShadeToggle();
 
 			// Modal header links

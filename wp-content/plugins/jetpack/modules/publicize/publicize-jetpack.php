@@ -283,6 +283,11 @@ class Publicize extends Publicize_Base {
 		/**
 		 * Filters the API URL used to interact with WordPress.com.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module publicize
+		 *
+>>>>>>> develop
 		 * @since 2.0.0
 		 *
 		 * @param string https://public-api.wordpress.com/connect/?jetpack=publicize Default Publicize API URL.

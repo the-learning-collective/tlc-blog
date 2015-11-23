@@ -539,6 +539,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 				/**
 				 * Filter the documentation returned for a post attachment.
 				 *
+<<<<<<< HEAD
+=======
+				 * @module json-api
+				 *
+>>>>>>> develop
 				 * @since 1.9.0
 				 *
 				 * @param array $docs Array of documentation about a post attachment.
@@ -585,6 +590,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 				/**
 				 * Filter the documentation returned for a plugin.
 				 *
+<<<<<<< HEAD
+=======
+				 * @module json-api
+				 *
+>>>>>>> develop
 				 * @since 3.1.0
 				 *
 				 * @param array $docs Array of documentation about a plugin.
@@ -965,6 +975,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 			/**
 			 * Filter access to a specific post.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module json-api
+			 *
+>>>>>>> develop
 			 * @since 3.4.0
 			 *
 			 * @param bool current_user_can( 'read_post', $post->ID ) Can the current user access the post.
@@ -1020,6 +1035,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 				/**
 				 * Filter whether the current site is a Jetpack site.
 				 *
+<<<<<<< HEAD
+=======
+				 * @module json-api
+				 *
+>>>>>>> develop
 				 * @since 3.3.0
 				 *
 				 * @param bool false Is the current site a Jetpack site. Default to false.
@@ -1254,7 +1274,10 @@ abstract class WPCOM_JSON_API_Endpoint {
 				return new WP_Error( 'unauthorized', 'User cannot edit taxonomy', 403 );
 			break;
 		case 'display' :
+<<<<<<< HEAD
 			$tax = get_taxonomy( $taxonomy_type );
+=======
+>>>>>>> develop
 			if ( -1 == get_option( 'blog_public' ) && ! current_user_can( 'read' ) ) {
 				return new WP_Error( 'unauthorized', 'User cannot view taxonomy', 403 );
 			}
@@ -1437,6 +1460,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 		 * '/inc/jetpack.compat.php', '/inc/jetpack.php', '/includes/jetpack.compat.php files
 		 * of the theme (parent and child) and copy functions hooked onto 'after_setup_theme' within those files.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module json-api
+		 *
+>>>>>>> develop
 		 * @since 3.2.0
 		 */
 		do_action( 'restapi_theme_after_setup_theme' );
@@ -1450,6 +1478,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 		 * '/inc/jetpack.compat.php', '/inc/jetpack.php', '/includes/jetpack.compat.php files
 		 * of the theme (parent and child) and copy functions hooked onto 'init' within those files.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module json-api
+		 *
+>>>>>>> develop
 		 * @since 3.2.0
 		 */
 		do_action( 'restapi_theme_init' );
@@ -1767,6 +1800,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 		/**
 		 * Filter the post types Jetpack has access to, and can synchronize with WordPress.com.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module json-api
+		 *
+>>>>>>> develop
 		 * @since 2.2.3
 		 *
 		 * @param array $allowed_types Array of whitelisted post types. Default to `array( 'post', 'page', 'revision' )`.
@@ -1933,6 +1971,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 		/**
 		 * Filter the list of whitelisted video clients.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module json-api
+		 *
+>>>>>>> develop
 		 * @since 3.2.0
 		 *
 		 * @param array $clients_allowed_video_uploads Array of whitelisted Video clients.
@@ -1948,6 +1991,11 @@ abstract class WPCOM_JSON_API_Endpoint {
 		/**
 		 * Filter the video filetypes allowed on the site.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module json-api
+		 *
+>>>>>>> develop
 		 * @since 3.2.0
 		 *
 		 * @param array $video_exts Array of video filetypes allowed on the site.

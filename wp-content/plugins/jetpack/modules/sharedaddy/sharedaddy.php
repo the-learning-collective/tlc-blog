@@ -67,10 +67,33 @@ function sharing_add_meta_box() {
 	if ( empty( $post ) ) { // If a current post is not defined, such as when editing a comment.
 		return;
 	}
+<<<<<<< HEAD
+=======
+
+	/**
+	 * Filter whether to display the Sharing Meta Box or not.
+	 *
+	 * @module sharedaddy
+	 *
+	 * @since 3.8.0
+	 *
+	 * @param bool true Display Sharing Meta Box.
+	 * @param $post Post.
+	 */
+	if ( ! apply_filters( 'sharing_meta_box_show', true, $post ) ) {
+		return;
+	}
+
+>>>>>>> develop
 	$post_types = get_post_types( array( 'public' => true ) );
 	/**
 	 * Filter the Sharing Meta Box title.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module sharedaddy
+	 *
+>>>>>>> develop
 	 * @since 2.2.0
 	 *
 	 * @param string $var Sharing Meta Box title. Default is "Sharing".
@@ -88,6 +111,11 @@ function sharing_meta_box_content( $post ) {
 	/**
 	 * Fires before the sharing meta box content.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module sharedaddy
+	 *
+>>>>>>> develop
 	 * @since 2.2.0
 	 *
 	 * @param WP_Post $post The post to share.
@@ -108,6 +136,11 @@ function sharing_meta_box_content( $post ) {
 	/**
 	 * Fires after the sharing meta box content.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module sharedaddy
+	 *
+>>>>>>> develop
 	 * @since 2.2.0
 	 *
 	 * @param WP_Post $post The post to share.

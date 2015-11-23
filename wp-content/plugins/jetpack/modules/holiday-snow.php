@@ -31,10 +31,19 @@ class Jetpack_Holiday_Snow_Settings {
 	}
 
 	public function holiday_snow_option_updated() {
+<<<<<<< HEAD
 		
 		/**
 		 * Fires when the holiday snow option is updated.
 		 *
+=======
+
+		/**
+		 * Fires when the holiday snow option is updated.
+		 *
+		 * @module theme-tools
+		 *
+>>>>>>> develop
 		 * @since 2.0.3
 		 */
 		do_action( 'jetpack_holiday_snow_option_updated' );
@@ -42,13 +51,22 @@ class Jetpack_Holiday_Snow_Settings {
 }
 
 function jetpack_holiday_snow_script() {
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> develop
 	/**
 	 * Allow holiday snow.
 	 *
 	 * Note: there's no actual randomness involved in whether it snows
 	 * or not, despite the filter mentioning a "chance of snow."
 	 *
+<<<<<<< HEAD
+=======
+	 * @module theme-tools
+	 *
+>>>>>>> develop
 	 * @since 2.0.3
 	 *
 	 * @param bool True to allow snow, false to disable it.
@@ -59,6 +77,11 @@ function jetpack_holiday_snow_script() {
 	/**
 	 * Fires when it's snowing.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module theme-tools
+	 *
+>>>>>>> develop
 	 * @since 2.0.3
 	 */
 	do_action( 'jetpack_holiday_snowing' );
@@ -66,6 +89,11 @@ function jetpack_holiday_snow_script() {
 	/**
 	 * Filter the holiday snow JavaScript URL.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module theme-tools
+	 *
+>>>>>>> develop
 	 * @since 2.0.3
 	 *
 	 * @param str URL to the holiday snow JavaScript file.
@@ -87,10 +115,19 @@ function jetpack_maybe_holiday_snow() {
 }
 
 function jetpack_holiday_snow_option_name() {
+<<<<<<< HEAD
 	
 	/**
 	 * Filter the holiday snow option name.
 	 *
+=======
+
+	/**
+	 * Filter the holiday snow option name.
+	 *
+	 * @module theme-tools
+	 *
+>>>>>>> develop
 	 * @since 2.0.3
 	 *
 	 * @param str The holiday snow option name.
@@ -112,6 +149,11 @@ function jetpack_is_holiday_snow_season() {
 	 * Southern Hemisphere. In that case, the dates for winter
 	 * above are incorrect for your location.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module theme-tools
+	 *
+>>>>>>> develop
 	 * @since 2.1.0
 	 *
 	 * @param bool $snow True if it's snow season, false if not.

@@ -340,6 +340,11 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 						$response['options']['software_version'] = null;
 					}
 
+<<<<<<< HEAD
+=======
+					$response['options']['max_upload_size'] = get_option( 'jetpack_max_upload_size', false );
+
+>>>>>>> develop
 					// Sites have to prove that they are not main_network site.
 					// If the sync happends right then we should be able to see that we are not dealing with a network site
 					$response['options']['is_multi_network'] = (bool) get_option( 'jetpack_is_main_network', true  );
@@ -354,6 +359,11 @@ class WPCOM_JSON_API_GET_Site_Endpoint extends WPCOM_JSON_API_Endpoint {
 				/**
 				 * Filters the URL scheme used when querying your site's REST API endpoint.
 				 *
+<<<<<<< HEAD
+=======
+				 * @module json-api
+				 *
+>>>>>>> develop
 				 * @since 3.2.0
 				 *
 				 * @param string parse_url( get_option( 'home' ), PHP_URL_SCHEME ) URL scheme parsed from home URL.
@@ -513,7 +523,11 @@ class WPCOM_JSON_API_List_Post_Types_Endpoint extends WPCOM_JSON_API_Endpoint {
 				$formatted_post_type_object[ $value ] = $post_type_object->{ $key };
 			}
 			$formatted_post_type_object['api_queryable'] = $is_queryable;
+<<<<<<< HEAD
 
+=======
+			$formatted_post_type_object['supports'] = get_all_post_type_supports( $post_type );
+>>>>>>> develop
 			$formatted_post_type_objects[] = $formatted_post_type_object;
 		}
 

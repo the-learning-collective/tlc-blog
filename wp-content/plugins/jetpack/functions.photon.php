@@ -15,6 +15,11 @@ function jetpack_photon_url( $image_url, $args = array(), $scheme = null ) {
 	/**
 	 * Allow specific image URls to avoid going through Photon.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module photon
+	 *
+>>>>>>> develop
 	 * @since 3.2.0
 	 *
 	 * @param bool false Should the image be returned as is, without going through Photon. Default to false.
@@ -29,6 +34,11 @@ function jetpack_photon_url( $image_url, $args = array(), $scheme = null ) {
 	/**
 	 * Filter the original image URL before it goes through Photon.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module photon
+	 *
+>>>>>>> develop
 	 * @since 1.9.0
 	 *
 	 * @param string $image_url Image URL.
@@ -39,6 +49,11 @@ function jetpack_photon_url( $image_url, $args = array(), $scheme = null ) {
 	/**
 	 * Filter the original Photon image parameters before Photon is applied to an image.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module photon
+	 *
+>>>>>>> develop
 	 * @since 1.9.0
 	 *
 	 * @param array|string $args Array of Photon arguments.
@@ -88,6 +103,11 @@ function jetpack_photon_url( $image_url, $args = array(), $scheme = null ) {
 	 * By default, Photon doesn't support query strings so we ignore them and look only at the path.
 	 * This setting is Photon Server dependent.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module photon
+	 *
+>>>>>>> develop
 	 * @since 1.9.0
 	 *
 	 * @param bool false Should images using query strings go through Photon. Default is false.
@@ -112,6 +132,11 @@ function jetpack_photon_url( $image_url, $args = array(), $scheme = null ) {
 	/**
 	 * Filters the domain used by the Photon module.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module photon
+	 *
+>>>>>>> develop
 	 * @since 3.4.2
 	 *
 	 * @param string http://i{$subdomain}.wp.com Domain used by Photon. $subdomain is a random number between 0 and 2.
@@ -126,6 +151,11 @@ function jetpack_photon_url( $image_url, $args = array(), $scheme = null ) {
 	 * By default, Photon doesn't support query strings so we ignore them.
 	 * This setting is Photon Server dependent.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module photon
+	 *
+>>>>>>> develop
 	 * @since 1.9.0
 	 *
 	 * @param bool false Should query strings be added to the image URL. Default is false.

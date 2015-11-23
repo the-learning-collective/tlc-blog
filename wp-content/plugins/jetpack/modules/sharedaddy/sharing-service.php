@@ -68,6 +68,11 @@ class Sharing_Service {
 		/**
 		 * Filters the list of available Sharing Services.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sharedaddy
+		 *
+>>>>>>> develop
 		 * @since 1.1.0
 		 *
 		 * @param array $services Array of all available Sharing Services.
@@ -135,6 +140,11 @@ class Sharing_Service {
 		/**
 		 * Control the state of the list of sharing services.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sharedaddy
+		 *
+>>>>>>> develop
 		 * @since 1.1.0
 		 *
 		 * @param array $args {
@@ -178,6 +188,11 @@ class Sharing_Service {
 			/**
 			 * Filters the list of default Sharing Services.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module sharedaddy
+			 *
+>>>>>>> develop
 			 * @since 1.1.0
 			 *
 			 * @param array $enabled Array of default Sharing Services.
@@ -203,6 +218,11 @@ class Sharing_Service {
 		/**
 		 * Filters the list of enabled Sharing Services.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sharedaddy
+		 *
+>>>>>>> develop
 		 * @since 1.1.0
 		 *
 		 * @param array $blog Array of enabled Sharing Services.
@@ -249,6 +269,11 @@ class Sharing_Service {
 		/**
 		 * Filters global sharing settings.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sharedaddy
+		 *
+>>>>>>> develop
 		 * @since 1.1.0
 		 *
 		 * @param array $options['global'] Array of global sharing settings.
@@ -341,6 +366,11 @@ class Sharing_Service {
 		/**
 		 * Get the state of a sharing button.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sharedaddy
+		 *
+>>>>>>> develop
 		 * @since 1.1.0
 		 *
 		 * @param array $args {
@@ -474,6 +504,11 @@ function sharing_maybe_enqueue_scripts() {
 	/**
 	 * Filter to decide when sharing scripts should be enqueued.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module sharedaddy
+	 *
+>>>>>>> develop
 	 * @since 3.2.0
 	 *
 	 * @param bool $enqueue Decide if the sharing scripts should be enqueued.
@@ -487,6 +522,11 @@ function sharing_add_footer() {
 	/**
 	 * Filter all Javascript output by the sharing module.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module sharedaddy
+	 *
+>>>>>>> develop
 	 * @since 1.1.0
 	 *
 	 * @param bool true Control whether the sharing module should add any Javascript to the site. Default to true.
@@ -496,6 +536,11 @@ function sharing_add_footer() {
 		/**
 		 * Filter the display of sharing counts next to the sharing buttons.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sharedaddy
+		 *
+>>>>>>> develop
 		 * @since 3.2.0
 		 *
 		 * @param bool true Control the display of counters next to the sharing buttons. Default to true.
@@ -613,9 +658,17 @@ function sharing_display( $text = '', $echo = false ) {
 	/**
 	 * Filter to decide if sharing buttons should be displayed.
 	 *
+<<<<<<< HEAD
 	 * @since 1.1.0
 	 *
 	 * @param
+=======
+	 * @module sharedaddy
+	 *
+	 * @since 1.1.0
+	 *
+	 * @param bool $show Should the sharing buttons be displayed.
+>>>>>>> develop
 	 * @param WP_Post $post The post to share.
 	 */
 	$show = apply_filters( 'sharing_show', $show, $post );
@@ -643,6 +696,11 @@ function sharing_display( $text = '', $echo = false ) {
 		/**
 		 * Filters the list of enabled Sharing Services.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sharedaddy
+		 *
+>>>>>>> develop
 		 * @since 2.2.3
 		 *
 		 * @param array $sharer->get_blog_services() Array of Sharing Services currently enabled.
@@ -726,10 +784,28 @@ function sharing_display( $text = '', $echo = false ) {
 		}
 	}
 
+<<<<<<< HEAD
 	if ( $echo )
 		echo $text.$sharing_content;
 	else
 		return $text.$sharing_content;
+=======
+	/**
+	 * Filters the content markup of the Jetpack sharing links
+	 *
+	 * @module sharedaddy
+	 *
+	 * @since 3.8.0
+	 *
+	 * @param string $sharing_content Content markup of the Jetpack sharing links
+	 */
+	$sharing_markup = apply_filters( 'jetpack_sharing_display_markup', $sharing_content );
+
+	if ( $echo )
+		echo $text . $sharing_markup;
+	else
+		return $text . $sharing_markup;
+>>>>>>> develop
 }
 
 add_filter( 'the_content', 'sharing_display', 19 );

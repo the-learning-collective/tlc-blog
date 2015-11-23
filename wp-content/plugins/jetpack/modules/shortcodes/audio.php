@@ -67,6 +67,7 @@ class AudioShortcode {
 		self::$add_script = true;
 		$atts[0] = strip_tags( join( ' ', $atts ) );
 		$src = ltrim( $atts[0], '=' );
+<<<<<<< HEAD
 		
         /**
          * Set the audio player default colors.
@@ -89,6 +90,32 @@ class AudioShortcode {
          *      @type string $border          Border color.
          *      @type string $loader          Loader color.
          */
+=======
+
+		/**
+		 * Set the audio player default colors.
+		 *
+		 * @module shortcodes
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param array $ap_options {
+		 *      The default colors for the audio player in hexidecimal format (e.g. 0x#F8F8F8).
+		 *
+		 *      @type string $bg              Background color.
+		 *      @type string $leftbg          Left background color.
+		 *      @type string $lefticon        Left icon color.
+		 *      @type string $rightbg         Right background color.
+		 *      @type string $rightbghover    Right background hover color.
+		 *      @type string $righticon       Right icon color.
+		 *      @type string $righticonhover  Right icon hover color.
+		 *      @type string $text            Text color.
+		 *      @type string $slider          Slider color.
+		 *      @type string $track           Track color.
+		 *      @type string $border          Border color.
+		 *      @type string $loader          Loader color.
+		 */
+>>>>>>> develop
 		$ap_options = apply_filters(
 			'audio_player_default_colors',
 			array(
@@ -282,6 +309,7 @@ CONTROLS;
 		}
 		$html5_audio .= "<span id='wp-as-{$post_id}_{$ap_playerID}-playing'></span>";
 
+<<<<<<< HEAD
         /**
          * Sets external resource URL.
          *
@@ -290,6 +318,18 @@ CONTROLS;
          * @param string $args URL of external resource.
          *
          */
+=======
+		/**
+		 * Sets external resource URL.
+		 *
+		 * @module shortcodes
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param string $args URL of external resource.
+		 *
+		 */
+>>>>>>> develop
 		$swfurl = apply_filters(
 			'jetpack_static_url',
 			set_url_scheme( "http://en.wordpress.com/wp-content/plugins/audio-player/player.swf" )

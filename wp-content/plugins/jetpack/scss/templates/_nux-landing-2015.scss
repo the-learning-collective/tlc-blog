@@ -434,7 +434,12 @@
 				white-space: normal;
 				max-width: 200px;
 				margin-bottom: 0;
+<<<<<<< HEAD
 				padding-top: 2px;
+=======
+				padding-top: 4px;
+				padding-bottom: 5px;
+>>>>>>> develop
 			}
 			.feat {
 				@include vertalign;

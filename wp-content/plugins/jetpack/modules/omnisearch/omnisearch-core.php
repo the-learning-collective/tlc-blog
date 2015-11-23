@@ -39,8 +39,16 @@ class Jetpack_Omnisearch {
 
 		/**
 		 * Fires after each default omnisearch provider has been required.
+<<<<<<< HEAD
 		 * Can be used to add your own Omnisearch provider.
 		 *
+=======
+		 *
+		 * Can be used to add your own Omnisearch provider.
+		 *
+		 * @module minileven
+		 *
+>>>>>>> develop
 		 * @since 2.3.2
 		 */
 		do_action( 'omnisearch_add_providers' );
@@ -90,6 +98,11 @@ class Jetpack_Omnisearch {
 			/**
 			 * Filter the results returned for a given Omnisearch search query.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module minileven
+			 *
+>>>>>>> develop
 			 * @since 2.3.0
 			 *
 			 * @param array $results Array of Omnisearch results.
@@ -100,6 +113,11 @@ class Jetpack_Omnisearch {
 		/**
 		 * Filter the number of results displayed for each Omnisearch searched section.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module minileven
+		 *
+>>>>>>> develop
 		 * @since 2.3.0
 		 *
 		 * @param int 5 Number of results displayed for each Omnisearch searched section.
@@ -206,6 +224,11 @@ class Jetpack_Omnisearch {
 		/**
 		 * Filters the Omnisearch search form output.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module minileven
+		 *
+>>>>>>> develop
 		 * @since 2.3.0
 		 *
 		 * @param string ob_get_clean() Omnisearch search form output.

@@ -10,6 +10,10 @@
  * Auto Activate: No
  * Module Tags: Appearance, Mobile, Recommended
  * Feature: Recommended
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: mobile, theme, minileven
+>>>>>>> develop
  */
 
 function jetpack_load_minileven() {

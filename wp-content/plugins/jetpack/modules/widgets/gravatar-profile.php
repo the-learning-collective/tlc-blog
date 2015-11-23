@@ -100,10 +100,45 @@ class Jetpack_Gravatar_Profile_Widget extends WP_Widget {
 
 			?>
 
+<<<<<<< HEAD
 			<p><a href="<?php echo esc_url( $profile['profileUrl'] ); ?>" class="grofile-full-link"><?php echo esc_html( apply_filters( 'jetpack_gravatar_full_profile_title', __( 'View Full Profile &rarr;', 'jetpack' ) ) ); ?></a></p>
 
 			<?php
 
+=======
+			<p><a href="<?php echo esc_url( $profile['profileUrl'] ); ?>" class="grofile-full-link">
+				<?php echo esc_html(
+					/**
+					 * Filter the Gravatar Profile widget's profile link title.
+					 *
+					 * @module widgets
+					 *
+					 * @since 2.8.0
+					 *
+					 * @param string $str Profile link title.
+					 */
+					apply_filters(
+						'jetpack_gravatar_full_profile_title',
+						__( 'View Full Profile &rarr;', 'jetpack' )
+					)
+				); ?>
+			</a></p>
+
+			<?php
+
+			/**
+			 * Fires when an item is displayed on the frontend.
+			 *
+			 * Can be used to track stats about the number of displays for a specific item
+			 *
+			 * @module widgets, shortcodes
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param string widget Item type (e.g. widget, or embed).
+			 * @param string grofile Item description (e.g. grofile, goodreads).
+			 */
+>>>>>>> develop
 			do_action( 'jetpack_stats_extra', 'widget', 'grofile' );
 
 		} else {
@@ -120,7 +155,25 @@ class Jetpack_Gravatar_Profile_Widget extends WP_Widget {
 			return;
 		?>
 
+<<<<<<< HEAD
 			<h4><?php echo esc_html( apply_filters( 'jetpack_gravatar_personal_links_title', __( 'Personal Links', 'jetpack' ) ) ); ?></h4>
+=======
+			<h4><?php echo esc_html(
+				apply_filters(
+					/**
+					 * Filter the Gravatar Profile widget's "Personal Links" section title.
+					 *
+					 * @module widgets
+					 *
+					 * @since 2.8.0
+					 *
+					 * @param string $str "Personal Links" section title.
+					 */
+					'jetpack_gravatar_personal_links_title',
+					__( 'Personal Links', 'jetpack' )
+					)
+				); ?></h4>
+>>>>>>> develop
 			<ul class="grofile-urls grofile-links">
 
 			<?php foreach( $personal_links as $personal_link ) : ?>
@@ -143,7 +196,25 @@ class Jetpack_Gravatar_Profile_Widget extends WP_Widget {
 			return;
 		?>
 
+<<<<<<< HEAD
 		<h4><?php echo esc_html( apply_filters( 'jetpack_gravatar_verified_services_title', __( 'Verified Services', 'jetpack' ) ) ); ?></h4>
+=======
+		<h4><?php echo esc_html(
+				/**
+				 * Filter the Gravatar Profile widget's "Verified Services" section title.
+				 *
+				 * @module widgets
+				 *
+				 * @since 2.8.0
+				 *
+				 * @param string $str "Verified Services" section title.
+				 */
+				apply_filters(
+					'jetpack_gravatar_verified_services_title',
+					__( 'Verified Services', 'jetpack' )
+				)
+			); ?></h4>
+>>>>>>> develop
 		<ul class="grofile-urls grofile-accounts">
 
 		<?php foreach( $accounts as $account ) :

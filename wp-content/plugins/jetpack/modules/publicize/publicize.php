@@ -50,6 +50,11 @@ abstract class Publicize_Base {
 			/**
 			 * Filter the default Publicize message.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module publicize
+			 *
+>>>>>>> develop
 			 * @since 2.0.0
 			 *
 			 * @param string $this->default_message Publicize's default message. Default is the post title.
@@ -63,6 +68,11 @@ abstract class Publicize_Base {
 			/**
 			 * Filter the message prepended to the Publicize custom message.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module publicize
+			 *
+>>>>>>> develop
 			 * @since 2.0.0
 			 *
 			 * @param string $this->default_prefix String prepended to the Publicize custom message.
@@ -75,6 +85,11 @@ abstract class Publicize_Base {
 			/**
 			 * Filter the message appended to the Publicize custom message.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module publicize
+			 *
+>>>>>>> develop
 			 * @since 2.0.0
 			 *
 			 * @param string $this->default_suffix String appended to the Publicize custom message.
@@ -85,9 +100,18 @@ abstract class Publicize_Base {
 
 		/**
 		 * Filter the capability to change global Publicize connection options.
+<<<<<<< HEAD
 		 * All users with this cap can unglobalize all other global connections, and globalize any of their own
 		 * Globalized connections cannot be unselected by users without this capability when publishing.
 		 *
+=======
+		 *
+		 * All users with this cap can unglobalize all other global connections, and globalize any of their own
+		 * Globalized connections cannot be unselected by users without this capability when publishing.
+		 *
+		 * @module publicize
+		 *
+>>>>>>> develop
 		 * @since 2.2.1
 		 *
 		 * @param string $this->GLOBAL_CAP default capability in control of global Publicize connection options. Default to edit_others_posts.

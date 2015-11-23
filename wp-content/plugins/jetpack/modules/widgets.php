@@ -7,6 +7,10 @@
  * Requires Connection: No
  * Auto Activate: Yes
  * Module Tags: Social, Appearance
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: widget, widgets, facebook, gallery, twitter, gravatar, image, rss
+>>>>>>> develop
  */
 
 function jetpack_load_widgets() {
@@ -18,6 +22,11 @@ function jetpack_load_widgets() {
 	/**
 	 * Modify which Jetpack Widgets to register.
 	 *
+<<<<<<< HEAD
+=======
+	 * @module widgets
+	 *
+>>>>>>> develop
 	 * @since 2.2.1
 	 *
 	 * @param array $widgets_include An array of widgets to be registered.

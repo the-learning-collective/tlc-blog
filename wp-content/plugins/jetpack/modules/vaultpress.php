@@ -9,6 +9,10 @@
  * Requires Connection: Yes
  * Auto Activate: Yes
  * Feature: Performance-Security
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: vaultpress, backup, security
+>>>>>>> develop
  */
 
 add_action( 'jetpack_modules_loaded', 'vaultpress_jetpack_stub' );

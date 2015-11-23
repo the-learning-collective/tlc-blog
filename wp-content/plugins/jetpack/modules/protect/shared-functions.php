@@ -15,11 +15,19 @@ function jetpack_protect_format_whitelist() {
 
 	$local_whitelist = jetpack_protect_get_local_whitelist();
 
+<<<<<<< HEAD
 	$formatted = array(
 		'local'         => array(),
 	);
 
 	foreach( $local_whitelist as $item ) {
+=======
+	$formatted = array (
+		'local' => array (),
+	);
+
+	foreach ( $local_whitelist as $item ) {
+>>>>>>> develop
 		if ( $item->range ) {
 			$formatted['local'][] = $item->range_low . ' - ' . $item->range_high;
 		} else {
@@ -28,6 +36,7 @@ function jetpack_protect_format_whitelist() {
 	}
 
 	if ( is_multisite() && current_user_can( 'manage_network' ) ) {
+<<<<<<< HEAD
 		$formatted['global'] = array();
 		$global_whitelist = jetpack_protect_get_global_whitelist();
 
@@ -37,6 +46,17 @@ function jetpack_protect_format_whitelist() {
 		}
 
 		foreach( $global_whitelist as $item ) {
+=======
+		$formatted['global'] = array ();
+		$global_whitelist    = jetpack_protect_get_global_whitelist();
+
+		if ( false === $global_whitelist ) {
+			// if the global whitelist has never been set, check for a legacy option set prior to 3.6
+			$global_whitelist = get_site_option( 'jetpack_protect_whitelist', array () );
+		}
+
+		foreach ( $global_whitelist as $item ) {
+>>>>>>> develop
 			if ( $item->range ) {
 				$formatted['global'][] = $item->range_low . ' - ' . $item->range_high;
 			} else {
@@ -65,10 +85,17 @@ function jetpack_protect_get_local_whitelist() {
 		// The local whitelist has never been set
 		if ( is_multisite() ) {
 			// On a multisite, we can check for a legacy site_option that existed prior to v 3.6, or default to an empty array
+<<<<<<< HEAD
 			$whitelist = get_site_option( 'jetpack_protect_whitelist', array() );
 		} else {
 			// On a single site, we can just use an empty array
 			$whitelist = array();
+=======
+			$whitelist = get_site_option( 'jetpack_protect_whitelist', array () );
+		} else {
+			// On a single site, we can just use an empty array
+			$whitelist = array ();
+>>>>>>> develop
 		}
 	}
 
@@ -87,20 +114,35 @@ function jetpack_protect_get_global_whitelist() {
 
 	if ( false === $whitelist ) {
 		// The global whitelist has never been set. Check for legacy site_option, or default to an empty array
+<<<<<<< HEAD
 		$whitelist = get_site_option( 'jetpack_protect_whitelist', array() );
 	}
+=======
+		$whitelist = get_site_option( 'jetpack_protect_whitelist', array () );
+	}
+
+>>>>>>> develop
 	return $whitelist;
 }
 
 function jetpack_protect_save_whitelist( $whitelist, $global = false ) {
+<<<<<<< HEAD
 	$whitelist_error    = false;
 	$new_items          = array();
+=======
+	$whitelist_error = false;
+	$new_items       = array ();
+>>>>>>> develop
 
 	if ( ! is_array( $whitelist ) ) {
 		return new WP_Error( 'invalid_parameters', __( 'Expecting an array', 'jetpack' ) );
 	}
 
+<<<<<<< HEAD
 	if( $global && ! is_multisite() ) {
+=======
+	if ( $global && ! is_multisite() ) {
+>>>>>>> develop
 		return new WP_Error( 'invalid_parameters', __( 'Cannot use global flag on non-multisites', 'jetpack' ) );
 	}
 
@@ -109,7 +151,11 @@ function jetpack_protect_save_whitelist( $whitelist, $global = false ) {
 	}
 
 	// validate each item
+<<<<<<< HEAD
 	foreach( $whitelist as $item ) {
+=======
+	foreach ( $whitelist as $item ) {
+>>>>>>> develop
 
 		$item = trim( $item );
 
@@ -118,6 +164,7 @@ function jetpack_protect_save_whitelist( $whitelist, $global = false ) {
 		}
 
 		$range = false;
+<<<<<<< HEAD
 		if ( strpos( $item, '-') ) {
 			$item = explode( '-', $item );
 			$range = true;
@@ -128,6 +175,18 @@ function jetpack_protect_save_whitelist( $whitelist, $global = false ) {
 		if ( ! empty( $range ) ) {
 
 			$low = trim( $item[0] );
+=======
+		if ( strpos( $item, '-' ) ) {
+			$item  = explode( '-', $item );
+			$range = true;
+		}
+		$new_item        = new stdClass();
+		$new_item->range = $range;
+
+		if ( ! empty( $range ) ) {
+
+			$low  = trim( $item[0] );
+>>>>>>> develop
 			$high = trim( $item[1] );
 
 			if ( ! filter_var( $low, FILTER_VALIDATE_IP ) || ! filter_var( $high, FILTER_VALIDATE_IP ) ) {
@@ -140,8 +199,13 @@ function jetpack_protect_save_whitelist( $whitelist, $global = false ) {
 				break;
 			}
 
+<<<<<<< HEAD
 			$new_item->range_low    = $low;
 			$new_item->range_high   = $high;
+=======
+			$new_item->range_low  = $low;
+			$new_item->range_high = $high;
+>>>>>>> develop
 
 		} else {
 
@@ -177,6 +241,7 @@ function jetpack_protect_save_whitelist( $whitelist, $global = false ) {
 }
 
 function jetpack_protect_get_ip() {
+<<<<<<< HEAD
 	
 	$trusted_header = get_site_option( 'trusted_ip_header' );
 
@@ -201,16 +266,60 @@ function jetpack_protect_get_ip() {
 	}
 	
 	return jetpack_clean_ip( $_SERVER['REMOTE_ADDR'] );
+=======
+
+	$trusted_header_data = get_site_option( 'trusted_ip_header' );
+
+	if ( isset( $trusted_header_data->trusted_header ) && isset( $_SERVER[ $trusted_header_data->trusted_header ] ) ) {
+		$ip            = $_SERVER[ $trusted_header_data->trusted_header ];
+		$segments      = $trusted_header_data->segments;
+		$reverse_order = $trusted_header_data->reverse;
+	} else {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+
+	$ips = explode( ',', $ip );
+
+	if ( ! isset( $segments ) || ! $segments ) {
+		$segments = 1;
+	}
+	if ( isset( $reverse_order ) && $reverse_order ) {
+		$ips = array_reverse( $ips );
+	}
+
+
+
+	$ip_count = count( $ips );
+
+	if ( 1 == $ip_count ) {
+		return jetpack_clean_ip( $ips[0] );
+	} elseif ( $ip_count >= $segments ) {
+		$the_one = $ip_count - $segments;
+
+		return jetpack_clean_ip( $ips[ $the_one ] );
+	} else {
+		return jetpack_clean_ip( $_SERVER['REMOTE_ADDR'] );
+	}
+>>>>>>> develop
 }
 
 function jetpack_clean_ip( $ip ) {
 	$ip = trim( $ip );
+<<<<<<< HEAD
 	
 	// Check for IPv4 IP cast as IPv6
 	if ( preg_match('/^::ffff:(\d+\.\d+\.\d+\.\d+)$/', $ip, $matches ) ) {
 		$ip = $matches[1];
 	}
 	
+=======
+
+	// Check for IPv4 IP cast as IPv6
+	if ( preg_match( '/^::ffff:(\d+\.\d+\.\d+\.\d+)$/', $ip, $matches ) ) {
+		$ip = $matches[1];
+	}
+
+>>>>>>> develop
 	return $ip;
 }
 
@@ -225,18 +334,30 @@ function jetpack_protect_ip_is_private( $ip ) {
 
 	// we are dealing with ipv6, so we can simply rely on filter_var
 	if ( false === strpos( $ip, '.' ) ) {
+<<<<<<< HEAD
 		return !filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
 	}
 
 	// we are dealing with ipv4
 	$private_ip4_addresses = array(
+=======
+		return ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
+	}
+
+	// we are dealing with ipv4
+	$private_ip4_addresses = array (
+>>>>>>> develop
 		'10.0.0.0|10.255.255.255',     // single class A network
 		'172.16.0.0|172.31.255.255',   // 16 contiguous class B network
 		'192.168.0.0|192.168.255.255', // 256 contiguous class C network
 		'169.254.0.0|169.254.255.255', // Link-local address also referred to as Automatic Private IP Addressing
 		'127.0.0.0|127.255.255.255'    // localhost
 	);
+<<<<<<< HEAD
 	$long_ip = ip2long( $ip );
+=======
+	$long_ip               = ip2long( $ip );
+>>>>>>> develop
 	if ( -1 != $long_ip ) {
 		foreach ( $private_ip4_addresses as $pri_addr ) {
 			list ( $start, $end ) = explode( '|', $pri_addr );
@@ -245,6 +366,10 @@ function jetpack_protect_ip_is_private( $ip ) {
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 	return false;
 }
 
@@ -264,6 +389,10 @@ function jetpack_convert_ip_address( $ip ) {
 	if ( function_exists( 'inet_pton' ) ) {
 		return inet_pton( $ip );
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 	return ip2long( $ip );
 }
 

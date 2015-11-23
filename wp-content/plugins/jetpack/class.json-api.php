@@ -141,6 +141,16 @@ class WPCOM_JSON_API {
 
 		$this->exit = (bool) $exit;
 
+<<<<<<< HEAD
+=======
+		// This was causing problems with Jetpack, but is necessary for wpcom
+		// @see https://github.com/Automattic/jetpack/pull/2603
+		// @see r124548-wpcom
+		if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+			add_filter( 'home_url', array( $this, 'ensure_http_scheme_of_home_url' ), 10, 3 );
+		}
+
+>>>>>>> develop
 		add_filter( 'user_can_richedit', '__return_true' );
 
 		add_filter( 'comment_edit_pre', array( $this, 'comment_edit_pre' ) );
@@ -151,6 +161,11 @@ class WPCOM_JSON_API {
 			 * Fires before the page output.
 			 * Can be used to specify custom header options.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module json-api
+			 *
+>>>>>>> develop
 			 * @since 3.1.0
 			 */
 			do_action( 'wpcom_json_api_options' );
@@ -165,8 +180,25 @@ class WPCOM_JSON_API {
 		// Normalize path and extract API version
 		$this->path = untrailingslashit( $this->path );
 		preg_match( '#^/rest/v(\d+(\.\d+)*)#', $this->path, $matches );
+<<<<<<< HEAD
 		$this->path = substr( $this->path, strlen( $matches[0] ) );
 		$this->version = $matches[1];
+=======
+
+		// HACK Alert!
+		// In order to workaround a bug in the iOS 5.6 release we need to handle /rest/sites/new as if it was
+		// /rest/v1.1/sites/new
+		if ( $this->path === '/rest/sites/new' ) {
+			$this->version = '1.1';
+			$this->path = '/sites/new';
+		} else if ( $this->path === '/rest/users/new' ) {
+			$this->version = '1.1';
+			$this->path = '/users/new';
+		} else {
+			$this->path = substr( $this->path, strlen( $matches[0] ) );
+			$this->version = $matches[1];
+		}
+>>>>>>> develop
 
 		$allowed_methods = array( 'GET', 'POST' );
 		$four_oh_five = false;
@@ -329,7 +361,13 @@ class WPCOM_JSON_API {
 		else
 			$this->output( $status_code, $response, $content_type );
 		$this->exit = $exit;
+<<<<<<< HEAD
 		$this->finish_request();
+=======
+		if ( ! defined( 'XMLRPC_REQUEST' ) || ! XMLRPC_REQUEST ) {
+			$this->finish_request();
+		}
+>>>>>>> develop
 	}
 
 	function set_output_status_code( $code = 200 ) {
@@ -497,6 +535,17 @@ class WPCOM_JSON_API {
 		return $response;
 	}
 
+<<<<<<< HEAD
+=======
+	function ensure_http_scheme_of_home_url( $url, $path, $original_scheme ) {
+		if ( $original_scheme ) {
+			return $url;
+		}
+
+		return preg_replace( '#^https:#', 'http:', $url );
+	}
+
+>>>>>>> develop
 	function comment_edit_pre( $comment_content ) {
 		return htmlspecialchars_decode( $comment_content, ENT_QUOTES );
 	}
@@ -536,6 +585,11 @@ class WPCOM_JSON_API {
 		/**
 		 * Filters all REST API access and return a 403 unauthorized response for all Restricted blog IDs.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module json-api
+		 *
+>>>>>>> develop
 		 * @since 3.4.0
 		 *
 		 * @param array $array Array of Blog IDs.

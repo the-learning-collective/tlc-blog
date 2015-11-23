@@ -42,7 +42,11 @@ class Publicize_UI {
 	function management_page() { ?>
 		<div class="wrap">
 			<div class="icon32" id="icon-options-general"><br /></div>
+<<<<<<< HEAD
 			<h2><?php _e( 'Sharing Settings', 'jetpack' ); ?></h2>
+=======
+			<h1><?php _e( 'Sharing Settings', 'jetpack' ); ?></h1>
+>>>>>>> develop
 
 				<?php
 				/** This action is documented in modules/sharedaddy/sharing.php */
@@ -106,7 +110,11 @@ class Publicize_UI {
 		?>
 
 		<form action="" id="publicize-form">
+<<<<<<< HEAD
 			<h3 id="publicize"><?php _e( 'Publicize', 'jetpack' ) ?></h3>
+=======
+			<h2 id="publicize"><?php _e( 'Publicize', 'jetpack' ) ?></h2>
+>>>>>>> develop
 
 			<?php
 				if ( ! empty( $_GET['action'] ) && 'deny' == $_GET['action'] ) {
@@ -553,6 +561,11 @@ jQuery( function($) {
 							/**
 							 * Filter whether a post should be publicized to a given service.
 							 *
+<<<<<<< HEAD
+=======
+							 * @module publicize
+							 *
+>>>>>>> develop
 							 * @since 2.0.0
 							 *
 							 * @param bool true Should the post be publicized to a given service? Default to true.
@@ -605,6 +618,7 @@ jQuery( function($) {
 							if ( !$done && ( 0 == $cmeta['connection_data']['user_id'] && !current_user_can( $this->publicize->GLOBAL_CAP ) ) ) {
 								$disabled = ' disabled="disabled"';
 								/**
+<<<<<<< HEAD
 								 * Filters the checkboxes for global connections with non-prilvedges users.
  								 *
  								 * @since 3.7.0
@@ -614,6 +628,19 @@ jQuery( function($) {
  								 * @param string $name Name of the connection (Facebook, Twitter, etc)
  								 * @param array $connection Array of data about the connection.
  								 */
+=======
+								 * Filters the checkboxes for global connections with non-prilvedged users.
+								 *
+								 * @module publicize
+								 *
+								 * @since 3.7.0
+								 *
+								 * @param bool   $checked Indicates if this connection should be enabled. Default true.
+								 * @param int    $post->ID ID of the current post
+								 * @param string $name Name of the connection (Facebook, Twitter, etc)
+								 * @param array  $connection Array of data about the connection.
+								 */
+>>>>>>> develop
 								$hidden_checkbox = apply_filters( 'publicize_checkbox_global_default', true, $post->ID, $name, $connection );
 							}
 
@@ -622,6 +649,11 @@ jQuery( function($) {
 							/**
 							 * Filter the checkbox state of each Publicize connection appearing in the post editor.
 							 *
+<<<<<<< HEAD
+=======
+							 * @module publicize
+							 *
+>>>>>>> develop
 							 * @since 2.0.1
 							 *
 							 * @param bool $checked Should the Publicize checkbox be enabled for a given service.
@@ -734,6 +766,11 @@ jQuery( function($) {
 			/**
 			 * Filter the Publicize details form.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module publicize
+			 *
+>>>>>>> develop
 			 * @since 2.0.0
 			 *
 			 * @param string $publicize_form Publicize Details form appearing above Publish button in the editor.

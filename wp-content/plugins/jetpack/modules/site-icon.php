@@ -8,9 +8,17 @@
  * Requires Connection: No
  * Auto Activate: No
  * Module Tags: Other
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: favicon, icon, site icon
+>>>>>>> develop
  */
 
 include dirname( __FILE__ ) . '/site-icon/jetpack-site-icon.php';
 include dirname( __FILE__ ) . '/site-icon/site-icon-functions.php';
 
+<<<<<<< HEAD
 Jetpack_Sync::sync_options( __FILE__, 'jetpack_site_icon_url' );
+=======
+Jetpack_Sync::sync_options( __FILE__, 'jetpack_site_icon_url' );
+>>>>>>> develop

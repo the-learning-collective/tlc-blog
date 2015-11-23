@@ -170,6 +170,11 @@ class Jetpack_RSS_Links_Widget extends WP_Widget {
 		/**
 		 * Filters the target link attribute for the RSS link in the RSS widget.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module widgets
+		 *
+>>>>>>> develop
 		 * @since 3.4.0
 		 *
 		 * @param bool false Control whether the link should open in a new tab. Default to false.
@@ -184,6 +189,11 @@ class Jetpack_RSS_Links_Widget extends WP_Widget {
 			/**
 			 * Filters the image used as RSS icon in the RSS widget.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module widgets
+			 *
+>>>>>>> develop
 			 * @since 3.6.0
 			 *
 			 * @param string $var URL of RSS Widget icon.

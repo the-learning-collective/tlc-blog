@@ -12,6 +12,11 @@ class Jetpack_Gallery_Settings {
 		/**
 		 * Filter the available gallery types.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module shortcodes, tiled-gallery
+		 *
+>>>>>>> develop
 		 * @since 2.5.1
 		 *
 		 * @param array $value Array of the default thumbnail grid gallery type. Default array contains one key, ‘default’.
@@ -48,6 +53,11 @@ class Jetpack_Gallery_Settings {
 		/**
 		 * Filter the default gallery type.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module tiled-gallery
+		 *
+>>>>>>> develop
 		 * @since 2.5.1
 		 *
 		 * @param string $value A string of the gallery type. Default is ‘default’.

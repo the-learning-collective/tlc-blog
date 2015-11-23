@@ -10,4 +10,8 @@
 
 			<?php
 				Jetpack::init()->load_view( 'admin/network-activated-notice.php' );
+<<<<<<< HEAD
+=======
+				/** This action is already documented in views/admin/admin-page.php */
+>>>>>>> develop
 				do_action( 'jetpack_notices' );

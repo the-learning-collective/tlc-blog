@@ -164,6 +164,11 @@ class WPCOM_JSON_API_Delete_Connection_Endpoint extends WPCOM_JSON_API_Endpoint 
 			/**
 			 * Fires when a Publicize connection is deleted.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module json-api
+			 *
+>>>>>>> develop
 			 * @since 3.2.0
 			 *
 			 * @param int $connection_id Publicize connection ID.

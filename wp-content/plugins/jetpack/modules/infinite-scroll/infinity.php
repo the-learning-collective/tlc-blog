@@ -194,7 +194,19 @@ class The_Neverending_Home_Page {
 				$settings['footer_widgets'] = (bool) is_active_sidebar( $settings['footer_widgets'] );
 			}
 
+<<<<<<< HEAD
 			// For complex logic, let themes filter the `footer_widgets` parameter.
+=======
+			/**
+			 * Filter Infinite Scroll's `footer_widgets` parameter.
+			 *
+			 * @module infinite-scroll
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param bool $settings['footer_widgets'] Does the current theme have Footer Widgets.
+			 */
+>>>>>>> develop
 			$settings['footer_widgets'] = apply_filters( 'infinite_scroll_has_footer_widgets', $settings['footer_widgets'] );
 
 			// Finally, after all of the sidebar checks and filtering, ensure that a boolean value is present, otherwise set to default of `false`.
@@ -211,6 +223,7 @@ class The_Neverending_Home_Page {
 					$settings['type'] = 'click';
 			}
 
+<<<<<<< HEAD
 			// Ignore posts_per_page theme setting for [click] type
 			if ( 'click' == $settings['type'] )
 				$settings['posts_per_page'] = (int) get_option( 'posts_per_page' );
@@ -218,6 +231,17 @@ class The_Neverending_Home_Page {
 			// Backwards compatibility for posts_per_page setting
 			elseif ( false === $settings['posts_per_page'] )
 				$settings['posts_per_page'] = 7;
+=======
+			// posts_per_page defaults to 7 for scroll, posts_per_page option for click
+			if ( false === $settings['posts_per_page'] ) {
+				if ( 'scroll' === $settings['type'] ) {
+					$settings['posts_per_page'] = 7;
+				}
+				else {
+					$settings['posts_per_page'] = (int) get_option( 'posts_per_page' );
+				}
+			}
+>>>>>>> develop
 
 			// Force display of the click handler and attendant bits when the type isn't `click`
 			if ( 'click' !== $settings['type'] ) {
@@ -225,6 +249,18 @@ class The_Neverending_Home_Page {
 			}
 
 			// Store final settings in a class static to avoid reparsing
+<<<<<<< HEAD
+=======
+			/**
+			 * Filter the array of Infinite Scroll settings.
+			 *
+			 * @module infinite-scroll
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param array $settings Array of Infinite Scroll settings.
+			 */
+>>>>>>> develop
 			self::$settings = apply_filters( 'infinite_scroll_settings', $settings );
 		}
 
@@ -240,6 +276,18 @@ class The_Neverending_Home_Page {
 	 */
 	static function wp_query() {
 		global $wp_the_query;
+<<<<<<< HEAD
+=======
+		/**
+		 * Filter the Infinite Scroll query object.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.2.1
+		 *
+		 * @param WP_Query $wp_the_query WP Query.
+		 */
+>>>>>>> develop
 		return apply_filters( 'infinite_scroll_query_object', $wp_the_query );
 	}
 
@@ -439,7 +487,11 @@ class The_Neverending_Home_Page {
 
 		//code inspired by WP_Query class
 		if ( preg_match_all( '/".*?("|$)|((?<=[\t ",+])|^)[^\t ",+]+/', self::wp_query()->get( 's' ), $matches ) ) {
+<<<<<<< HEAD
 			$search_terms = self::wp_query()->parse_search_terms( $matches[0] );
+=======
+			$search_terms = self::wp_query()->query_vars['search_terms'];
+>>>>>>> develop
 			// if the search string has only short terms or stopwords, or is 10+ terms long, match it as sentence
 			if ( empty( $search_terms ) || count( $search_terms ) > 9 ) {
 				$search_terms = array( self::wp_query()->get( 's' ) );
@@ -551,6 +603,21 @@ class The_Neverending_Home_Page {
 			// Construct the date query using our timestamp
 			$clause = $wpdb->prepare( " AND {$wpdb->posts}.{$sort_field} {$operator} %s", $last_post_date );
 
+<<<<<<< HEAD
+=======
+			/**
+			 * Filter Infinite Scroll's SQL date query making sure post queries
+			 * will always return results prior to (descending sort)
+			 * or before (ascending sort) the last post date.
+			 *
+			 * @module infinite-scroll
+			 *
+			 * @param string $clause SQL Date query.
+			 * @param object $query Query.
+			 * @param string $operator Query operator.
+			 * @param string $last_post_date Last Post Date timestamp.
+			 */
+>>>>>>> develop
 			$where .= apply_filters( 'infinite_scroll_posts_where', $clause, $query, $operator, $last_post_date );
 		}
 
@@ -592,6 +659,18 @@ class The_Neverending_Home_Page {
 
 		$ajaxurl = add_query_arg( array( 'infinity' => 'scrolling' ), $base_url );
 
+<<<<<<< HEAD
+=======
+		/**
+		 * Filter the Infinite Scroll Ajax URL.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param string $ajaxurl Infinite Scroll Ajax URL.
+		 */
+>>>>>>> develop
 		return apply_filters( 'infinite_scroll_ajax_url', $ajaxurl );
 	}
 
@@ -611,6 +690,16 @@ class The_Neverending_Home_Page {
 		@header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
 		send_nosniff_header();
 
+<<<<<<< HEAD
+=======
+		/**
+		 * Fires at the end of the Infinite Scroll Ajax response.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.0.0
+		 */
+>>>>>>> develop
 		do_action( 'custom_ajax_infinite_scroll' );
 		die( '0' );
 	}
@@ -697,8 +786,29 @@ class The_Neverending_Home_Page {
 				$js_settings['order'] = $order;
 		}
 
+<<<<<<< HEAD
 		$js_settings = apply_filters( 'infinite_scroll_js_settings', $js_settings );
 
+=======
+		/**
+		 * Filter the Infinite Scroll JS settings outputted in the head.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param array $js_settings Infinite Scroll JS settings.
+		 */
+		$js_settings = apply_filters( 'infinite_scroll_js_settings', $js_settings );
+
+		/**
+		 * Fires before Infinite Scroll outputs inline Javascript in the head.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.0.0
+		 */
+>>>>>>> develop
 		do_action( 'infinite_scroll_wp_head' );
 
 		?>
@@ -778,9 +888,33 @@ class The_Neverending_Home_Page {
 		global $wp_scripts, $wp_styles;
 
 		$scripts = is_a( $wp_scripts, 'WP_Scripts' ) ? $wp_scripts->done : array();
+<<<<<<< HEAD
 		$scripts = apply_filters( 'infinite_scroll_existing_scripts', $scripts );
 
 		$styles = is_a( $wp_styles, 'WP_Styles' ) ? $wp_styles->done : array();
+=======
+		/**
+		 * Filter the list of scripts already present on the page.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.1.2
+		 *
+		 * @param array $scripts Array of scripts present on the page.
+		 */
+		$scripts = apply_filters( 'infinite_scroll_existing_scripts', $scripts );
+
+		$styles = is_a( $wp_styles, 'WP_Styles' ) ? $wp_styles->done : array();
+		/**
+		 * Filter the list of styles already present on the page.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.1.2
+		 *
+		 * @param array $styles Array of styles present on the page.
+		 */
+>>>>>>> develop
 		$styles = apply_filters( 'infinite_scroll_existing_stylesheets', $styles );
 
 		?><script type="text/javascript">
@@ -856,7 +990,31 @@ class The_Neverending_Home_Page {
 		if ( ! isset( $results['scripts'] ) )
 			$results['scripts'] = array();
 
+<<<<<<< HEAD
 		$results['scripts'] = apply_filters( 'infinite_scroll_additional_scripts', $results['scripts'], $initial_scripts, $results, $query_args, $wp_query );
+=======
+		/**
+		 * Filter the additional scripts required by the latest set of IS posts.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.1.2
+		 *
+		 * @param array $results['scripts'] Additional scripts required by the latest set of IS posts.
+		 * @param array|bool $initial_scripts Set of scripts loaded on each page.
+		 * @param array $results Array of Infinite Scroll results.
+		 * @param array $query_args Array of Query arguments.
+		 * @param WP_Query $wp_query WP Query.
+		 */
+		$results['scripts'] = apply_filters(
+			'infinite_scroll_additional_scripts',
+			$results['scripts'],
+			$initial_scripts,
+			$results,
+			$query_args,
+			$wp_query
+		);
+>>>>>>> develop
 
 		if ( empty( $results['scripts'] ) )
 			unset( $results['scripts' ] );
@@ -940,7 +1098,31 @@ class The_Neverending_Home_Page {
 		if ( ! isset( $results['styles'] ) )
 			$results['styles'] = array();
 
+<<<<<<< HEAD
 		$results['styles'] = apply_filters( 'infinite_scroll_additional_stylesheets', $results['styles'], $initial_styles, $results, $query_args, $wp_query );
+=======
+		/**
+		 * Filter the additional styles required by the latest set of IS posts.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.1.2
+		 *
+		 * @param array $results['styles'] Additional styles required by the latest set of IS posts.
+		 * @param array|bool $initial_styles Set of styles loaded on each page.
+		 * @param array $results Array of Infinite Scroll results.
+		 * @param array $query_args Array of Query arguments.
+		 * @param WP_Query $wp_query WP Query.
+		 */
+		$results['styles'] = apply_filters(
+			'infinite_scroll_additional_stylesheets',
+			$results['styles'],
+			$initial_styles,
+			$results,
+			$query_args,
+			$wp_query
+		);
+>>>>>>> develop
 
 		if ( empty( $results['styles'] ) )
 			unset( $results['styles' ] );
@@ -1005,6 +1187,18 @@ class The_Neverending_Home_Page {
 		// Since IS is only used on archives, we should always display the first page of any paged content.
 		unset( $query_args['page'] );
 
+<<<<<<< HEAD
+=======
+		/**
+		 * Filter the array of main query arguments.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.0.1
+		 *
+		 * @param array $query_args Array of Query arguments.
+		 */
+>>>>>>> develop
 		$query_args = apply_filters( 'infinite_scroll_query_args', $query_args );
 
 		// Add query filter that checks for posts below the date
@@ -1028,6 +1222,16 @@ class The_Neverending_Home_Page {
 
 			// First, try theme's specified rendering handler, either specified via `add_theme_support` or by hooking to this action directly.
 			ob_start();
+<<<<<<< HEAD
+=======
+			/**
+			 * Fires when rendering Infinite Scroll posts.
+			 *
+			 * @module infinite-scroll
+			 *
+			 * @since 2.0.0
+			 */
+>>>>>>> develop
 			do_action( 'infinite_scroll_render' );
 			$results['html'] = ob_get_clean();
 
@@ -1037,6 +1241,10 @@ class The_Neverending_Home_Page {
 				rewind_posts();
 
 				ob_start();
+<<<<<<< HEAD
+=======
+				/** This action is already documented in modules/infinite-scroll/infinity.php */
+>>>>>>> develop
 				do_action( 'infinite_scroll_render' );
 				$results['html'] = ob_get_clean();
 			}
@@ -1044,6 +1252,16 @@ class The_Neverending_Home_Page {
 			// If primary and fallback rendering methods fail, prevent further IS rendering attempts. Otherwise, wrap the output if requested.
 			if ( empty( $results['html'] ) ) {
 				unset( $results['html'] );
+<<<<<<< HEAD
+=======
+				/**
+				 * Fires when Infinite Scoll doesn't render any posts.
+				 *
+				 * @module infinite-scroll
+				 *
+				 * @since 2.0.0
+				 */
+>>>>>>> develop
 				do_action( 'infinite_scroll_empty' );
 				$results['type'] = 'empty';
 			} elseif ( $this->has_wrapper() ) {
@@ -1080,11 +1298,32 @@ class The_Neverending_Home_Page {
 				$results['postflair'] = array_flip( $jetpack_sharing_counts );
 			}
 		} else {
+<<<<<<< HEAD
+=======
+			/** This action is already documented in modules/infinite-scroll/infinity.php */
+>>>>>>> develop
 			do_action( 'infinite_scroll_empty' );
 			$results['type'] = 'empty';
 		}
 
+<<<<<<< HEAD
 		echo wp_json_encode( apply_filters( 'infinite_scroll_results', $results, $query_args, self::wp_query() ) );
+=======
+		echo wp_json_encode(
+			/**
+			 * Filter the Infinite Scroll results.
+			 *
+			 * @module infinite-scroll
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param array $results Array of Infinite Scroll results.
+			 * @param array $query_args Array of main query arguments.
+			 * @param WP_Query $wp_query WP Query.
+			 */
+			apply_filters( 'infinite_scroll_results', $results, $query_args, self::wp_query() )
+		);
+>>>>>>> develop
 		die;
 	}
 
@@ -1140,6 +1379,19 @@ class The_Neverending_Home_Page {
 	 * @return array
 	 */
 	function inject_query_args( $query_args ) {
+<<<<<<< HEAD
+=======
+		/**
+		 * Filter the array of allowed Infinite Scroll query arguments.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.6.0
+		 *
+		 * @param array $args Array of allowed Infinite Scroll query arguments.
+		 * @param array $query_args Array of query arguments.
+		 */
+>>>>>>> develop
 		$allowed_vars = apply_filters( 'infinite_scroll_allowed_vars', array(), $query_args );
 
 		$query_args = array_merge( $query_args, array(
@@ -1184,6 +1436,19 @@ class The_Neverending_Home_Page {
 			return false;
 		}
 
+<<<<<<< HEAD
+=======
+		/**
+		 * Allow plugins to filter what archives Infinite Scroll supports.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param bool $supported Does the Archive page support Infinite Scroll.
+		 * @param object self::get_settings() IS settings provided by theme.
+		 */
+>>>>>>> develop
 		return (bool) apply_filters( 'infinite_scroll_archive_supported', $supported, self::get_settings() );
 	}
 
@@ -1224,6 +1489,18 @@ class The_Neverending_Home_Page {
 			__( 'Theme: %1$s.', 'jetpack' ),
 			function_exists( 'wp_get_theme' ) ? wp_get_theme()->Name : get_current_theme()
 		);
+<<<<<<< HEAD
+=======
+		/**
+		 * Filter Infinite Scroll's credit text.
+		 *
+		 * @module infinite-scroll
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param string $credits Infinite Scroll credits.
+		 */
+>>>>>>> develop
 		$credits = apply_filters( 'infinite_scroll_credit', $credits );
 
 		?>
@@ -1286,6 +1563,19 @@ add_action( 'init', 'the_neverending_home_page_init', 20 );
 function the_neverending_home_page_theme_support() {
 	$theme_name = get_stylesheet();
 
+<<<<<<< HEAD
+=======
+	/**
+	 * Filter the path to the Infinite Scroll compatibility file.
+	 *
+	 * @module infinite-scroll
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string $str IS compatibility file path.
+	 * @param string $theme_name Theme name.
+	 */
+>>>>>>> develop
 	$customization_file = apply_filters( 'infinite_scroll_customization_file', dirname( __FILE__ ) . "/themes/{$theme_name}.php", $theme_name );
 
 	if ( is_readable( $customization_file ) )

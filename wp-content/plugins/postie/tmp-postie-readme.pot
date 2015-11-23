@@ -163,6 +163,21 @@ msgid "More information can be found at http://PostiePlugin.com"
 msgstr ""
 
 #. Found in changelog list item.
+<<<<<<< HEAD
+=======
+msgid "Update admin screen to match current WP style"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove dependence on simple tabs jQuery-UI library and use WP admin tab style"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove email password from logging"
+msgstr ""
+
+#. Found in changelog list item.
+>>>>>>> develop
 msgid "Refix bug where \"Ignore mail state\" setting was being ignored"
 msgstr ""
 

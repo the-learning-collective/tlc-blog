@@ -1,5 +1,10 @@
 <?php
 
+<<<<<<< HEAD
+=======
+require_once( ABSPATH . WPINC . '/class-IXR.php' );
+
+>>>>>>> develop
 /**
  * IXR_Client
  *
@@ -29,10 +34,13 @@ class Jetpack_IXR_Client extends IXR_Client {
 		$request = new IXR_Request( $method, $args );
 		$xml = trim( $request->getXml() );
 
+<<<<<<< HEAD
 		$headers = array(
 			'Content-Type' => 'text/xml',
 		);
 
+=======
+>>>>>>> develop
 		$response = Jetpack_Client::remote_request( $this->jetpack_args, $xml );
 
 		if ( is_wp_error( $response ) ) {

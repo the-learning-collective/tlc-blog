@@ -3,7 +3,14 @@
 <div class="page-content landing">
 	<?php Jetpack::init()->load_view( 'admin/network-activated-notice.php' ); ?>
 
+<<<<<<< HEAD
 	<?php do_action( 'jetpack_notices' ) ?>
+=======
+	<?php
+		/** This action is already documented in views/admin/admin-page.php */
+		do_action( 'jetpack_notices' );
+	?>
+>>>>>>> develop
 
 	<div id="my-jetpack-page-template"></div>
 

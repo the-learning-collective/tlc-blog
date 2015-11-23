@@ -205,6 +205,7 @@ function grunion_handle_bulk_spam() {
 		wp_update_post( $post );
 
 		/**
+<<<<<<< HEAD
 		 * Fires after a comment has been marked by Akismet. Typically this
 		 * means the comment is spam.
 		 *
@@ -213,6 +214,19 @@ function grunion_handle_bulk_spam() {
 		 * @param string $comment_status Usually 'spam'
 		 * @param array $akismet_values From '_feedback_akismet_values' in comment meta
 		 **/
+=======
+		 * Fires after a comment has been marked by Akismet.
+		 *
+		 * Typically this means the comment is spam.
+		 *
+		 * @module contact-form
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param string $comment_status Usually is 'spam', otherwise 'ham'.
+		 * @param array $akismet_values From '_feedback_akismet_values' in comment meta
+		 */
+>>>>>>> develop
 		do_action( 'contact_form_akismet', 'spam', $akismet_values );
 	}
 
@@ -635,18 +649,23 @@ function grunion_ajax_spam() {
 		$status = wp_insert_post( $post );
 		wp_transition_post_status( 'spam', 'publish', $post );
 
+<<<<<<< HEAD
 		/**
 		 * @duplicate yes
 		 * @since ?
 		 * @param string $comment_status Usually 'spam'
 		 * @param array $akismet_values From '_feedback_akismet_values' in comment meta
 		 **/
+=======
+		/** This action is already documented in modules/contact-form/admin.php */
+>>>>>>> develop
 		do_action( 'contact_form_akismet', 'spam', $akismet_values );
 	} elseif ( $_POST['make_it'] == 'ham' ) {
 		$post->post_status = 'publish';
 		$status = wp_insert_post( $post );
 		wp_transition_post_status( 'publish', 'spam', $post );
 
+<<<<<<< HEAD
 		/**
 		 * @duplicate yes
 		 * @since ?
@@ -654,6 +673,10 @@ function grunion_ajax_spam() {
 		 * @param array $akismet_values From '_feedback_akismet_values' in comment meta
 		 **/
 		do_action( 'contact_form_akismet', 'spam', $akismet_values );
+=======
+		/** This action is already documented in modules/contact-form/admin.php */
+		do_action( 'contact_form_akismet', 'ham', $akismet_values );
+>>>>>>> develop
 
 		$comment_author_email = $reply_to_addr = $message = $to = $headers = false;
 		$blog_url = parse_url( site_url() );
@@ -695,6 +718,19 @@ function grunion_ajax_spam() {
 				$headers .= "Content-Type: text/plain; charset=\"" . get_option('blog_charset') . "\"";
 			}
 
+<<<<<<< HEAD
+=======
+			/**
+			 * Filters the subject of the email sent after a contact form submission.
+			 *
+			 * @module contact-form
+			 *
+			 * @since 3.0.0
+			 *
+			 * @param string $content_fields['_feedback_subject'] Feedback's subject line.
+			 * @param array $content_fields['_feedback_all_fields'] Feedback's data from old fields.
+			 */
+>>>>>>> develop
 			$subject = apply_filters( 'contact_form_subject', $content_fields['_feedback_subject'], $content_fields['_feedback_all_fields'] );
 
 			wp_mail( $to, $subject, $message, $headers );
@@ -849,10 +885,27 @@ function grunion_recheck_queue() {
 	foreach ( $approved_feedbacks as $feedback ) {
 		$meta = get_post_meta( $feedback->ID, '_feedback_akismet_values', true );
 
+<<<<<<< HEAD
+=======
+		/**
+		 * Filter whether the submitted feedback is considered as spam.
+		 *
+		 * @module contact-form
+		 *
+		 * @since 3.4.0
+		 *
+		 * @param bool false Is the submitted feedback spam? Default to false.
+		 * @param array $meta Feedack values returned by the Akismet plugin.
+		 */
+>>>>>>> develop
 		$is_spam = apply_filters( 'jetpack_contact_form_is_spam', false, $meta );
 
 		if ( $is_spam ) {
 			wp_update_post( array( 'ID' => $feedback->ID, 'post_status' => 'spam' ) );
+<<<<<<< HEAD
+=======
+			/** This action is already documented in modules/contact-form/admin.php */
+>>>>>>> develop
 			do_action( 'contact_form_akismet', 'spam', $akismet_values );
 		}
 	}

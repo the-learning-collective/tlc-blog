@@ -163,6 +163,11 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		/**
 		 * Control the number of displayed posts.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module widgets
+		 *
+>>>>>>> develop
 		 * @since 3.3.0
 		 *
 		 * @param string $count Number of Posts displayed in the Top Posts widget. Default is 10.
@@ -191,6 +196,11 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 			/**
 			 * Top Posts Widget Image options.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module widgets
+			 *
+>>>>>>> develop
 			 * @since 1.8.0
 			 *
 			 * @param array $get_image_options {
@@ -258,6 +268,11 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 						/**
 						 * Fires before each Top Post result, inside <li>.
 						 *
+<<<<<<< HEAD
+=======
+						 * @module widgets
+						 *
+>>>>>>> develop
 						 * @since 3.2.0
 						 *
 						 * @param string $post['post_id'] Post ID.
@@ -271,6 +286,11 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 						/**
 						 * Fires after each Top Post result, inside <li>.
 						 *
+<<<<<<< HEAD
+=======
+						 * @module widgets
+						 *
+>>>>>>> develop
 						 * @since 3.2.0
 						 *
 						 * @param string $post['post_id'] Post ID.
@@ -337,6 +357,11 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		/**
 		 * Filter the number of days used to calculate Top Posts for the Top Posts widget.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module widgets
+		 *
+>>>>>>> develop
 		 * @since 2.8.0
 		 *
 		 * @param int 2 Number of days. Default is 2.
@@ -425,6 +450,11 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		/**
 		 * Filter the Top Posts and Pages.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module widgets
+		 *
+>>>>>>> develop
 		 * @since 3.0.0
 		 *
 		 * @param array $posts Array of the most popular posts.

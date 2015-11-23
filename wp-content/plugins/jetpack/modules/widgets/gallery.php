@@ -88,6 +88,11 @@ class Jetpack_Gallery_Widget extends WP_Widget {
 		/**
 		 * Allow the width of a gallery to be altered by themes or other code.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module widgets
+		 *
+>>>>>>> develop
 		 * @since 2.5.0
 		 *
 		 * @param int self::DEFAULT_WIDTH Default gallery width. Default is 265.

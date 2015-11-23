@@ -16,7 +16,11 @@ add_action( 'init', 'jetpack_load_theme_tools', 30 );
  * Load theme compat file if it exists.
  */
 function jetpack_load_theme_compat() {
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> develop
 	/**
 	 * Filter theme compat files.
 	 *
@@ -28,6 +32,11 @@ function jetpack_load_theme_compat() {
 	 *     return $files;
 	 * }
 	 *
+<<<<<<< HEAD
+=======
+	 * @module theme-tools
+	 *
+>>>>>>> develop
 	 * @since 2.8.0
 	 *
 	 * @param array Associative array of theme compat files to load.

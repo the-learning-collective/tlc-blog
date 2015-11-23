@@ -147,7 +147,11 @@ _x( 'Backups and security scans.', 'Module Description', 'jetpack' );
 
 // modules/verification-tools.php
 _x( 'Site Verification', 'Module Name', 'jetpack' );
+<<<<<<< HEAD
 _x( 'Verify your site or domain with Google Webmaster Tools, Pinterest, and others.', 'Module Description', 'jetpack' );
+=======
+_x( 'Verify your site or domain with Google Search Console, Pinterest, and others.', 'Module Description', 'jetpack' );
+>>>>>>> develop
 
 // modules/videopress.php
 _x( 'VideoPress', 'Module Name', 'jetpack' );

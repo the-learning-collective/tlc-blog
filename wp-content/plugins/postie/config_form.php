@@ -1,15 +1,4 @@
 <div class="wrap"> 
-    <div style="float:right; width: 220px; border: 1px solid darkgrey; padding:2px;border-radius:10px;margin-left: 10px;" >
-        <p class="" style="text-align:center;font-weight: bolder; margin-top: 0px; margin-bottom: 2px;"><?php _e("Please Donate, Every $ Helps!", 'postie'); ?></p>
-        <p style="margin-top: 0;margin-bottom: 2px;"><?php _e("Your generous donation allows me to continue developing Postie for the WordPress community.", 'postie'); ?></p>
-        <form style="" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="HPK99BJ88V4C2">
-            <div style="text-align:center;">
-                <input style="border: none; margin: 0;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            </div>
-        </form>
-    </div>
     <h2>
         <a style='text-decoration:none' href='admin.php?page=postie-settings'>
             <?php
@@ -89,6 +78,7 @@
         <div class="updated"><p><?php _e($messages[$_GET['message']], 'postie'); ?></p></div>
     <?php endif; ?>
 
+<<<<<<< HEAD
     <form name="postie-options" method='post'> 
         <input type="hidden" name="action" value="runpostie" />
         <input name="Submit" value="<?php _e("Run Postie", 'postie'); ?> &raquo;" type="submit" class='button'>
@@ -381,77 +371,39 @@
                             <p class='description'><?php _e('separated by commas', 'postie') ?></p>
                         </td>
                     </tr>
+=======
+    <div id="poststuff">
+        <div id="post-body" class="metabox-holder columns-2">
+            <!-- main content -->
+            <div id="post-body-content" style="position: relative;">
+                <div class="meta-box-sortables ui-sortable">
+                    <div class="inside">
+                        <form name="postie-options" method="post" action='options.php' autocomplete="off">
+                            <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+                            <input style="display:none" type="text" name="fakeusernameremembered"/>
+                            <input style="display:none" type="password" name="fakepasswordremembered"/>
+>>>>>>> develop
 
-                    <tr> 
-                        <th scope="row"><?php _e('Default Post Status', 'postie') ?> </th> 
-                        <td>
-                            <select name='postie-settings[post_status]' id='postie-settings-post_status'>                               
-                                <?php
-                                $stati = get_post_stati();
-                                //DebugEcho($config['post_status']);
-                                //DebugDump($stati);
-                                foreach ($stati as $status) {
-                                    $selected = "";
-                                    if ($config['post_status'] == $status) {
-                                        $selected = " selected='selected'";
-                                    }
-                                    echo "<option value='$status'$selected>$status</option>";
-                                }
-                                ?>
-                            </select>               
-                        </td> 
-                    </tr> 
+                            <?php settings_fields('postie-settings'); ?>
+                            <input type="hidden" name="action" value="config" />
+                            <div id="simpleTabs">
+                                <h2 class="nav-tab-wrapper">
+                                    <a href="#" id="simpleTabs-nav-1" data-tab="1" class="nav-tab nav-tab-active"><?php _e('Mailserver', 'postie') ?></a>
+                                    <a href="#" id="simpleTabs-nav-2" data-tab="2" class="nav-tab"><?php _e('User', 'postie') ?></a>
+                                    <a href="#" id="simpleTabs-nav-3" data-tab="3" class="nav-tab"><?php _e('Message', 'postie') ?></a>
+                                    <a href="#" id="simpleTabs-nav-4" data-tab="4" class="nav-tab"><?php _e('Image', 'postie') ?></a>
+                                    <a href="#" id="simpleTabs-nav-5" data-tab="5" class="nav-tab"><?php _e('Video and Audio', 'postie') ?></a>
+                                    <a href="#" id="simpleTabs-nav-6" data-tab="6" class="nav-tab"><?php _e('Attachments', 'postie') ?></a>
+                                    <a href="#" id="simpleTabs-nav-7" data-tab="7" class="nav-tab"><?php _e('Support', 'postie') ?></a>
+                                </h2>
 
-                    <tr> 
-                        <th scope="row"><?php _e('Default Post Format', 'postie') ?> </th> 
-                        <td>
-                            <select name='postie-settings[post_format]' id='postie-settings-post_format'>
-                                <?php
-                                $formats = get_theme_support('post-formats');
-                                if (is_array($formats[0])) {
-                                    $formats = $formats[0];
-                                } else {
-                                    $formats = array();
-                                }
-                                array_unshift($formats, "standard");
-                                foreach ($formats as $format) {
-                                    $selected = "";
-                                    if ($config['post_format'] == $format) {
-                                        $selected = " selected='selected'";
-                                    }
-                                    echo "<option value='$format'$selected>$format</option>";
-                                }
-                                ?>
-                            </select>               
-                        </td> 
-                    </tr> 
+                                <?php include 'config_form_server.php'; ?>
 
-                    <tr> 
-                        <th scope="row"><?php _e('Default Post Type', 'postie') ?> </th> 
-                        <td>
-                            <select name='postie-settings[post_type]' id='postie-settings-post_type'>
-                                <?php
-                                $types = get_post_types();
-                                //array_unshift($types, "standard");
-                                foreach ($types as $type) {
-                                    $selected = "";
-                                    if ($config['post_type'] == $type) {
-                                        $selected = " selected='selected'";
-                                    }
-                                    echo "<option value='$type'$selected>$type</option>";
-                                }
-                                ?>
-                            </select>               
-                        </td> 
-                    </tr> 
+                                <?php include 'config_form_user.php'; ?>
 
-                    <tr> 
-                        <th scope="row"><?php _e('Default Title', 'postie') ?> </th> 
-                        <td>
-                            <input name='postie-settings[default_title]' type="text" id='postie-settings-default_title' value="<?php echo esc_attr($default_title); ?>" size="50" /><br />
-                        </td> 
-                    </tr> 
+                                <?php include 'config_form_message.php'; ?>
 
+<<<<<<< HEAD
                     <?php echo BuildBooleanSelect(__("Treat Replies As", 'postie'), "postie-settings[reply_as_comment]", $reply_as_comment, "", array("comments", "new posts")); ?>
                     <?php echo BuildBooleanSelect(__("Strip Original Content from Replies", 'postie'), "postie-settings[strip_reply]", $strip_reply, "Only applicable if replies are trated as comments"); ?>
 
@@ -592,16 +544,18 @@
                                     <li>{WIDTH} gets replaced with width of the photo</li>
                                     <li>{ICON} insert the icon for the attachment (for non-audio/image/video attachments only)</li>
                                 </ul>
+=======
+                                <?php include 'config_form_image.php'; ?>
+
+                                <?php include 'config_form_video.php'; ?>
+
+                                <?php include 'config_form_attachments.php'; ?>
+
+                                <?php include 'config_form_support.php'; ?>
+>>>>>>> develop
                             </div>
-                        </td>
-                    </tr> 
-                </table> 
-            </div> 
 
-            <!-- 
-            ##########   VIDEO AND AUDIO OPTIONS ###################
-            -->
-
+<<<<<<< HEAD
             <div id="simpleTabs-content-5" class="simpleTabs-content">
                 <table class='form-table'>
                     <?php
@@ -757,89 +711,63 @@
                 <table class='form-table'>
                     <?php echo BuildTextArea(__("Supported MIME Types", 'postie'), "postie-settings[supported_file_types]", $supported_file_types, __("Add just the type (not the subtype). Text, Video, Audio, Image and Multipart are always supported. Put each type on a single line", 'postie')); ?>
                     <?php echo BuildTextArea(__("Banned File Names", 'postie'), "postie-settings[banned_files_list]", $banned_files_list, __("Put each file name on a single line.Files matching this list will never be posted to your blog. You can use wildcards such as *.xls, or *.* for all files", 'postie')); ?>
+=======
+                            <p class="submit" style="clear: both;">
+                                <input type="hidden" name="action" value="update" />
+                                <input type="hidden" name="page_options" value="postie-settings" />
+                                <input type="submit" name="Submit" value="<?php _e('Save Changes') ?>" class="button button-primary" />
+                            </p>
+                        </form> 
+                    </div>
+                </div>
+            </div>
 
-                    <tr>
-                        <th scope='row'><?php _e('Attachment icon set', 'postie') ?></th>
-                        <td>
-                            <input type='hidden' id='postie-settings-icon_set' name='postie-settings[icon_set]'
-                                   value="<?php echo esc_attr($icon_set) ?>" />
+            <!-- sidebar -->
+            <div id="postbox-container-1" class="postbox-container">
+                <div class="meta-box-sortables ui-sortable">
 
-                            <?php
-                            $icon_sets = array('silver', 'black', 'white', 'custom', 'none');
-                            $icon_sizes = array(32, 48, 64);
-                            ?>
-                            <select name='icon_set_select' id='icon_set_select'  onchange="changeIconSet(this);" >
-                                <?php
-                                $styleOptions = $icon_sets;
-                                $selected = $icon_set;
-                                foreach ($styleOptions as $key) {
-                                    if ($key != 'selected') {
-                                        if ($key == $selected) {
-                                            $select = ' selected=selected ';
-                                        } else {
-                                            $select = ' ';
-                                        }
-                                        echo '<option' . $select . 'value="' . esc_attr($key) . '" >' . $key . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                            <div id='postie-settings-attachment_preview'></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope='row'><?php _e('Attachment icon size (in pixels)', 'postie') ?></th>
-                        <td>
-                            <input type='hidden' id='postie-settings-icon_size' name='postie-settings[icon_size]'
-                                   value="<?php echo esc_attr($icon_size) ?>" />
-                            <select name='icon_size_select' id='icon_size_select' onchange="changeIconSet(this, true);" >
-                                <?php
-                                $styleOptions = $icon_sizes;
-                                $selected = $icon_size;
-                                foreach ($styleOptions as $key) {
-                                    if ($key != 'selected') {
-                                        if ($key == $selected) {
-                                            $select = ' selected=selected ';
-                                        } else {
-                                            $select = ' ';
-                                        }
-                                        echo '<option' . $select . 'value="' . esc_attr($key) . '" >' . $key . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope='row'><?php _e('Attachment template', 'postie') ?>:<br />
-                        </th>
-                        <td>
-                            <input type='hidden' id='postie-settings-selected_generaltemplate' name='postie-settings[selected_generaltemplate]'
-                                   value="<?php echo esc_attr($selected_generaltemplate) ?>" />
-                            <select name='generaltemplateselect' id='generaltemplateselect' 
-                                    onchange="changeStyle('generalTemplatePreview', 'postie-settings-generaltemplate',
-                                                    'generaltemplateselect', 'postie-settings-selected_generaltemplate', 'interesting_document.doc', false);" >
-                                        <?php
-                                        include(POSTIE_ROOT . '/templates/general_template.php');
-                                        $styleOptions = $generalTemplates;
-                                        $selected = $selected_generaltemplate;
-                                        foreach ($styleOptions as $key => $value) {
-                                            if ($key != 'selected') {
-                                                if ($key == $selected) {
-                                                    $select = ' selected="selected" ';
-                                                } else {
-                                                    $select = ' ';
-                                                }
-                                                if ($key == 'custom')
-                                                    $value = $generaltemplate;
-                                                echo '<option' . $select . 'value="' . esc_attr($value) . '" >' . $key . '</option>';
-                                            }
-                                        }
-                                        ?>
-                            </select>
-                            <p class='description'><?php _e('Choose a default template, then customize to your liking in the text box', 'postie') ?></p>
-                            <p class='description'><?php _e('Note that this template are only used if the "Preferred Text Type" setting is set to "plain"', 'postie'); ?></p>
+                    <div class="postbox">
+                        <h3 class="hndle ui-sortable-handle"><span>Actions</span></h3>
+                        <div class="inside">
+                            <div class="submitbox">
+                                <p><?php _e("To run the check mail script manually", 'postie'); ?></p>
+                                <form name="postie-options" method='post'> 
+                                    <input type="hidden" name="action" value="runpostie" />
+                                    <input name="Submit" value="<?php _e("Process Email", 'postie'); ?>" type="submit" class='button'>
+                                </form>
 
+                                <p><?php _e("To run the check mail script manually with full debug output", 'postie'); ?></p>
+                                <form name="postie-options" method='post'> 
+                                    <input type="hidden" name="action" value="runpostie-debug" />
+                                    <input name="Submit" value="<?php _e("Debug", 'postie'); ?>" type="submit" class='button'>
+                                </form>
+
+                                <p><?php _e("Test your configuration (save first)", 'postie'); ?></p>
+                                <form name="postie-options" method="post">
+                                    <input type="hidden" name="action" value="test" />
+                                    <input name="Submit" value="<?php _e("Test Config", 'postie'); ?>" type="submit" class='button'>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+>>>>>>> develop
+
+                    <div class="postbox">
+                        <h3 class="hndle ui-sortable-handle"><span>Getting Started</span></h3>
+                        <div class="inside">
+                            <p>Be sure and check out the <a href="http://postieplugin.com/getting-started/" target="_blank">getting started</a> guide.</p>
+                            <p>Please use the Postie <a href="https://wordpress.org/support/plugin/postie" target="_blank">support forums</a> if you need help.</p>
+                        </div>
+                    </div>
+
+                    <div class="postbox">
+                        <h3 class="hndle ui-sortable-handle"><span>AddOns</span></h3>
+                        <div class="inside">
+                            <p>There are a number of different AddOns available to extend Postie's functionality.
+                                See <a href='http://postieplugin.com/add-ons/' target='_blank'>the list</a> for more information.</p>                        </div>
+                    </div>
+
+<<<<<<< HEAD
                             <div style="margin-top: 10px; font-weight: bold;">
                                 <?php _e('Preview', 'postie'); ?>
                             </div>
@@ -867,36 +795,48 @@
                         See <a href='http://postieplugin.com/add-ons/' target='_blank'>the list</a> for more information.</p>
                     <div>
                         <div id='postie-addons'></div>
+=======
+                    <div class="postbox">
+                        <h3 class="hndle ui-sortable-handle"><span>Donations</span></h3>
+
+                        <div class="inside">
+                            <p style="font-weight: bolder; margin-top: 0px; margin-bottom: 2px;"><?php _e("Please Donate, Every $ Helps!", 'postie'); ?></p>
+                            <p style="margin-top: 0;margin-bottom: 2px;"><?php _e("Your generous donation allows me to continue developing Postie for the WordPress community.", 'postie'); ?></p>
+                            <form style="" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="hosted_button_id" value="HPK99BJ88V4C2">
+                                <div style="text-align:center;">
+                                    <input style="border: none; margin: 0;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                </div>
+                            </form>
+                        </div>
+>>>>>>> develop
                     </div>
+
                 </div>
             </div>
-
-
-            <p class="submit" style="clear: both;">
-                <input type="hidden" name="action" value="update" />
-                <input type="hidden" name="page_options" value="postie-settings" />
-                <input type="submit" name="Submit" value="<?php _e('Save Changes') ?>" class="button button-primary" />
-            </p>
-    </form> 
-    <form id="postie-options" name="postie-options" method="post"> 
-        <input type="hidden" name="action" value="reset" />
-        <input name="Submit" value="<?php _e("Reset Settings To Defaults", 'postie') ?>" type="submit" class='button'> 
-        <span>&nbsp;<?php _e('(Your Mail server settings will be retained)', 'postie') ?></span>
-    </form>
+            <br class="clear">
+        </div>
+    </div>
 </div>
 
 <?php $iconDir = get_option('siteurl') . '/' . PLUGINDIR . '/postie/icons'; ?>
 <script type="text/javascript">
     jQuery(document).ready(function () {
-        jQuery("#simpleTabs").simpleTabs({
-            fadeSpeed: "medium", // @param : low, medium, fast
-            defautContent: 1, // @param : number ( simpleTabs-nav-number)
-            autoNav: "false", // @param : true or false
-            closeTabs: "false"   // @param : true or false;
+        jQuery('.simpleTabs-content').hide();
+        jQuery("#simpleTabs-content-1").show();
+
+        jQuery(".nav-tab").click(function (event) {
+            jQuery(".nav-tab").removeClass('nav-tab-active');
+            jQuery(event.currentTarget).addClass('nav-tab-active');
+            jQuery('.simpleTabs-content').hide();
+            tab = jQuery(event.currentTarget).data('tab');
+            jQuery("#simpleTabs-content-" + tab).show();
         });
+
         jQuery("#simpleTabs-nav-7").click(function () {
             jQuery.get('http://postieplugin.com/feed/?post_type=download', function (data) {
-                console.log(data);
+                //console.log(data);
                 var h = '';
                 jQuery(data).find("item").each(function () {
                     var t = jQuery(this).find("title").text();

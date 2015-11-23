@@ -2,8 +2,13 @@
 Contributors: rmccue, rachelbaker
 Tags: json, rest, api, rest-api
 Requires at least: 3.9
+<<<<<<< HEAD
 Tested up to: 4.3-alpha
 Stable tag: 1.2.3
+=======
+Tested up to: 4.4
+Stable tag: 1.2.4
+>>>>>>> develop
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +55,17 @@ to use the plugin, as it uses custom rewrite rules to power the API.
 
 == Changelog ==
 
+<<<<<<< HEAD
+=======
+= 1.2.4 =
+
+* Compatibilty with WordPress 4.4
+
+  Because WordPress 4.4 also registers rewrite rules for /wp-json/, WP-API v1 needs to register its rewrite rules with higher priority to continue to function as expected.
+
+  (props @danielbachhuber)
+
+>>>>>>> develop
 = 1.2.3 =
 
 * Fix potential XSS vulnerability.

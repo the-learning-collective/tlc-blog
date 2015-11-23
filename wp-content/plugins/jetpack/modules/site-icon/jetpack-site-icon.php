@@ -106,6 +106,7 @@ class Jetpack_Site_Icon {
 	 *
 	 */
 	public function site_icon_add_meta() {
+<<<<<<< HEAD
 		/**
 		 * Toggles the Favicon meta elements from being loaded.
 		 *
@@ -114,6 +115,20 @@ class Jetpack_Site_Icon {
 		 * @param bool Output Site Icon Meta Elements.
 		 */
 		if ( apply_filters( 'site_icon_has_favicon', false ) ) {
+=======
+		if (
+			/**
+			 * Toggles the Favicon meta elements from being loaded.
+			 *
+			 * @module site-icon
+			 *
+			 * @since 3.2.0
+			 *
+			 * @param bool Output Site Icon Meta Elements.
+			 */
+			apply_filters( 'site_icon_has_favicon', false )
+		) {
+>>>>>>> develop
 			return;
 		}
 
@@ -758,6 +773,11 @@ class Jetpack_Site_Icon {
 		/**
 		 * Filter the different dimensions that a site icon is saved in.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module site-icon
+		 *
+>>>>>>> develop
 		 * @since 3.2.0
 		 *
 		 * @param array $site_icon_sizes Sizes available for the Site Icon.  Default is array(256, 128, 80, 64, 32, 16).

@@ -11,6 +11,10 @@
  * Auto Activate: No
  * Module Tags: Developers
  * Feature: Jumpstart, Performance-Security
+<<<<<<< HEAD
+=======
+ * Additional Search Queries: sso, single sign on, login, log in
+>>>>>>> develop
  */
 
 class Jetpack_SSO {
@@ -36,6 +40,11 @@ class Jetpack_SSO {
 			/**
 			 * Filter the display of the disclaimer message appearing when default WordPress login form is disabled.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module sso
+			 *
+>>>>>>> develop
 			 * @since 2.8.0
 			 *
 			 * @param bool true Should the disclaimer be displayed. Default to true.
@@ -326,6 +335,11 @@ class Jetpack_SSO {
 		/**
 		 * Redirect the site's log in form to WordPress.com's log in form.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 3.1.0
 		 *
 		 * @param bool false Should the site's log in form be automatically forwarded to WordPress.com's log in form.
@@ -431,6 +445,11 @@ class Jetpack_SSO {
 		/**
 		 * Remove the default log in form, only leave the WordPress.com log in button.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 3.1.0
 		 *
 		 * @param bool get_option( 'jetpack_sso_remove_login_form', false ) Should the default log in form be removed. Default to false.
@@ -570,6 +589,11 @@ class Jetpack_SSO {
 		/**
 		 * Fires before Jetpack's SSO modifies the log in form.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 2.6.0
 		 *
 		 * @param object $user_data User login information.
@@ -579,6 +603,11 @@ class Jetpack_SSO {
 		/**
 		 * Is it required to have 2-step authentication enabled on WordPress.com to use SSO?
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 2.8.0
 		 *
 		 * @param bool get_option( 'jetpack_sso_require_two_step' ) Does SSO require 2-step authentication?
@@ -663,6 +692,11 @@ class Jetpack_SSO {
 		/**
 		 * Fires after we got login information from WordPress.com.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 2.6.0
 		 *
 		 * @param array $user WordPress.com User information.
@@ -683,6 +717,11 @@ class Jetpack_SSO {
 			/**
 			 * Filter the remember me value.
 			 *
+<<<<<<< HEAD
+=======
+			 * @module sso
+			 *
+>>>>>>> develop
 			 * @since 2.8.0
 			 *
 			 * @param bool $remember Is the remember me option checked?
@@ -728,6 +767,11 @@ class Jetpack_SSO {
 		/**
 		 * Link the local account to an account on WordPress.com using the same email address.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 2.6.0
 		 *
 		 * @param bool $match_by_email Should we link the local account to an account on WordPress.com using the same email address. Default to false.
@@ -741,6 +785,11 @@ class Jetpack_SSO {
 		/**
 		 * Allow users to register on your site with a WordPress.com account, even though you disallow normal registrations.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 2.6.0
 		 *
 		 * @param bool $new_user_override Allow users to register on your site with a WordPress.com account. Default to false.
@@ -901,6 +950,11 @@ class Jetpack_SSO {
 		/**
 		 * Filter the message displayed when the default WordPress login form is disabled.
 		 *
+<<<<<<< HEAD
+=======
+		 * @module sso
+		 *
+>>>>>>> develop
 		 * @since 2.8.0
 		 *
 		 * @param string $msg Disclaimer when default WordPress login form is disabled.
