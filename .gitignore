@@ -4,6 +4,7 @@
 *.zip
 *.tar
 *.sass-cache
+node_modules
 
 .htaccess
 sitemap.xml

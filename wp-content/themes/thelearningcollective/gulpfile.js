@@ -3,7 +3,6 @@
 var gulp = require( 'gulp' ),
     plumber = require( 'gulp-plumber' ),
     watch = require( 'gulp-watch' ),
-    livereload = require( 'gulp-livereload' ),
     minifycss = require( 'gulp-minify-css' ),
     uglify = require( 'gulp-uglify' ),
     rename = require( 'gulp-rename' ),
@@ -47,15 +46,10 @@ gulp.task( 'sass', function() {
     .pipe( rename( { suffix: '.min' } ) )
     .pipe( gulp.dest( paths.stylesOutput ) )
     .pipe( notify( { message: 'Styles task complete' } ) )
-    .pipe( livereload() );
 } );
 
 gulp.task( 'watch', function() {
-    livereload.listen();
     gulp.watch( paths.styles, [ 'sass' ] );
-    gulp.watch( './**/*.php' ).on( 'change', function( file ) {
-        livereload.changed( file );
-    } );
 } );
 
 gulp.task( 'default', [ 'sass', 'watch' ], function() {
