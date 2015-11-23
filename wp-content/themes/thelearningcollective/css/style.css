@@ -16,6 +16,12 @@ Template: hiero
 /* ------------------------------------------
 / STRUCTURE
 --------------------------------------------- */
+.site-header .search-form label {
+  display: inline-block; }
+
+.site-header input[type="submit"] {
+  background-color: #ff2828; }
+
 /* ------------------------------------------
 / COMMON CLASSES
 --------------------------------------------- */

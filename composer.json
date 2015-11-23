@@ -39,6 +39,7 @@
         "wpackagist-plugin/subscribr": ">=0.1.9.1",
         "wpackagist-plugin/wordpress-importer": ">=0.6.1",
         "wpackagist-plugin/wp-oauth": ">=0.4",
+        "wpackagist-plugin/smart-syntax": ">=1.0.2",
         "glocalcoop/anp-meetings": "dev-master"
     },
     "require-dev": {
