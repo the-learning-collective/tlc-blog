@@ -6,6 +6,8 @@
 *.sass-cache
 node_modules
 /vendor
+*.lock
+*~
 
 .htaccess
 sitemap.xml
