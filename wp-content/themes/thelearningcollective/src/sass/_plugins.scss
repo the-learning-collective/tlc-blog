@@ -231,7 +231,7 @@ MEETINGS ARCHIVE & SINGLE STYLES
 
                 li {
 
-                    @extend %fa-before;
+                    @extend .fa;
 
                     &.agenda-link {
                         @extend .fa-list;

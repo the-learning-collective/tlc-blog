@@ -39,7 +39,14 @@
 .archive-summary article .tags,
 .archive-agenda article .tags,
 .taxonomy-meeting_type article .tags,
-.taxonomy-meeting_tag article .tags {
+.taxonomy-meeting_tag article .tags, .single-meeting article .entry-content .connected-content li,
+.single-proposal article .entry-content .connected-content li,
+.single-agenda article .entry-content .connected-content li,
+.single-summary article .entry-content .connected-content li,
+.singular-agenda article .entry-content .connected-content li,
+.singular-proposal article .entry-content .connected-content li,
+.singular-meeting article .entry-content .connected-content li,
+.singular-summary article .entry-content .connected-content li {
   display: inline-block;
   font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
@@ -120,7 +127,14 @@
 .archive-summary article .fa-pull-left.tags,
 .archive-agenda article .fa-pull-left.tags,
 .taxonomy-meeting_type article .fa-pull-left.tags,
-.taxonomy-meeting_tag article .fa-pull-left.tags {
+.taxonomy-meeting_tag article .fa-pull-left.tags, .single-meeting article .entry-content .connected-content li.fa-pull-left,
+.single-proposal article .entry-content .connected-content li.fa-pull-left,
+.single-agenda article .entry-content .connected-content li.fa-pull-left,
+.single-summary article .entry-content .connected-content li.fa-pull-left,
+.singular-agenda article .entry-content .connected-content li.fa-pull-left,
+.singular-proposal article .entry-content .connected-content li.fa-pull-left,
+.singular-meeting article .entry-content .connected-content li.fa-pull-left,
+.singular-summary article .entry-content .connected-content li.fa-pull-left {
   margin-right: .3em; }
 
 .fa.fa-pull-right, .post-type-archive-meeting article .connected-content li.fa-pull-right,
@@ -147,7 +161,14 @@
 .archive-summary article .fa-pull-right.tags,
 .archive-agenda article .fa-pull-right.tags,
 .taxonomy-meeting_type article .fa-pull-right.tags,
-.taxonomy-meeting_tag article .fa-pull-right.tags {
+.taxonomy-meeting_tag article .fa-pull-right.tags, .single-meeting article .entry-content .connected-content li.fa-pull-right,
+.single-proposal article .entry-content .connected-content li.fa-pull-right,
+.single-agenda article .entry-content .connected-content li.fa-pull-right,
+.single-summary article .entry-content .connected-content li.fa-pull-right,
+.singular-agenda article .entry-content .connected-content li.fa-pull-right,
+.singular-proposal article .entry-content .connected-content li.fa-pull-right,
+.singular-meeting article .entry-content .connected-content li.fa-pull-right,
+.singular-summary article .entry-content .connected-content li.fa-pull-right {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -181,7 +202,14 @@
 .archive-summary article .pull-left.tags,
 .archive-agenda article .pull-left.tags,
 .taxonomy-meeting_type article .pull-left.tags,
-.taxonomy-meeting_tag article .pull-left.tags {
+.taxonomy-meeting_tag article .pull-left.tags, .single-meeting article .entry-content .connected-content li.pull-left,
+.single-proposal article .entry-content .connected-content li.pull-left,
+.single-agenda article .entry-content .connected-content li.pull-left,
+.single-summary article .entry-content .connected-content li.pull-left,
+.singular-agenda article .entry-content .connected-content li.pull-left,
+.singular-proposal article .entry-content .connected-content li.pull-left,
+.singular-meeting article .entry-content .connected-content li.pull-left,
+.singular-summary article .entry-content .connected-content li.pull-left {
   margin-right: .3em; }
 
 .fa.pull-right, .post-type-archive-meeting article .connected-content li.pull-right,
@@ -208,7 +236,14 @@
 .archive-summary article .pull-right.tags,
 .archive-agenda article .pull-right.tags,
 .taxonomy-meeting_type article .pull-right.tags,
-.taxonomy-meeting_tag article .pull-right.tags {
+.taxonomy-meeting_tag article .pull-right.tags, .single-meeting article .entry-content .connected-content li.pull-right,
+.single-proposal article .entry-content .connected-content li.pull-right,
+.single-agenda article .entry-content .connected-content li.pull-right,
+.single-summary article .entry-content .connected-content li.pull-right,
+.singular-agenda article .entry-content .connected-content li.pull-right,
+.singular-proposal article .entry-content .connected-content li.pull-right,
+.singular-meeting article .entry-content .connected-content li.pull-right,
+.singular-summary article .entry-content .connected-content li.pull-right {
   margin-left: .3em; }
 
 .fa-spin {
