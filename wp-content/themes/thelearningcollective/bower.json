@@ -1,0 +1,23 @@
+{
+  "name": "thelearningcollective",
+  "description": "Custom child theme for The Learning Collective",
+  "main": "index.php",
+  "authors": [
+    "TLC"
+  ],
+  "license": "GPL-3.0",
+  "keywords": [
+    "Wordpress",
+    "themes"
+  ],
+  "moduleType": [],
+  "homepage": "https://github.com/the-learning-collective/tlc-blog",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
