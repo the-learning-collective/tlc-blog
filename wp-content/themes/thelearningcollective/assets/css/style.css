@@ -2869,17 +2869,26 @@ MEETINGS ARCHIVE & SINGLE STYLES
   .singular-meeting article .entry-content .connected-content,
   .singular-summary article .entry-content .connected-content {
     list-style: none; }
-    .single-meeting article .entry-content .connected-content li::before,
-    .single-proposal article .entry-content .connected-content li::before,
-    .single-agenda article .entry-content .connected-content li::before,
-    .single-summary article .entry-content .connected-content li::before,
-    .singular-agenda article .entry-content .connected-content li::before,
-    .singular-proposal article .entry-content .connected-content li::before,
-    .singular-meeting article .entry-content .connected-content li::before,
-    .singular-summary article .entry-content .connected-content li::before {
-      margin-right: .125em;
-      color: #b8b6b2;
-      font-weight: normal; }
+    .single-meeting article .entry-content .connected-content li,
+    .single-proposal article .entry-content .connected-content li,
+    .single-agenda article .entry-content .connected-content li,
+    .single-summary article .entry-content .connected-content li,
+    .singular-agenda article .entry-content .connected-content li,
+    .singular-proposal article .entry-content .connected-content li,
+    .singular-meeting article .entry-content .connected-content li,
+    .singular-summary article .entry-content .connected-content li {
+      margin-right: 10px; }
+      .single-meeting article .entry-content .connected-content li::before,
+      .single-proposal article .entry-content .connected-content li::before,
+      .single-agenda article .entry-content .connected-content li::before,
+      .single-summary article .entry-content .connected-content li::before,
+      .singular-agenda article .entry-content .connected-content li::before,
+      .singular-proposal article .entry-content .connected-content li::before,
+      .singular-meeting article .entry-content .connected-content li::before,
+      .singular-summary article .entry-content .connected-content li::before {
+        margin-right: 5px;
+        color: #b8b6b2;
+        font-weight: normal; }
   .single-meeting article .entry-content .post-content h2,
   .single-proposal article .entry-content .post-content h2,
   .single-agenda article .entry-content .post-content h2,

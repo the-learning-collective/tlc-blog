@@ -231,6 +231,8 @@ MEETINGS ARCHIVE & SINGLE STYLES
 
                 li {
 
+                    margin-right: 10px;
+
                     @extend .fa;
 
                     &.agenda-link {
@@ -245,7 +247,7 @@ MEETINGS ARCHIVE & SINGLE STYLES
                     }
 
                     &::before {
-                        margin-right: .125em;
+                        margin-right: 5px;
                         color: $base6;
                         font-weight: normal;
                     }
