@@ -11,9 +11,9 @@
  */
 function tlc_custom_scripts() {
 	
-	wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'parent-style', trailingslashit( get_template_directory_uri() ) . 'style.css' );
     wp_enqueue_style( 'tlc-theme',
-        get_stylesheet_directory_uri() . '/css/style.css',
+        trailingslashit( get_stylesheet_directory_uri() ) . 'assets/css/style.css',
         array('parent-style')
     );
 }

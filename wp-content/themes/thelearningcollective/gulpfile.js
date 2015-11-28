@@ -17,7 +17,7 @@ var onError = function( err ) {
 
 var paths = {
     /* Source paths */
-    styles: ['./sass/*'],
+    styles: ['./src/sass/*'],
     scripts: [
         './src/js/*',
         './src/vendor/js/*'
@@ -29,7 +29,7 @@ var paths = {
     ],
 
     /* Output paths */
-    stylesOutput: './css',
+    stylesOutput: './assets/css',
     scriptsOutput: './assets/js',
     imagesOutput: './assets/images',
     fontsOutput: './assets/fonts'
