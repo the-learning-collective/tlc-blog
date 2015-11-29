@@ -2681,6 +2681,34 @@ MEETINGS ARCHIVE & SINGLE STYLES
   .taxonomy-meeting_tag article .comments-link {
     display: none; }
 
+.post-type-archive-meeting .proposal-status,
+.post-type-archive-meeting .proposal-status label,
+.post-type-archive-proposal .proposal-status,
+.post-type-archive-proposal .proposal-status label,
+.post-type-archive-summary .proposal-status,
+.post-type-archive-summary .proposal-status label,
+.post-type-archive-agenda .proposal-status,
+.post-type-archive-agenda .proposal-status label,
+.tax-meeting_tag .proposal-status,
+.tax-meeting_tag .proposal-status label,
+.tax-meeting_type .proposal-status,
+.tax-meeting_type .proposal-status label,
+.tax-proposal_status .proposal-status,
+.tax-proposal_status .proposal-status label,
+.archive-meeting .proposal-status,
+.archive-meeting .proposal-status label,
+.archive-proposal .proposal-status,
+.archive-proposal .proposal-status label,
+.archive-summary .proposal-status,
+.archive-summary .proposal-status label,
+.archive-agenda .proposal-status,
+.archive-agenda .proposal-status label,
+.taxonomy-meeting_type .proposal-status,
+.taxonomy-meeting_type .proposal-status label,
+.taxonomy-meeting_tag .proposal-status,
+.taxonomy-meeting_tag .proposal-status label {
+  font-size: 1.25rem; }
+
 .single-meeting article p.meta,
 .single-proposal article p.meta,
 .single-agenda article p.meta,
@@ -3016,6 +3044,19 @@ MEETINGS ARCHIVE & SINGLE STYLES
 .singular-summary article .article-footer,
 .singular-summary article .cat-links {
   display: none; }
+
+a:hover .proposal-status,
+a:focus .proposal-status {
+  color: #757472; }
+
+.proposal-status label:after {
+  content: ':'; }
+
+.proposal-status,
+.proposal-status label {
+  display: inline-block;
+  color: #757472;
+  font-weight: normal; }
 
 /* want to style individual post classes? Booya! */
 /* post by id (i.e. post-3) */

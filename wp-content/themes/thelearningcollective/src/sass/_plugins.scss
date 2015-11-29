@@ -143,6 +143,11 @@ MEETINGS ARCHIVE & SINGLE STYLES
 
     }
 
+    .proposal-status,
+    .proposal-status label {
+        font-size: 1.25rem;
+    }
+
 }
 
 // Single Post
@@ -319,6 +324,23 @@ MEETINGS ARCHIVE & SINGLE STYLES
     }
 
 }
+
+a:hover,
+a:focus {
+    .proposal-status {
+        color: $base4;
+    }
+}
+.proposal-status label:after {
+    content: ':'
+}
+.proposal-status,
+.proposal-status label {
+    display: inline-block;
+    color: $base4;
+    font-weight: normal;
+}
+
 
 
 
