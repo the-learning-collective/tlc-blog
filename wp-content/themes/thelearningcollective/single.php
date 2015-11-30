@@ -11,52 +11,52 @@ get_header();
 	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
-		<?php if ( ( 'meeting' == get_post_type() || 'agenda' == get_post_type() || 'proposal' == get_post_type() || 'summary' == get_post_type() ) && is_user_logged_in() ) : ?>
-
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php get_template_part( 'content', 'single' ); ?>
+			<?php if( !is_user_logged_in() && ( is_singular( array( 'meeting', 'proposal', 'summary', 'agenda' ) ) ) ) : ?>
 
-			<?php if ( get_theme_mod( 'author_bio' ) != 1 ) : ?>
-				<div class="clearfix author-info">
-					<div class="author-photo"><?php echo get_avatar( get_the_author_meta( 'ID' ) , 75 ); ?></div>
-					<div class="author-content">
-						<h3><?php the_author(); ?></h3>
-						<p><?php the_author_meta( 'description' ); ?></p>
-						<div class="author-links">
-							<a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="me">More Posts</a>
+				<?php get_template_part( 'content', 'private' ); ?>
 
-							<?php if ( get_the_author_meta( 'twitter' ) ) : ?>
-							<a href="http://twitter.com/<?php echo get_the_author_meta( 'twitter' ); ?>">Twitter</a>
-							<?php endif; ?>
+			<?php else : ?>
 
-							<?php if ( get_the_author_meta( 'facebook' ) ) : ?>
-							<a href="https://facebook.com/<?php echo get_the_author_meta( 'facebook' ); ?>">Facebook</a>
-							<?php endif; ?>
+				<?php get_template_part( 'content', 'single' ); ?>
 
-							<?php if ( get_the_author_meta( 'linkedin' ) ) : ?>
-							<a href="http://linkedin.com/in/<?php echo get_the_author_meta( 'linkedin' ); ?>">LinkedIn</a>
-							<?php endif; ?>
+				<?php if ( get_theme_mod( 'author_bio' ) != 1 ) : ?>
+					<div class="clearfix author-info">
+						<div class="author-photo"><?php echo get_avatar( get_the_author_meta( 'ID' ) , 75 ); ?></div>
+						<div class="author-content">
+							<h3><?php the_author(); ?></h3>
+							<p><?php the_author_meta( 'description' ); ?></p>
+							<div class="author-links">
+								<a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" rel="me">More Posts</a>
+
+								<?php if ( get_the_author_meta( 'twitter' ) ) : ?>
+								<a href="http://twitter.com/<?php echo get_the_author_meta( 'twitter' ); ?>">Twitter</a>
+								<?php endif; ?>
+
+								<?php if ( get_the_author_meta( 'facebook' ) ) : ?>
+								<a href="https://facebook.com/<?php echo get_the_author_meta( 'facebook' ); ?>">Facebook</a>
+								<?php endif; ?>
+
+								<?php if ( get_the_author_meta( 'linkedin' ) ) : ?>
+								<a href="http://linkedin.com/in/<?php echo get_the_author_meta( 'linkedin' ); ?>">LinkedIn</a>
+								<?php endif; ?>
+							</div>
 						</div>
-					</div>
-				<!-- .author-info --></div>
+					<!-- .author-info --></div>
+				<?php endif; ?>
+
+				<?php athemes_content_nav( 'nav-below' ); ?>
+
+				<?php
+					// If comments are open or we have at least one comment, load up the comment template
+					if ( comments_open() || '0' != get_comments_number() )
+						comments_template();
+				?>
+
 			<?php endif; ?>
 
-			<?php athemes_content_nav( 'nav-below' ); ?>
-
-			<?php
-				// If comments are open or we have at least one comment, load up the comment template
-				if ( comments_open() || '0' != get_comments_number() )
-					comments_template();
-			?>
-
 		<?php endwhile; // end of the loop. ?>
-
-		<?php else : ?>
-
-			<?php get_template_part( 'content', 'private' ); ?>
-
-		<?php endif; ?>
 
 		</div><!-- #content -->
 	</div><!-- #primary -->

@@ -12,7 +12,11 @@ get_header(); ?>
 	<section id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
-		<?php if( is_user_logged_in() && ( is_post_type_archive( array( 'meeting', 'proposal', 'summary', 'agenda' ) ) || is_tax( array( 'meeting_type', 'proposal_status', 'meeting_tag' ) ) ) ) : ?>
+		<?php if( !is_user_logged_in() && ( is_post_type_archive( array( 'meeting', 'proposal', 'summary', 'agenda' ) ) || is_tax( array( 'meeting_type', 'proposal_status', 'meeting_tag' ) ) ) ) : ?>
+
+				<?php get_template_part( 'content', 'private' ); ?>
+
+			<?php else : ?>
 
 			<?php if ( have_posts() ) : ?>
 
@@ -105,10 +109,6 @@ get_header(); ?>
 
 			<?php endif; ?>
 
-
-		<?php else : ?>
-
-			<?php get_template_part( 'content', 'private' ); ?>
 
 		<?php endif; ?>
 
